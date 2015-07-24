@@ -23,6 +23,16 @@ distributed under the Artistic license 2.0. You are free to use and
 redistribute this software.
 
 
+## Loading nucleoSim package
+
+As with any R package, the `r Rpackage("nucleoSim")` package should 
+first be loaded with the following command:
+
+```{r loadingPackage, warning=FALSE, message=FALSE}
+library(nucleoSim)
+```
+
+
 ## Session info
 
 Here is the output of `sessionInfo()` on the system on which this document was 
