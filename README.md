@@ -3,6 +3,13 @@ nucleoSim: Generate synthetic nucleosome maps
 
 [![Build Status](https://travis-ci.org/adeschen/consensusSeekeR.svg?branch=master)](https://travis-ci.org/adeschen/nucleoSim)
 
+This package generate synthetic nucleosome maps using
+parameters given by users. Users has choice between three different
+distributions: Normal, Student and Uniform.
+
+This package implements a modifed version of the 
+syntheticNucMap() function from Bioconductor nucleR package 
+(Flores and Orozco, 2011).
 
 ## Authors ##
 
