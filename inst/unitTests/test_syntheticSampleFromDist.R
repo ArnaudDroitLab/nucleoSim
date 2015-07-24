@@ -138,3 +138,80 @@ test.syntheticNucMapFromDist_vector_wp_del<- function() {
     checkEquals(obs, exp, msg = message)
 }
 
+## Test the result when a string is passed as wp.var parameter
+test.syntheticNucMapFromDist_string_wp_var <- function() {
+    obs <- tryCatch(syntheticNucMapFromDist(wp.num = 3, wp.del = 2,
+                            wp.var = "allo", fuz.num = 4, fuz.var = 40,
+                            as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                            distr = "Normal"), error = conditionMessage)
+    exp <- "wp.var must be a non-negative integer"
+    message <- paste0(" syntheticNucMapFromDist_string_wp_var() ",
+                      "- A string as wp.var parameter did not generated ",
+                      "expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result when a negative is passed as wp.var parameter
+test.syntheticNucMapFromDist_negative_wp_var <- function() {
+    obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
+                        wp.var = -1, fuz.num = 4, fuz.var = 40,
+                        as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                        distr = "Normal"), error = conditionMessage)
+    exp <- "wp.var must be a non-negative integer"
+    message <- paste0(" syntheticNucMapFromDist_negative_wp_var() ",
+                "- A negative integer as wp.var parameter did not generated ",
+                "expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result when a vector is passed as wp.var parameter
+test.syntheticNucMapFromDist_vector_wp_var<- function() {
+    obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
+                    wp.var = c(1, 2), fuz.num = 4, fuz.var = 40,
+                    as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                    distr = "Normal"), error = conditionMessage)
+    exp <- "wp.var must be a non-negative integer"
+    message <- paste0(" syntheticNucMapFromDist_vector_wp_var() ",
+                      "- A vector as wp.var parameter did not generated ",
+                      "expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result when a string is passed as fuz.var parameter
+test.syntheticNucMapFromDist_string_fuz_var <- function() {
+    obs <- tryCatch(syntheticNucMapFromDist(wp.num = 3, wp.del = 2,
+                    wp.var = 2, fuz.num = 4, fuz.var = "allo",
+                    as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                    distr = "Normal"), error = conditionMessage)
+    exp <- "fuz.var must be a non-negative integer"
+    message <- paste0(" syntheticNucMapFromDist_string_fuz_var() ",
+                      "- A string as fuz.var parameter did not generated ",
+                      "expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result when a negative is passed as fuz.var parameter
+test.syntheticNucMapFromDist_negative_fuz_var <- function() {
+    obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
+                        wp.var = 1, fuz.num = 4, fuz.var = -40,
+                        as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                        distr = "Normal"), error = conditionMessage)
+    exp <- "fuz.var must be a non-negative integer"
+    message <- paste0(" syntheticNucMapFromDist_negative_fuz_var() ",
+        "- A negative integer as fuz.var parameter did not generated ",
+        "expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result when a vector is passed as fuz.var parameter
+test.syntheticNucMapFromDist_vector_fuz_var<- function() {
+    obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
+                            wp.var = 3, fuz.num = 4, fuz.var = c(2, 3),
+                            as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                            distr = "Normal"), error = conditionMessage)
+    exp <- "fuz.var must be a non-negative integer"
+    message <- paste0(" syntheticNucMapFromDist_vector_fuz_var() ",
+                      "- A vector as fuz.var parameter did not generated ",
+                      "expected error.")
+    checkEquals(obs, exp, msg = message)
+}
