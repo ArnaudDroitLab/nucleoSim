@@ -77,6 +77,10 @@ syntheticNucMapFromDistValidation <- function(wp.num, wp.del, wp.var, fuz.num,
         stop("fuz.var must be a non-negative integer")
     }
 
+    if (!isInteger(max.cover) || max.cover < 1) {
+        stop("max.cover must be a positive integer")
+    }
+
     return(0)
 }
 

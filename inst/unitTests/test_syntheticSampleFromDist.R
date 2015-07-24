@@ -215,3 +215,55 @@ test.syntheticNucMapFromDist_vector_fuz_var<- function() {
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
+
+## Test the result when a string is passed as max.cover parameter
+test.syntheticNucMapFromDist_string_max_cover <- function() {
+    obs <- tryCatch(syntheticNucMapFromDist(wp.num = 3, wp.del = 2,
+                wp.var = 2, fuz.num = 4, fuz.var = 2, max.cover = "allo",
+                as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                distr = "Normal"), error = conditionMessage)
+    exp <- "max.cover must be a positive integer"
+    message <- paste0(" syntheticNucMapFromDist_string_max_cover() ",
+                      "- A string as max.cover parameter did not generated ",
+                      "expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result when a zero is passed as max.cover parameter
+test.syntheticNucMapFromDist_zero_max_cover <- function() {
+    obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
+                    wp.var = 1, fuz.num = 4, fuz.var = 40, max.cover = 0,
+                    as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                    distr = "Normal"), error = conditionMessage)
+    exp <- "max.cover must be a positive integer"
+    message <- paste0(" syntheticNucMapFromDist_zero_max_cover() ",
+            "- A zero integer as max.cover parameter did not generated ",
+            "expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result when a negative is passed as max.cover parameter
+test.syntheticNucMapFromDist_negative_max_cover <- function() {
+    obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
+                    wp.var = 1, fuz.num = 4, fuz.var = 40, max.cover = -1,
+                    as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                        distr = "Normal"), error = conditionMessage)
+    exp <- "max.cover must be a positive integer"
+    message <- paste0(" syntheticNucMapFromDist_negative_max_cover() ",
+            "- A negative integer as max.cover parameter did not generated ",
+            "expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result when a vector is passed as max.cover parameter
+test.syntheticNucMapFromDist_vector_max_cover <- function() {
+    obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
+            wp.var = 3, fuz.num = 4, fuz.var = 2, max.cover = c(1, 2),
+            as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+            distr = "Normal"), error = conditionMessage)
+    exp <- "max.cover must be a positive integer"
+    message <- paste0(" syntheticNucMapFromDist_vector_max_cover() ",
+                      "- A vector as max.cover parameter did not generated ",
+                      "expected error.")
+    checkEquals(obs, exp, msg = message)
+}
