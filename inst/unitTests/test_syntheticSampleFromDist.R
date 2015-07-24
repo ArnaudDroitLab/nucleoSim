@@ -267,3 +267,43 @@ test.syntheticNucMapFromDist_vector_max_cover <- function() {
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
+
+## Test the result when a string is passed as lin.len parameter
+test.syntheticNucMapFromDist_string_lin_len <- function() {
+    obs <- tryCatch(syntheticNucMapFromDist(wp.num = 3, wp.del = 2,
+                        wp.var = 2, fuz.num = 4, fuz.var = 2, lin.len = "allo",
+                        as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                        distr = "Normal"), error = conditionMessage)
+    exp <- "lin.len must be a non-negative integer"
+    message <- paste0(" syntheticNucMapFromDist_string_lin_len() ",
+                      "- A string as lin.len parameter did not generated ",
+                      "expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result when a negative is passed as lin.len parameter
+test.syntheticNucMapFromDist_negative_lin_len <- function() {
+    obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
+                        wp.var = 1, fuz.num = 4, fuz.var = 40, lin.len = -1,
+                        as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                        distr = "Normal"), error = conditionMessage)
+    exp <- "lin.len must be a non-negative integer"
+    message <- paste0(" syntheticNucMapFromDist_negative_lin_len() ",
+            "- A negative integer as lin.len parameter did not generated ",
+            "expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result when a vector is passed as lin.len parameter
+test.syntheticNucMapFromDist_vector_lin_len <- function() {
+    obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
+                    wp.var = 3, fuz.num = 4, fuz.var = 40, lin.len = c(1, 4),
+                    as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                    distr = "Normal"), error = conditionMessage)
+    exp <- "lin.len must be a non-negative integer"
+    message <- paste0(" syntheticNucMapFromDist_vector_lin_len() ",
+                      "- A vector as lin.len parameter did not generated ",
+                      "expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
