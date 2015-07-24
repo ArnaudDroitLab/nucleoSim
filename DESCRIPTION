@@ -1,0 +1,36 @@
+Package: nucleoSim
+Version: 0.99.0
+Date: 2015-07-24
+Title: Generate synthetic nucleosome maps
+Description: This package generate synthetic nucleosome maps using
+    parameters given by users. Users has choice between three different
+    distributions:
+    Normal, Student and Uniform.
+Author: Rawane Samb [aut], Astrid Louise Deschenes [cre, aut],
+    Pascal Belleau [aut], Arnaud Droit [aut]
+Author@R: c(person("Rawane", "Samb",
+    email="rawane.samb.1@ulaval.ca", role=c("aut")),
+    person("Astrid Louise", "Deschenes",
+    email="Astrid-Louise.Deschenes@crchudequebec.ulaval.ca",
+    role=c("cre","aut")),
+    person("Pascal", "Belleau",
+    email="pascal.belleau@crchuq.ulaval.ca", role=c("aut")),
+    person("Arnaud", "Droit",
+    email="arnaud.droit@crchuq.ulaval.ca", role=c("aut")))
+Depends: R (>= 3.1)
+Imports: stats,
+    IRanges,
+    S4Vectors,
+    BiocGenerics,
+    graphics
+Suggests: BiocStyle,
+    knitr,
+    RUnit
+License: Artistic-2.0 | file LICENSE
+URL: https://github.com/adeschen/nucleoSim
+BugReports: https://github.com/adeschen/nucleoSim/issues
+VignetteBuilder: knitr
+NeedsCompilation: no
+biocViews: Genetics, Sequencing, Software, StatisticalMethod
+Maintainer: Astrid Louise Deschenes
+    <Astrid-Louise.Deschenes@crchudequebec.ulaval.ca>
