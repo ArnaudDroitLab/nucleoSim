@@ -21,9 +21,9 @@ Depends: R (>= 3.1)
 Imports: stats,
     IRanges,
     S4Vectors,
-    BiocGenerics,
     graphics
 Suggests: BiocStyle,
+    BiocGenerics,
     knitr,
     RUnit
 License: Artistic-2.0 | file LICENSE

@@ -320,6 +320,8 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 #'
 #' @param lin.len the length of the DNA linker DNA. Default = 20.
 #'
+#' @param read.len the length of each of the paired reads. Default = 40.
+#'
 #' @param rnd.seed a single value, interpreted as an \code{integer}, or
 #' \code{NULL}. If a \code{integer} is given, the value is used to set the seed
 #' of the random number generator. By fixing the seed, the generated results
@@ -343,14 +345,18 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 #' following elements:
 #' \itemize{
 #' \item \code{call} the matched call.
-#' \item \code{dataIP} TODO
-#' \item \code{wp} TODO
-#' read.
-#' \item \code{paired} TODO
+#' \item \code{dataIP} a \code{data.frame} with all forward and reverse reads
+#' for all well-positioned and fuzzy nucleosomes.
+#' \item \code{wp} a \code{data.frame} with the positions of all the
+#' well-positioned nucleosomes, as well as the number of paired-reads
+#' associated to each one.
+#' \item \code{fuz} a \code{data.frame} with the positions of all the fuzzy
+#' nucleosomes, as well as the number of paired-reads associated to each one.
+#' \item \code{paired} a \code{data.frame} with the starting and ending
+#' positions of the reads used to generate the paired-end reads.
 #' }
 #'
 #' @author Pascal Belleau, Rawane Samb, Astrid Louise Deschenes
-#' @importFrom BiocGenerics nrow
 #'
 #' @examples
 #'
@@ -366,11 +372,17 @@ syntheticSampleFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
                                 max.cover = 100,
                                 nuc.len = 147,
                                 lin.len = 20,
+                                read.len = 40,
                                 rnd.seed = NULL,
                                 as.ratio = FALSE,
                                 distr = c("Uniform", "Normal", "Student"),
                                 offset)
 {
+    ## Validate that offset is a non-negative integer
+    if (!isInteger(offset) || offset < 0) {
+        stop("offset must be a non-negative integer")
+    }
+
     ## Get call information
     cl <- match.call()
 
@@ -390,63 +402,46 @@ syntheticSampleFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     syn.reads$end   <- syn.reads$end   + offset
 
     ## Decompose read info to create forward reads of length 40 bps
-    forward <- data.frame(rep("chrSYNTHETIC", nreads),
+    forward <- data.frame(rep("chr_SYNTHETIC", nreads),
                     as.integer(syn.reads$start),
-                    as.integer(syn.reads$start + 40),
+                    as.integer(syn.reads$start + read.len),
                     rep("+", nreads))
-
     colnames(forward) = c("chr", "start", "end", "strand")
 
     ## Decompose read info to create reverse reads of length 40 bps
-    reverse <- data.frame(rep("chrSYNTHETIC", nreads),
-                        as.integer(syn.reads$end - 40),
+    reverse <- data.frame(rep("chr_SYNTHETIC", nreads),
+                        as.integer(syn.reads$end - read.len),
                         as.integer(syn.reads$end),
                         rep("-", nreads))
-
     colnames(reverse) = c("chr", "start", "end", "strand")
 
-
-    paired <- data.frame(rep("chrSYNTHETIC",nreads),
+    # Store read paired information
+    paired <- data.frame(rep("chr_SYNTHETIC", nreads),
                             as.integer(syn.reads$start),
                             as.integer(syn.reads$end))
     colnames(paired) <- c("chr", "start", "end")
 
-    colP <- paired$start
-    orderP <- order(colP)
-    paired$start <- paired$start[orderP]
-    paired$end <- paired$end[orderP]
+    # Order paired reads by starting position
+    paired <- paired[order(paired$start), ]
 
-    colF <- forward$start
-    orderF <- order(colF)
-    forward$start <- forward$start[orderF]
-    forward$end <- forward$end[orderF]
-
-
-    colR <- reverse$start
-    orderR <- order(colR)
-    reverse$start <- reverse$start[orderR]
-    reverse$end <- reverse$end[orderR]
-
-
+    # Create dataframe with both forward and reverse reads
     dataIP <- rbind(forward, reverse)
-    column <- dataIP$start
-    ordre <- order(column)
-    dataIP$start <- dataIP$start[ordre]
-    dataIP$end <- dataIP$end[ordre]
-    dataIP$strand <- dataIP$strand[ordre]
 
+    # Order reads by starting position
+    dataIP <- dataIP[order(dataIP$start), ]
+
+    # Create dataframe with well-positioned nucleosomes shifted by offset value
     wp <- data.frame(map$wp.starts + offset + round(nuc.len/2), map$wp.nreads)
     colnames(wp) <- c("nucleopos", "nreads")
 
-    fuz <- data.frame(map$fuz.starts + offset + round(nuc.len/2), map$fuz.nreads)
+    # Create dataframe with fuzzy nucleosomes shifted by offset value
+    fuz <- data.frame(map$fuz.starts + offset + round(nuc.len/2),
+                            map$fuz.nreads)
     colnames(fuz) <- c("nucleopos", "nreads")
-    result <- list(call = cl)
 
-
-    result[["dataIP"]] <- dataIP
-    result[["wp"]] <- wp
-    result[["fuz"]] <- fuz
-    result[["paired"]] <- paired
+    # Create returned result list
+    result <- list(call = cl, dataIP = dataIP, wp = wp, fuz = fuz,
+                   paired = paired)
 
     return(result)
 }

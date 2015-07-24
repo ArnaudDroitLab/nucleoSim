@@ -6,8 +6,9 @@
 reverse reads}
 \usage{
 syntheticSampleFromDist(wp.num, wp.del, wp.var, fuz.num, fuz.var,
-  max.cover = 100, nuc.len = 147, lin.len = 20, rnd.seed = NULL,
-  as.ratio = FALSE, distr = c("Uniform", "Normal", "Student"), offset)
+  max.cover = 100, nuc.len = 147, lin.len = 20, read.len = 40,
+  rnd.seed = NULL, as.ratio = FALSE, distr = c("Uniform", "Normal",
+  "Student"), offset)
 }
 \arguments{
 \item{wp.num}{the number of well-positioned
@@ -36,6 +37,8 @@ nucleosomes can be overlapping. Default = 100.}
 
 \item{lin.len}{the length of the DNA linker DNA. Default = 20.}
 
+\item{read.len}{the length of each of the paired reads. Default = 40.}
+
 \item{rnd.seed}{a single value, interpreted as an \code{integer}, or
 \code{NULL}. If a \code{integer} is given, the value is used to set the seed
 of the random number generator. By fixing the seed, the generated results
@@ -60,10 +63,15 @@ an \code{list} of \code{class} "nucleoSim" containing the
 following elements:
 \itemize{
 \item \code{call} the matched call.
-\item \code{dataIP} TODO
-\item \code{wp} TODO
-read.
-\item \code{paired} TODO
+\item \code{dataIP} a \code{data.frame} with all forward and reverse reads
+for all well-positioned and fuzzy nucleosomes.
+\item \code{wp} a \code{data.frame} with the positions of all the
+well-positioned nucleosomes, as well as the number of paired-reads
+associated to each one.
+\item \code{fuz} a \code{data.frame} with the positions of all the fuzzy
+nucleosomes, as well as the number of paired-reads associated to each one.
+\item \code{paired} a \code{data.frame} with the starting and ending
+positions of the reads used to generate the paired-end reads.
 }
 }
 \description{
