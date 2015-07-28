@@ -17,7 +17,7 @@ Author@R: c(person("Rawane", "Samb",
     email="pascal.belleau@crchuq.ulaval.ca", role=c("aut")),
     person("Arnaud", "Droit",
     email="arnaud.droit@crchuq.ulaval.ca", role=c("aut")))
-Depends: R
+Depends: R (>= 3.1)
 Imports: stats,
     IRanges,
     S4Vectors,
