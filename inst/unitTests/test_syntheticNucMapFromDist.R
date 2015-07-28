@@ -21,6 +21,10 @@ if(FALSE) {
 ## Test the syntheticNucMapFromDist() function parameters
 ###########################################################
 
+################################
+## wp.num
+################################
+
 ## Test the result when a string is passed as wp.num parameter
 test.syntheticNucMapFromDist_string_wp_num <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = "allo", wp.del = 0,
@@ -59,6 +63,10 @@ test.syntheticNucMapFromDist_vector_wp_num <- function() {
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
+
+################################
+## fuz.num
+################################
 
 ## Test the result when a string is passed as fuz.num parameter
 test.syntheticNucMapFromDist_string_fuz_num <- function() {
@@ -99,6 +107,10 @@ test.syntheticNucMapFromDist_vector_fuz_num <- function() {
     checkEquals(obs, exp, msg = message)
 }
 
+################################
+## wp.del
+################################
+
 ## Test the result when a string is passed as wp.del parameter
 test.syntheticNucMapFromDist_string_wp_del <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 3, wp.del = "allo",
@@ -137,6 +149,10 @@ test.syntheticNucMapFromDist_vector_wp_del<- function() {
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
+
+################################
+## wp.var
+################################
 
 ## Test the result when a string is passed as wp.var parameter
 test.syntheticNucMapFromDist_string_wp_var <- function() {
@@ -177,6 +193,10 @@ test.syntheticNucMapFromDist_vector_wp_var<- function() {
     checkEquals(obs, exp, msg = message)
 }
 
+################################
+## fuz.var
+################################
+
 ## Test the result when a string is passed as fuz.var parameter
 test.syntheticNucMapFromDist_string_fuz_var <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 3, wp.del = 2,
@@ -215,6 +235,10 @@ test.syntheticNucMapFromDist_vector_fuz_var<- function() {
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
+
+################################
+## max.cover
+################################
 
 ## Test the result when a string is passed as max.cover parameter
 test.syntheticNucMapFromDist_string_max_cover <- function() {
@@ -281,6 +305,10 @@ test.syntheticNucMapFromDist_string_lin_len <- function() {
     checkEquals(obs, exp, msg = message)
 }
 
+################################
+## lin.len
+################################
+
 ## Test the result when a negative is passed as lin.len parameter
 test.syntheticNucMapFromDist_negative_lin_len <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
@@ -307,3 +335,18 @@ test.syntheticNucMapFromDist_vector_lin_len <- function() {
     checkEquals(obs, exp, msg = message)
 }
 
+################################
+## distr
+################################
+
+## Test the result when bad value is passed as distr parameter
+test.syntheticNucMapFromDist_bad_distr <- function() {
+    message <- paste0(" syntheticNucMapFromDist_vector_bad_distr() ",
+                      "- A bad value as distr parameter did not generated ",
+                      "expected error.")
+
+    checkException(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
+                        wp.var = 3, fuz.num = 4, fuz.var = 40, lin.len = 4,
+                        as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                        distr = "TOTO"), msg = message)
+}

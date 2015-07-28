@@ -114,6 +114,9 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
                             max.cover, nuc.len, lin.len, rnd.seed, as.ratio,
                             show.plot)
 
+    # Validate distribution value
+    distr <- match.arg(distr)
+
     # Set seed if given
     if (!is.null(rnd.seed)) {
         set.seed(rnd.seed)
