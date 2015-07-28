@@ -405,21 +405,21 @@ syntheticSampleFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     syn.reads$end   <- syn.reads$end   + offset
 
     ## Decompose read info to create forward reads of length 40 bps
-    forward <- data.frame(rep("chr_SYNTHETIC", nreads),
+    forward <- data.frame(rep("chr1", nreads),
                     as.integer(syn.reads$start),
                     as.integer(syn.reads$start + read.len),
                     rep("+", nreads))
     colnames(forward) = c("chr", "start", "end", "strand")
 
     ## Decompose read info to create reverse reads of length 40 bps
-    reverse <- data.frame(rep("chr_SYNTHETIC", nreads),
+    reverse <- data.frame(rep("chr1", nreads),
                         as.integer(syn.reads$end - read.len),
                         as.integer(syn.reads$end),
                         rep("-", nreads))
     colnames(reverse) = c("chr", "start", "end", "strand")
 
     # Store read paired information
-    paired <- data.frame(rep("chr_SYNTHETIC", nreads),
+    paired <- data.frame(rep("chr1", nreads),
                             as.integer(syn.reads$start),
                             as.integer(syn.reads$end))
     colnames(paired) <- c("chr", "start", "end")
