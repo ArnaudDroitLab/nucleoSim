@@ -96,14 +96,10 @@
 #' ## nucleosomes using a Normal distribution with a variance of 30 for the
 #' ## well-positioned nucleosomes, a variance of 40 for the fuzzy nucleosomes
 #' ## and a seed of 15
-#' res <- syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
-#' fuz.num = 10, fuz.var = 40,
-#' show.plot = TRUE, rnd.seed = 15, distr = "Normal")
+#' res <- syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30, fuz.num = 10, fuz.var = 40, show.plot = TRUE, rnd.seed = 15, distr = "Normal")
 #'
 #' ## Same output but without graph
-#' res <- syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
-#' fuz.num = 10, fuz.var = 40,
-#' show.plot = FALSE, rnd.seed = 15, distr = "Normal")
+#' res <- syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30, fuz.num = 10, fuz.var = 40, show.plot = FALSE, rnd.seed = 15, distr = "Normal")
 #'
 #' @export
 syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
@@ -218,7 +214,7 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     syn.reads <- c(wp.reads, fuz.reads)
 
     # RATIO AS HYBRIDIZATION (Tiling Array)
-    if (as.ratio) {
+    if (as.logical(as.ratio)) {
         # Just put the same amount of reads as before randomly
         ctr.starts <- round(runif(length(syn.reads),
                                     min = 1,
@@ -244,13 +240,13 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 
     result[["wp.starts"]] <- wp.starts
     result[["wp.nreads"]] <- wp.nreads
-    result[["wp.reads"]] <- wp.reads
+    result[["wp.reads"]]  <- wp.reads
 
     result[["fuz.starts"]] <- fuz.starts
     result[["fuz.nreads"]] <- fuz.nreads
-    result[["fuz.reads"]] <- fuz.reads
+    result[["fuz.reads"]]  <- fuz.reads
 
-    result[["syn.reads"]] <- syn.reads
+    result[["syn.reads"]]  <- syn.reads
 
     if(as.ratio) {
         result[["ctr.reads"]] <- ctr.reads

@@ -100,14 +100,10 @@ from Bioconductor nucleR package (Flores and Orozco, 2011).
 ## nucleosomes using a Normal distribution with a variance of 30 for the
 ## well-positioned nucleosomes, a variance of 40 for the fuzzy nucleosomes
 ## and a seed of 15
-res <- syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
-fuz.num = 10, fuz.var = 40,
-show.plot = TRUE, rnd.seed = 15, distr = "Normal")
+res <- syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30, fuz.num = 10, fuz.var = 40, show.plot = TRUE, rnd.seed = 15, distr = "Normal")
 
 ## Same output but without graph
-res <- syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
-fuz.num = 10, fuz.var = 40,
-show.plot = FALSE, rnd.seed = 15, distr = "Normal")
+res <- syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30, fuz.num = 10, fuz.var = 40, show.plot = FALSE, rnd.seed = 15, distr = "Normal")
 }
 \author{
 Rawane Samb, Astrid Louise Deschenes
