@@ -29,16 +29,19 @@
 #' can have a higher value than \code{max.cover} since reads from differents
 #' nucleosomes can be overlapping. Default = 100.
 #'
-#' @param nuc.len the nucleosome length. Default = 147.
+#' @param nuc.len a \code{numeric}, the nucleosome length. Default = 147.
 #'
-#' @param lin.len the length of the DNA linker DNA. Default = 20.
+#' @param len.var a \code{numeric}, the variance of the distance between a
+#' forward read and its paired reverse read. Default = 10.
+#'
+#' @param lin.len a \code{numeric}, the length of the DNA linker. Default = 20.
 #'
 #' @param rnd.seed a single value, interpreted as an \code{integer}, or
 #' \code{NULL}. If a \code{integer} is given, the value is used to set the seed
 #' of the random number generator. By fixing the seed, the generated results
 #' can be reproduced. Default = \code{NULL}.
 #'
-#' @param as.ratio a \code{logical}, if \code{TRUE},  a synthetic naked DNA
+#' @param as.ratio a \code{logical}, if \code{TRUE}, a synthetic naked DNA
 #' control map is created and the ratio between it and the nucleosome coverage
 #' are calculated. It can be used to simulate hybridization ratio data, like
 #' the one in Tiling Arrays. Both control map and calculated ratio are
@@ -89,18 +92,24 @@
 #'
 #' @examples
 #'
-#'## Generate a synthetic map with 20 well-positioned nucleosomes and 10 fuzzy
-#'## nucleosomes using a Normal distribution with a variance of 30 for the
-#'## well-positioned nucleosomes, a variance of 40 for the fuzzy nucleosomes
-#'## and a seed of 15
-#'res <- syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
-#'fuz.num = 10, fuz.var = 40, as.ratio = TRUE,
-#'show.plot = TRUE, rnd.seed = 15, distr = "Normal")
+#' ## Generate a synthetic map with 20 well-positioned nucleosomes and 10 fuzzy
+#' ## nucleosomes using a Normal distribution with a variance of 30 for the
+#' ## well-positioned nucleosomes, a variance of 40 for the fuzzy nucleosomes
+#' ## and a seed of 15
+#' res <- syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
+#' fuz.num = 10, fuz.var = 40,
+#' show.plot = TRUE, rnd.seed = 15, distr = "Normal")
+#'
+#' ## Same output but without graph
+#' res <- syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
+#' fuz.num = 10, fuz.var = 40,
+#' show.plot = FALSE, rnd.seed = 15, distr = "Normal")
 #'
 #' @export
 syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
                             max.cover = 100,
                             nuc.len = 147,
+                            len.var = 10,
                             lin.len = 20,
                             rnd.seed = NULL,
                             as.ratio = FALSE,
@@ -110,9 +119,10 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     # Get call information
     cl <- match.call()
 
+    # Validate parameters
     syntheticNucMapFromDistValidation(wp.num, wp.del, wp.var, fuz.num, fuz.var,
-                            max.cover, nuc.len, lin.len, rnd.seed, as.ratio,
-                            show.plot)
+                            max.cover, nuc.len, len.var, lin.len, rnd.seed,
+                            as.ratio, show.plot)
 
     # Validate distribution value
     distr <- match.arg(distr)
@@ -143,22 +153,22 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     {
         wp.varstar <- wp.repstar + round(rnorm(length(wp.repstar), 0,
                                                 wp.var^0.5))
-        wp.varlen <- nuc.len + round(rnorm(length(wp.repstar), 0,
-                                                wp.var^0.5))
+        wp.varlen  <- nuc.len + round(rnorm(length(wp.repstar), 0,
+                                                len.var^0.5))
     }
     else if (distr == "Student")
     {
-        wp.varstar <- wp.repstar + round(rt(length(wp.repstar),4))
-        wp.varlen <- nuc.len + round(rt(length(wp.repstar),4))
+        wp.varstar <- wp.repstar + round(rt(length(wp.repstar), 4))
+        wp.varlen  <- nuc.len + round(rnorm(length(wp.repstar), 0,
+                                           len.var^0.5))
     }
     else
     {
         wp.varstar <- wp.repstar + round(runif(length(wp.repstar),
                                                 min=-wp.var,
                                                 max=wp.var))
-        wp.varlen <- nuc.len + round(runif(length(wp.repstar),
-                                                min=-wp.var,
-                                                max=wp.var))
+        wp.varlen <- nuc.len + round(rnorm(length(wp.repstar), 0,
+                                           len.var^0.5))
     }
 
     # Putative reads
@@ -185,21 +195,21 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
         fuz.varstar <- fuz.repstar + round(rnorm(length(fuz.repstar), 0,
                                                 fuz.var^0.5))
         fuz.varlen <- nuc.len + round(rnorm(length(fuz.repstar), 0,
-                                                fuz.var^0.5))
+                                                len.var^0.5))
     }
     else if (distr == "Student")
     {
         fuz.varstar <- fuz.repstar + round(rt(length(fuz.repstar), 4))
-        fuz.varlen <- nuc.len + round(rt(length(fuz.repstar), 4))
+        fuz.varlen  <- nuc.len + round(rnorm(length(fuz.repstar), 0,
+                                                len.var^0.5))
     }
     else
     {
         fuz.varstar <- fuz.repstar + round(runif(length(fuz.repstar),
                                                 min = -fuz.var,
                                                 max = fuz.var))
-        fuz.varlen <- nuc.len + round(runif(length(fuz.repstar),
-                                                min = -fuz.var,
-                                                max = fuz.var))
+        fuz.varlen <- nuc.len + round(rnorm(length(fuz.repstar), 0,
+                                                len.var^0.5))
     }
     # Overlapped reads
     fuz.reads <- IRanges(start = fuz.varstar, end = fuz.varstar + fuz.varlen)
