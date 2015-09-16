@@ -380,3 +380,39 @@ test.syntheticNucMapFromDist_bad_distr <- function() {
                         as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
                         distr = "TOTO"), msg = message)
 }
+
+
+
+################################
+## Good results
+################################
+
+
+## Test the result when as.ratio is FALSE
+test.syntheticNucMapFromDist_good_result_01 <- function() {
+    obs <- syntheticNucMapFromDist(wp.num = 4, wp.del = 2,
+                wp.var = 3, fuz.num = 1, fuz.var = 40, lin.len = 4,
+                as.ratio = FALSE, show.plot = FALSE, rnd.seed = 25,
+                distr = "Normal")
+
+    exp.wp.starts  <- c(1, 152, 303, 454)
+    exp.wp.nreads  <- c(42, 70, 16,  0)
+    exp.fuz.starts <- c(283)
+    exp.fuz.nreads <- c(51)
+
+    message     <- paste0(" test.syntheticNucMapFromDist_good_result_01() ",
+                          "- syntheticNucMapFromDist did not generated ",
+                          "expected values")
+
+    checkEqualsNumeric(obs$wp.starts, exp.wp.starts, msg = message)
+    checkEqualsNumeric(obs$wp.nreads, exp.wp.nreads, msg = message)
+    checkEqualsNumeric(obs$fuz.starts, exp.fuz.starts, msg = message)
+    checkEqualsNumeric(obs$fuz.nreads, exp.fuz.nreads, msg = message)
+    checkEqualsNumeric(length(obs$wp.reads), 128, msg = message)
+    checkEqualsNumeric(length(obs$fuz.reads), 51, msg = message)
+    checkEqualsNumeric(length(obs$syn.reads), 179, msg = message)
+    checkTrue(is.null(obs$syn.ratio), msg = message)
+    checkTrue(is.null(obs$ctr.reads), msg = message)
+}
+
+
