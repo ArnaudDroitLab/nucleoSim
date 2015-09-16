@@ -401,20 +401,6 @@ syntheticSampleFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     syn.reads$start <- syn.reads$start + offset
     syn.reads$end   <- syn.reads$end   + offset
 
-    ## Decompose read info to create forward reads of length 40 bps
-    forward <- data.frame(rep("chr_SYNTHETIC", nreads),
-                    as.integer(syn.reads$start),
-                    as.integer(syn.reads$start + read.len),
-                    rep("+", nreads))
-    colnames(forward) = c("chr", "start", "end", "strand")
-
-    ## Decompose read info to create reverse reads of length 40 bps
-    reverse <- data.frame(rep("chr_SYNTHETIC", nreads),
-                        as.integer(syn.reads$end - read.len),
-                        as.integer(syn.reads$end),
-                        rep("-", nreads))
-    colnames(reverse) = c("chr", "start", "end", "strand")
-
     # Store read paired information
     paired <- data.frame(rep("chr_SYNTHETIC", nreads),
                             as.integer(syn.reads$start),
@@ -424,8 +410,16 @@ syntheticSampleFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     # Order paired reads by starting position
     paired <- paired[order(paired$start), ]
 
-    # Create dataframe with both forward and reverse reads
-    dataIP <- rbind(forward, reverse)
+    ## Create dataset with forward and reverse reads for all nucleosomes
+    ## Forward and reverse reads are generated forme read paired information
+    ## using the read.len parameter
+    dataIP <- data.frame(rep("chr_SYNTHETIC", 2 * nreads),
+               c(as.integer(syn.reads$start),
+                    as.integer(syn.reads$end - read.len)),
+               c(as.integer(syn.reads$start + read.len),
+                    as.integer(syn.reads$end)),
+               c(rep("+", nreads), rep("-", nreads)))
+    colnames(dataIP) = c("chr", "start", "end", "strand")
 
     # Order reads by starting position
     dataIP <- dataIP[order(dataIP$start), ]
