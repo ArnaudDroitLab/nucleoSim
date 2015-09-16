@@ -1,5 +1,5 @@
 ###################################################
-# Created by Astrid Louise Deschenes
+# Created by Astrid Deschenes
 # 2015-07-23
 ###################################################
 
@@ -330,6 +330,36 @@ test.syntheticNucMapFromDist_vector_lin_len <- function() {
                     distr = "Normal"), error = conditionMessage)
     exp <- "lin.len must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_vector_lin_len() ",
+                      "- A vector as lin.len parameter did not generated ",
+                      "expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+################################
+## len.var
+################################
+
+## Test the result when a negative is passed as len.var parameter
+test.syntheticNucMapFromDist_negative_len_var<- function() {
+    obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
+                    wp.var = 1, fuz.num = 4, fuz.var = 40, len.var = -1,
+                    as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                    distr = "Normal"), error = conditionMessage)
+    exp <- "len.var must be a positive integer"
+    message <- paste0(" test.syntheticNucMapFromDist_negative_len_var() ",
+                      "- A negative integer as len.var parameter did not ",
+                      "generated expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result when a vector is passed as len.var parameter
+test.syntheticNucMapFromDist_vector_len_var <- function() {
+    obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
+                    wp.var = 3, fuz.num = 4, fuz.var = 40, len.var = c(1, 4),
+                    as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                    distr = "Normal"), error = conditionMessage)
+    exp <- "len.var must be a positive integer"
+    message <- paste0(" test.syntheticNucMapFromDist_vector_len_var() ",
                       "- A vector as lin.len parameter did not generated ",
                       "expected error.")
     checkEquals(obs, exp, msg = message)
