@@ -360,7 +360,7 @@ test.syntheticNucMapFromDist_vector_len_var <- function() {
                     distr = "Normal"), error = conditionMessage)
     exp <- "len.var must be a positive integer"
     message <- paste0(" test.syntheticNucMapFromDist_vector_len_var() ",
-                      "- A vector as lin.len parameter did not generated ",
+                      "- A vector as len.var parameter did not generated ",
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
