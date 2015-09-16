@@ -1,21 +1,22 @@
 #' @title Parameter validation for the \code{\link{syntheticNucMapFromDist}}
 #' function
 #'
-#' @param wp.num the number of well-positioned
+#' @param wp.num a \code{integer}, the number of well-positioned
 #' (non overlapping) nucleosomes.
 #'
-#' @param wp.del the number of well-positioned nucleosomes to remove to create
-#' uncovered regions.
+#' @param wp.del a \code{integer}, the number of well-positioned nucleosomes
+#' to remove to create uncovered regions.
 #'
-#' @param wp.var the maximum variance in basepairs of the well-positioned
+#' @param wp.var the variance in base pairs of the well-positioned
 #' nucleosomes. This parameter introduces some variation in the position of
 #' the reads describing a nucleosome.
 #'
-#' @param fuz.num the number of fuzzy nucleosomes. Those nucleosomes are
-#' distributed accordingly to selected distribution all over the region.
-#' Those nucleosomes can overlap other well-positioned or fuzzy nucleosomes.
+#' @param fuz.num a \code{integer}, the number of fuzzy nucleosomes. Those
+#' nucleosomes are distributed accordingly to selected distribution all over
+#' the region. Those nucleosomes can overlap other well-positioned or
+#' fuzzy nucleosomes.
 #'
-#' @param fuz.var the maximum variance of the fuzzy nucleosomes. This variance
+#' @param fuz.var the variance of the fuzzy nucleosomes. This variance
 #' can be different than the one used for the well-positioned
 #' nucleosome reads.
 #'
@@ -24,6 +25,9 @@
 #' nucleosomes can be overlapping.
 #'
 #' @param nuc.len the nucleosome length.
+#'
+#' @param len.var a \code{numeric}, the variance of the distance between a
+#' forward read and its paired reverse read.
 #'
 #' @param lin.len the length of the DNA linker DNA.
 #'
@@ -45,12 +49,13 @@
 #' @return \code{0} indicating that all parameters validations have been
 #' successful.
 #'
-#' @author Astrid Louise Deschenes
+#' @author Astrid Deschenes
 #' @keywords internal
 syntheticNucMapFromDistValidation <- function(wp.num, wp.del, wp.var, fuz.num,
                                               fuz.var,
                                               max.cover,
                                               nuc.len,
+                                              len.var,
                                               lin.len,
                                               rnd.seed,
                                               as.ratio,
@@ -83,6 +88,10 @@ syntheticNucMapFromDistValidation <- function(wp.num, wp.del, wp.var, fuz.num,
 
     if (!isInteger(lin.len) || lin.len < 0) {
         stop("lin.len must be a non-negative integer")
+    }
+
+    if (!isInteger(len.var) || len.var <= 0) {
+        stop("len.var must be a positive integer")
     }
 
     return(0)

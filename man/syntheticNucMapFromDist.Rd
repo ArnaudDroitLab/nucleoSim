@@ -5,9 +5,9 @@
 \title{Generate a synthetic nucleosome map}
 \usage{
 syntheticNucMapFromDist(wp.num, wp.del, wp.var, fuz.num, fuz.var,
-  max.cover = 100, nuc.len = 147, lin.len = 20, rnd.seed = NULL,
-  as.ratio = FALSE, show.plot = FALSE, distr = c("Uniform", "Normal",
-  "Student"), ...)
+  max.cover = 100, nuc.len = 147, len.var = 10, lin.len = 20,
+  rnd.seed = NULL, as.ratio = FALSE, show.plot = FALSE,
+  distr = c("Uniform", "Normal", "Student"), ...)
 }
 \arguments{
 \item{wp.num}{the number of well-positioned
@@ -32,16 +32,19 @@ nucleosome reads.}
 can have a higher value than \code{max.cover} since reads from differents
 nucleosomes can be overlapping. Default = 100.}
 
-\item{nuc.len}{the nucleosome length. Default = 147.}
+\item{nuc.len}{a \code{numeric}, the nucleosome length. Default = 147.}
 
-\item{lin.len}{the length of the DNA linker DNA. Default = 20.}
+\item{len.var}{a \code{numeric}, the variance of the distance between a
+forward read and its paired reverse read. Default = 10.}
+
+\item{lin.len}{a \code{numeric}, the length of the DNA linker. Default = 20.}
 
 \item{rnd.seed}{a single value, interpreted as an \code{integer}, or
 \code{NULL}. If a \code{integer} is given, the value is used to set the seed
 of the random number generator. By fixing the seed, the generated results
 can be reproduced. Default = \code{NULL}.}
 
-\item{as.ratio}{a \code{logical}, if \code{TRUE},  a synthetic naked DNA
+\item{as.ratio}{a \code{logical}, if \code{TRUE}, a synthetic naked DNA
 control map is created and the ratio between it and the nucleosome coverage
 are calculated. It can be used to simulate hybridization ratio data, like
 the one in Tiling Arrays. Both control map and calculated ratio are
@@ -62,26 +65,27 @@ when \code{show.plot=TRUE}.}
 an \code{list} of \code{class} "nucleoSim" containing the
 following elements:
 \itemize{
-\item \code{call} the matched call.
-\item \code{wp.starts} the start points of all well-positioned nucleosomes.
-\item \code{wp.nreads} th number of repetitions of each well positioned
+    \item \code{call} the matched call.
+    \item \code{wp.starts} the start points of all well-positioned
+nucleosomes.
+    \item \code{wp.nreads} th number of repetitions of each well positioned
 read.
-\item \code{wp.reads} a \code{IRanges} containing the well positioned
+    \item \code{wp.reads} a \code{IRanges} containing the well positioned
 nucleosome reads.
-\item \code{fuz.starts} the start points of all the fuzzy nucleosomes.
-\item \code{fuz.nreads} the number of repetitions of each fuzzy
+    \item \code{fuz.starts} the start points of all the fuzzy nucleosomes.
+    \item \code{fuz.nreads} the number of repetitions of each fuzzy
 nucleosome read.
-\item \code{fuz.reads} a \code{IRanges} containing the fuzzy nucleosome
+    \item \code{fuz.reads} a \code{IRanges} containing the fuzzy nucleosome
 reads.
-\item \code{syn.reads} a \code{IRanges} containing all the synthetic
+    \item \code{syn.reads} a \code{IRanges} containing all the synthetic
 nucleosome reads (from fuzzy and well-positioned nucleosomes).
 }
 The following elements will be only returned if \code{as.ratio=TRUE}:
 \itemize{
-\item \code{ctr.reads} a \code{IRanges} containing the naked DNA
+    \item \code{ctr.reads} a \code{IRanges} containing the naked DNA
 (control) reads.
-\item \code{syn.ratio} a \code{Rle} containing the calculated ratio between
-the nucleosome coverage and the control coverage.
+    \item \code{syn.ratio} a \code{Rle} containing the calculated ratio
+between the nucleosome coverage and the control coverage.
 }
 }
 \description{
@@ -97,9 +101,14 @@ from Bioconductor nucleR package (Flores and Orozco, 2011).
 ## nucleosomes using a Normal distribution with a variance of 30 for the
 ## well-positioned nucleosomes, a variance of 40 for the fuzzy nucleosomes
 ## and a seed of 15
-res <- syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
-fuz.num = 10, fuz.var = 40, as.ratio = TRUE,
-show.plot = TRUE, rnd.seed = 15, distr = "Normal")
+syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
+    fuz.num = 10, fuz.var = 40, show.plot = TRUE, rnd.seed = 15,
+    distr = "Normal")
+
+## Same output but without graph
+syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
+    fuz.num = 10, fuz.var = 40, show.plot = FALSE,
+    rnd.seed = 15, as.ratio = FALSE, distr = "Normal")
 }
 \author{
 Rawane Samb, Astrid Louise Deschenes

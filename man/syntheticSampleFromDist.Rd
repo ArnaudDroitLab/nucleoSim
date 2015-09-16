@@ -6,9 +6,9 @@
 reverse reads}
 \usage{
 syntheticSampleFromDist(wp.num, wp.del, wp.var, fuz.num, fuz.var,
-  max.cover = 100, nuc.len = 147, lin.len = 20, read.len = 40,
-  rnd.seed = NULL, as.ratio = FALSE, distr = c("Uniform", "Normal",
-  "Student"), offset)
+  max.cover = 100, nuc.len = 147, len.var = 10, lin.len = 20,
+  read.len = 40, rnd.seed = NULL, as.ratio = FALSE, distr = c("Uniform",
+  "Normal", "Student"), offset)
 }
 \arguments{
 \item{wp.num}{the number of well-positioned
@@ -34,6 +34,9 @@ can have a higher value than \code{max.cover} since reads from differents
 nucleosomes can be overlapping. Default = 100.}
 
 \item{nuc.len}{the nucleosome length. Default = 147.}
+
+\item{len.var}{a \code{numeric}, the variance of the distance between a
+forward read and its paired reverse read. Default = 10.}
 
 \item{lin.len}{the length of the DNA linker DNA. Default = 20.}
 

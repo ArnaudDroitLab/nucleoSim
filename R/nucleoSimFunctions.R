@@ -29,16 +29,19 @@
 #' can have a higher value than \code{max.cover} since reads from differents
 #' nucleosomes can be overlapping. Default = 100.
 #'
-#' @param nuc.len the nucleosome length. Default = 147.
+#' @param nuc.len a \code{numeric}, the nucleosome length. Default = 147.
 #'
-#' @param lin.len the length of the DNA linker DNA. Default = 20.
+#' @param len.var a \code{numeric}, the variance of the distance between a
+#' forward read and its paired reverse read. Default = 10.
+#'
+#' @param lin.len a \code{numeric}, the length of the DNA linker. Default = 20.
 #'
 #' @param rnd.seed a single value, interpreted as an \code{integer}, or
 #' \code{NULL}. If a \code{integer} is given, the value is used to set the seed
 #' of the random number generator. By fixing the seed, the generated results
 #' can be reproduced. Default = \code{NULL}.
 #'
-#' @param as.ratio a \code{logical}, if \code{TRUE},  a synthetic naked DNA
+#' @param as.ratio a \code{logical}, if \code{TRUE}, a synthetic naked DNA
 #' control map is created and the ratio between it and the nucleosome coverage
 #' are calculated. It can be used to simulate hybridization ratio data, like
 #' the one in Tiling Arrays. Both control map and calculated ratio are
@@ -58,27 +61,44 @@
 #' @return an \code{list} of \code{class} "nucleoSim" containing the
 #' following elements:
 #' \itemize{
-#' \item \code{call} the matched call.
-#' \item \code{wp.starts} the start points of all well-positioned nucleosomes.
-#' \item \code{wp.nreads} th number of repetitions of each well positioned
+#'     \item \code{call} the matched call.
+#'     \item \code{wp.starts} the start points of all well-positioned
+#' nucleosomes.
+#'     \item \code{wp.nreads} th number of repetitions of each well positioned
 #' read.
-#' \item \code{wp.reads} a \code{IRanges} containing the well positioned
+#'     \item \code{wp.reads} a \code{IRanges} containing the well positioned
 #' nucleosome reads.
-#' \item \code{fuz.starts} the start points of all the fuzzy nucleosomes.
-#' \item \code{fuz.nreads} the number of repetitions of each fuzzy
+#'     \item \code{fuz.starts} the start points of all the fuzzy nucleosomes.
+#'     \item \code{fuz.nreads} the number of repetitions of each fuzzy
 #' nucleosome read.
-#' \item \code{fuz.reads} a \code{IRanges} containing the fuzzy nucleosome
+#'     \item \code{fuz.reads} a \code{IRanges} containing the fuzzy nucleosome
 #' reads.
-#' \item \code{syn.reads} a \code{IRanges} containing all the synthetic
+#'     \item \code{syn.reads} a \code{IRanges} containing all the synthetic
 #' nucleosome reads (from fuzzy and well-positioned nucleosomes).
 #' }
 #' The following elements will be only returned if \code{as.ratio=TRUE}:
 #' \itemize{
-#' \item \code{ctr.reads} a \code{IRanges} containing the naked DNA
+#'     \item \code{ctr.reads} a \code{IRanges} containing the naked DNA
 #' (control) reads.
-#' \item \code{syn.ratio} a \code{Rle} containing the calculated ratio between
-#' the nucleosome coverage and the control coverage.
+#'     \item \code{syn.ratio} a \code{Rle} containing the calculated ratio
+#' between the nucleosome coverage and the control coverage.
 #' }
+#'
+#' @examples
+#'
+#' ## Generate a synthetic map with 20 well-positioned nucleosomes and 10 fuzzy
+#' ## nucleosomes using a Normal distribution with a variance of 30 for the
+#' ## well-positioned nucleosomes, a variance of 40 for the fuzzy nucleosomes
+#' ## and a seed of 15
+#' syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
+#'     fuz.num = 10, fuz.var = 40, show.plot = TRUE, rnd.seed = 15,
+#'     distr = "Normal")
+#'
+#' ## Same output but without graph
+#' syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
+#'     fuz.num = 10, fuz.var = 40, show.plot = FALSE,
+#'     rnd.seed = 15, as.ratio = FALSE, distr = "Normal")
+#'
 #'
 #' @author Rawane Samb, Astrid Louise Deschenes
 #' @importFrom stats runif rnorm rt
@@ -86,21 +106,11 @@
 #' @importFrom graphics plot
 #' @importFrom S4Vectors Rle
 #' @importFrom IRanges coverage
-#'
-#' @examples
-#'
-#'## Generate a synthetic map with 20 well-positioned nucleosomes and 10 fuzzy
-#'## nucleosomes using a Normal distribution with a variance of 30 for the
-#'## well-positioned nucleosomes, a variance of 40 for the fuzzy nucleosomes
-#'## and a seed of 15
-#'res <- syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
-#'fuz.num = 10, fuz.var = 40, as.ratio = TRUE,
-#'show.plot = TRUE, rnd.seed = 15, distr = "Normal")
-#'
 #' @export
 syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
                             max.cover = 100,
                             nuc.len = 147,
+                            len.var = 10,
                             lin.len = 20,
                             rnd.seed = NULL,
                             as.ratio = FALSE,
@@ -110,9 +120,13 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     # Get call information
     cl <- match.call()
 
+    # Validate parameters
     syntheticNucMapFromDistValidation(wp.num, wp.del, wp.var, fuz.num, fuz.var,
-                            max.cover, nuc.len, lin.len, rnd.seed, as.ratio,
-                            show.plot)
+                            max.cover, nuc.len, len.var, lin.len, rnd.seed,
+                            as.ratio, show.plot)
+
+    # Validate distribution value
+    distr <- match.arg(distr)
 
     # Set seed if given
     if (!is.null(rnd.seed)) {
@@ -140,22 +154,22 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     {
         wp.varstar <- wp.repstar + round(rnorm(length(wp.repstar), 0,
                                                 wp.var^0.5))
-        wp.varlen <- nuc.len + round(rnorm(length(wp.repstar), 0,
-                                                wp.var^0.5))
+        wp.varlen  <- nuc.len + round(rnorm(length(wp.repstar), 0,
+                                                len.var^0.5))
     }
     else if (distr == "Student")
     {
-        wp.varstar <- wp.repstar + round(rt(length(wp.repstar),4))
-        wp.varlen <- nuc.len + round(rt(length(wp.repstar),4))
+        wp.varstar <- wp.repstar + round(rt(length(wp.repstar), 4))
+        wp.varlen  <- nuc.len + round(rnorm(length(wp.repstar), 0,
+                                           len.var^0.5))
     }
     else
     {
         wp.varstar <- wp.repstar + round(runif(length(wp.repstar),
                                                 min=-wp.var,
                                                 max=wp.var))
-        wp.varlen <- nuc.len + round(runif(length(wp.repstar),
-                                                min=-wp.var,
-                                                max=wp.var))
+        wp.varlen <- nuc.len + round(rnorm(length(wp.repstar), 0,
+                                           len.var^0.5))
     }
 
     # Putative reads
@@ -182,21 +196,21 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
         fuz.varstar <- fuz.repstar + round(rnorm(length(fuz.repstar), 0,
                                                 fuz.var^0.5))
         fuz.varlen <- nuc.len + round(rnorm(length(fuz.repstar), 0,
-                                                fuz.var^0.5))
+                                                len.var^0.5))
     }
     else if (distr == "Student")
     {
         fuz.varstar <- fuz.repstar + round(rt(length(fuz.repstar), 4))
-        fuz.varlen <- nuc.len + round(rt(length(fuz.repstar), 4))
+        fuz.varlen  <- nuc.len + round(rnorm(length(fuz.repstar), 0,
+                                                len.var^0.5))
     }
     else
     {
         fuz.varstar <- fuz.repstar + round(runif(length(fuz.repstar),
                                                 min = -fuz.var,
                                                 max = fuz.var))
-        fuz.varlen <- nuc.len + round(runif(length(fuz.repstar),
-                                                min = -fuz.var,
-                                                max = fuz.var))
+        fuz.varlen <- nuc.len + round(rnorm(length(fuz.repstar), 0,
+                                                len.var^0.5))
     }
     # Overlapped reads
     fuz.reads <- IRanges(start = fuz.varstar, end = fuz.varstar + fuz.varlen)
@@ -231,13 +245,13 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 
     result[["wp.starts"]] <- wp.starts
     result[["wp.nreads"]] <- wp.nreads
-    result[["wp.reads"]] <- wp.reads
+    result[["wp.reads"]]  <- wp.reads
 
     result[["fuz.starts"]] <- fuz.starts
     result[["fuz.nreads"]] <- fuz.nreads
-    result[["fuz.reads"]] <- fuz.reads
+    result[["fuz.reads"]]  <- fuz.reads
 
-    result[["syn.reads"]] <- syn.reads
+    result[["syn.reads"]]  <- syn.reads
 
     if(as.ratio) {
         result[["ctr.reads"]] <- ctr.reads
@@ -318,6 +332,9 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 #'
 #' @param nuc.len the nucleosome length. Default = 147.
 #'
+#' @param len.var a \code{numeric}, the variance of the distance between a
+#' forward read and its paired reverse read. Default = 10.
+#'
 #' @param lin.len the length of the DNA linker DNA. Default = 20.
 #'
 #' @param read.len the length of each of the paired reads. Default = 40.
@@ -371,6 +388,7 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 syntheticSampleFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
                                 max.cover = 100,
                                 nuc.len = 147,
+                                len.var = 10,
                                 lin.len = 20,
                                 read.len = 40,
                                 rnd.seed = NULL,
@@ -387,9 +405,13 @@ syntheticSampleFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     cl <- match.call()
 
     ## Create a nucleosome map using the parameters of the user
-    map <- syntheticNucMapFromDist(wp.num, wp.del, wp.var, fuz.num, fuz.var,
-                          max.cover, nuc.len, lin.len, rnd.seed,
-                          as.ratio, show.plot = FALSE, distr)
+    map <- syntheticNucMapFromDist(wp.num = wp.num, wp.del = wp.del,
+                                    wp.var = wp.var, fuz.num = fuz.num,
+                                    fuz.var = fuz.var, max.cover = max.cover,
+                                    nuc.len = nuc.len, len.var = len.var,
+                                    lin.len = lin.len, rnd.seed = rnd.seed,
+                                    as.ratio = as.ratio, show.plot = FALSE,
+                                    distr = distr)
 
     ## Extract reads to create a dataframe
     syn.reads <- as.data.frame(map$syn.reads)
@@ -402,7 +424,7 @@ syntheticSampleFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     syn.reads$end   <- syn.reads$end   + offset
 
     # Store read paired information
-    paired <- data.frame(rep("chr_SYNTHETIC", nreads),
+    paired <- data.frame(rep("chr1", nreads),
                             as.integer(syn.reads$start),
                             as.integer(syn.reads$end))
     colnames(paired) <- c("chr", "start", "end")

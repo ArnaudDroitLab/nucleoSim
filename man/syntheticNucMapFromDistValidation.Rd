@@ -6,24 +6,25 @@
 function}
 \usage{
 syntheticNucMapFromDistValidation(wp.num, wp.del, wp.var, fuz.num, fuz.var,
-  max.cover, nuc.len, lin.len, rnd.seed, as.ratio, show.plot)
+  max.cover, nuc.len, len.var, lin.len, rnd.seed, as.ratio, show.plot)
 }
 \arguments{
-\item{wp.num}{the number of well-positioned
+\item{wp.num}{a \code{integer}, the number of well-positioned
 (non overlapping) nucleosomes.}
 
-\item{wp.del}{the number of well-positioned nucleosomes to remove to create
-uncovered regions.}
+\item{wp.del}{a \code{integer}, the number of well-positioned nucleosomes
+to remove to create uncovered regions.}
 
-\item{wp.var}{the maximum variance in basepairs of the well-positioned
+\item{wp.var}{the variance in base pairs of the well-positioned
 nucleosomes. This parameter introduces some variation in the position of
 the reads describing a nucleosome.}
 
-\item{fuz.num}{the number of fuzzy nucleosomes. Those nucleosomes are
-distributed accordingly to selected distribution all over the region.
-Those nucleosomes can overlap other well-positioned or fuzzy nucleosomes.}
+\item{fuz.num}{a \code{integer}, the number of fuzzy nucleosomes. Those
+nucleosomes are distributed accordingly to selected distribution all over
+the region. Those nucleosomes can overlap other well-positioned or
+fuzzy nucleosomes.}
 
-\item{fuz.var}{the maximum variance of the fuzzy nucleosomes. This variance
+\item{fuz.var}{the variance of the fuzzy nucleosomes. This variance
 can be different than the one used for the well-positioned
 nucleosome reads.}
 
@@ -32,6 +33,9 @@ can have a higher value than \code{max.cover} since reads from differents
 nucleosomes can be overlapping.}
 
 \item{nuc.len}{the nucleosome length.}
+
+\item{len.var}{a \code{numeric}, the variance of the distance between a
+forward read and its paired reverse read.}
 
 \item{lin.len}{the length of the DNA linker DNA.}
 
@@ -59,7 +63,7 @@ Parameter validation for the \code{\link{syntheticNucMapFromDist}}
 function
 }
 \author{
-Astrid Louise Deschenes
+Astrid Deschenes
 }
 \keyword{internal}
 
