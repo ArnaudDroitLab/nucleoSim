@@ -94,6 +94,6 @@ fuz.num = 10, fuz.var = 40, as.ratio = TRUE, rnd.seed = 15, distr = "Normal",
 offset = 1000)
 }
 \author{
-Pascal Belleau, Rawane Samb, Astrid Louise Deschenes
+Pascal Belleau, Rawane Samb, Astrid Deschenes
 }
 

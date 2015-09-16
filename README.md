@@ -17,8 +17,8 @@ syntheticNucMap() function from Bioconductor nucleR package
 
 [Rawane Samb](https://ca.linkedin.com/in/rawanesamb 
 "Rawane Samb"), 
-[Astrid Louise Deschenes](http://ca.linkedin.com/in/astriddeschenes 
-"Astrid Louise Deschenes"), 
+[Astrid Deschenes](http://ca.linkedin.com/in/astriddeschenes 
+"Astrid Deschenes"), 
 [Pascal Belleau](http://ca.linkedin.com/in/pascalbelleau 
 "Pascal Belleau") 
 and [Arnaud Droit](http://ca.linkedin.com/in/drarnaud 

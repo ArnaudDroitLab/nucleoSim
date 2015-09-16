@@ -100,7 +100,7 @@
 #'     rnd.seed = 15, as.ratio = FALSE, distr = "Normal")
 #'
 #'
-#' @author Rawane Samb, Astrid Louise Deschenes
+#' @author Rawane Samb, Astrid Deschenes
 #' @importFrom stats runif rnorm rt
 #' @importFrom IRanges IRanges
 #' @importFrom graphics plot
@@ -373,7 +373,7 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 #' positions of the reads used to generate the paired-end reads.
 #' }
 #'
-#' @author Pascal Belleau, Rawane Samb, Astrid Louise Deschenes
+#' @author Pascal Belleau, Rawane Samb, Astrid Deschenes
 #'
 #' @examples
 #'

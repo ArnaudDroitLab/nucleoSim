@@ -6,11 +6,11 @@ Description: This package generate synthetic nucleosome maps using
     parameters given by users. Users has choice between three different
     distributions:
     Normal, Student and Uniform.
-Author: Rawane Samb [aut], Astrid Louise Deschenes [cre, aut],
+Author: Rawane Samb [aut], Astrid Deschenes [cre, aut],
     Pascal Belleau [aut], Arnaud Droit [aut]
 Author@R: c(person("Rawane", "Samb",
     email="rawane.samb.1@ulaval.ca", role=c("aut")),
-    person("Astrid Louise", "Deschenes",
+    person("Astrid", "Deschenes",
     email="Astrid-Louise.Deschenes@crchudequebec.ulaval.ca",
     role=c("cre","aut")),
     person("Pascal", "Belleau",

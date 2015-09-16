@@ -111,7 +111,7 @@ syntheticNucMapFromDistValidation <- function(wp.num, wp.del, wp.var, fuz.num,
 #'
 #' @return \code{TRUE} is the parameter is a integer; otherwise \code{FALSE}
 #'
-#' @author Astrid Louise Deschenes
+#' @author Astrid Deschenes
 #' @keywords internal
 isInteger <- function(value) {
     return((is.integer(value) && length(value) == 1) || (is.numeric(value) &&
