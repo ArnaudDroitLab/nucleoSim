@@ -1,7 +1,9 @@
 nucleoSim: Generate synthetic nucleosome maps
 =====================
 
-[![Build Status](https://travis-ci.org/adeschen/consensusSeekeR.svg?branch=master)](https://travis-ci.org/adeschen/nucleoSim)
+[![Build Status](https://travis-ci.org/adeschen/nucleoSim.svg?branch=master)](https://travis-ci.org/adeschen/nucleoSim)
+
+[![codecov.io](http://codecov.io/github/adeschen/nucleoSim/coverage.svg?branch=master)](http://codecov.io/github/adeschen/nucleoSim?branch=master)
 
 This package generate synthetic nucleosome maps using
 parameters given by users. Three different
