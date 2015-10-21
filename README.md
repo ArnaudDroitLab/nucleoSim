@@ -9,15 +9,16 @@ parameters given by users. Three different
 distributions are available: Normal, Student and Uniform.
 
 This package implements a modifed version of the 
-syntheticNucMap() function from Bioconductor nucleR package 
-(Flores and Orozco, 2011).
+syntheticNucMap() function from Bioconductor 
+[nucleR](http://www.bioconductor.org/packages/release/bioc/html/nucleR.html) 
+package (Flores and Orozco, 2011).
 
 ## Authors ##
 
 [Rawane Samb](https://ca.linkedin.com/in/rawanesamb 
 "Rawane Samb"), 
-[Astrid Deschenes](http://ca.linkedin.com/in/astriddeschenes 
-"Astrid Deschenes"), 
+[Astrid Desch&ecirc;nes](http://ca.linkedin.com/in/astriddeschenes 
+"Astrid Desch&ecirc;nes"), 
 [Pascal Belleau](http://ca.linkedin.com/in/pascalbelleau 
 "Pascal Belleau") 
 and [Arnaud Droit](http://ca.linkedin.com/in/drarnaud 
@@ -28,8 +29,8 @@ See [Arnaud Droit Lab](http://bioinformatique.ulaval.ca/home/
 
 ## Maintainer ##
 
-[Astrid Deschenes](http://ca.linkedin.com/in/astriddeschenes 
-"Astrid Deschenes")
+[Astrid Desch&ecirc;nes](http://ca.linkedin.com/in/astriddeschenes 
+"Astrid Desch&ecirc;nes")
 
 ## License ##
 
