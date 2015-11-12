@@ -102,20 +102,19 @@
 #'
 #' @author Rawane Samb, Astrid Deschenes
 #' @importFrom stats runif rnorm rt
-#' @importFrom IRanges IRanges
-#' @importFrom graphics plot
-#' @importFrom S4Vectors Rle
-#' @importFrom IRanges coverage
+#' @importFrom IRanges IRanges coverage start
+#' @importFrom graphics plot lines abline points legend
+#' @importFrom S4Vectors Rle start
 #' @export
 syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
-                            max.cover = 100,
-                            nuc.len = 147,
-                            len.var = 10,
-                            lin.len = 20,
-                            rnd.seed = NULL,
-                            as.ratio = FALSE,
-                            show.plot = FALSE,
-                            distr= c("Uniform", "Normal", "Student"), ...)
+                                max.cover = 100,
+                                nuc.len = 147,
+                                len.var = 10,
+                                lin.len = 20,
+                                rnd.seed = NULL,
+                                as.ratio = FALSE,
+                                show.plot = FALSE,
+                                distr= c("Uniform", "Normal", "Student"), ...)
 {
     # Get call information
     cl <- match.call()
@@ -161,7 +160,7 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     {
         wp.varstar <- wp.repstar + round(rt(length(wp.repstar), 4))
         wp.varlen  <- nuc.len + round(rnorm(length(wp.repstar), 0,
-                                           len.var^0.5))
+                                                len.var^0.5))
     }
     else
     {
@@ -169,11 +168,10 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
                                                 min=-wp.var,
                                                 max=wp.var))
         wp.varlen <- nuc.len + round(rnorm(length(wp.repstar), 0,
-                                           len.var^0.5))
+                                                len.var^0.5))
     }
 
     # Putative reads
-    #wp.reads <- IRanges(start=wp.varstar, width=nuc.len)
     wp.reads <- IRanges(start=wp.varstar, end=wp.varstar + wp.varlen)
 
     ###########################################################################
@@ -386,15 +384,15 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 #'
 #' @export
 syntheticSampleFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
-                                max.cover = 100,
-                                nuc.len = 147,
-                                len.var = 10,
-                                lin.len = 20,
-                                read.len = 40,
-                                rnd.seed = NULL,
-                                as.ratio = FALSE,
-                                distr = c("Uniform", "Normal", "Student"),
-                                offset)
+                                    max.cover = 100,
+                                    nuc.len = 147,
+                                    len.var = 10,
+                                    lin.len = 20,
+                                    read.len = 40,
+                                    rnd.seed = NULL,
+                                    as.ratio = FALSE,
+                                    distr = c("Uniform", "Normal", "Student"),
+                                    offset)
 {
     ## Validate that offset is a non-negative integer
     if (!isInteger(offset) || offset < 0) {
