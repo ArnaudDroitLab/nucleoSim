@@ -52,14 +52,14 @@
 #' @author Astrid Deschenes
 #' @keywords internal
 syntheticNucMapFromDistValidation <- function(wp.num, wp.del, wp.var, fuz.num,
-                                              fuz.var,
-                                              max.cover,
-                                              nuc.len,
-                                              len.var,
-                                              lin.len,
-                                              rnd.seed,
-                                              as.ratio,
-                                              show.plot)
+                                                fuz.var,
+                                                max.cover,
+                                                nuc.len,
+                                                len.var,
+                                                lin.len,
+                                                rnd.seed,
+                                                as.ratio,
+                                                show.plot)
 {
 
     if (!isInteger(wp.num) || wp.num < 0) {
@@ -92,6 +92,10 @@ syntheticNucMapFromDistValidation <- function(wp.num, wp.del, wp.var, fuz.num,
 
     if (!isInteger(len.var) || len.var <= 0) {
         stop("len.var must be a positive integer")
+    }
+
+    if (!is.null(rnd.seed) && !isInteger(rnd.seed)) {
+        stop("rnd.seed must be NULL or an integer")
     }
 
     return(0)
