@@ -415,4 +415,58 @@ test.syntheticNucMapFromDist_good_result_01 <- function() {
     checkTrue(is.null(obs$ctr.reads), msg = message)
 }
 
+## Test the result when as.ratio is FALSE and Student distribution
+test.syntheticNucMapFromDist_good_result_02 <- function() {
+    obs <- syntheticNucMapFromDist(wp.num = 4, wp.del = 1,
+                                   wp.var = 2, fuz.num = 1, fuz.var = 40, lin.len = 4,
+                                   as.ratio = FALSE, show.plot = FALSE, rnd.seed = 26,
+                                   distr = "Student")
+
+    exp.wp.starts  <- c(1, 152, 303, 454)
+    exp.wp.nreads  <- c(0, 30, 88,  80)
+    exp.fuz.starts <- c(166)
+    exp.fuz.nreads <- c(22)
+
+    message     <- paste0(" test.syntheticNucMapFromDist_good_result_02() ",
+                          "- syntheticNucMapFromDist did not generated ",
+                          "expected values")
+
+    checkEqualsNumeric(obs$wp.starts, exp.wp.starts, msg = message)
+    checkEqualsNumeric(obs$wp.nreads, exp.wp.nreads, msg = message)
+    checkEqualsNumeric(obs$fuz.starts, exp.fuz.starts, msg = message)
+    checkEqualsNumeric(obs$fuz.nreads, exp.fuz.nreads, msg = message)
+    checkEqualsNumeric(length(obs$wp.reads), 198, msg = message)
+    checkEqualsNumeric(length(obs$fuz.reads), 22, msg = message)
+    checkEqualsNumeric(length(obs$syn.reads), 220, msg = message)
+    checkTrue(is.null(obs$syn.ratio), msg = message)
+    checkTrue(is.null(obs$ctr.reads), msg = message)
+}
+
+## Test the result when as.ratio is FALSE and Uniform distribution
+test.syntheticNucMapFromDist_good_result_03 <- function() {
+    obs <- syntheticNucMapFromDist(wp.num = 3, wp.del = 1,
+                                   wp.var = 2, fuz.num = 2, fuz.var = 40, lin.len = 4,
+                                   as.ratio = FALSE, show.plot = FALSE, rnd.seed = 26,
+                                   distr = "Uniform")
+
+    exp.wp.starts  <- c(1, 152, 303)
+    exp.wp.nreads  <- c(3, 0, 88)
+    exp.fuz.starts <- c(47, 270)
+    exp.fuz.nreads <- c(94, 2)
+
+    message     <- paste0(" test.syntheticNucMapFromDist_good_result_03() ",
+                          "- syntheticNucMapFromDist did not generated ",
+                          "expected values")
+
+    checkEqualsNumeric(obs$wp.starts, exp.wp.starts, msg = message)
+    checkEqualsNumeric(obs$wp.nreads, exp.wp.nreads, msg = message)
+    checkEqualsNumeric(obs$fuz.starts, exp.fuz.starts, msg = message)
+    checkEqualsNumeric(obs$fuz.nreads, exp.fuz.nreads, msg = message)
+    checkEqualsNumeric(length(obs$wp.reads), 91, msg = message)
+    checkEqualsNumeric(length(obs$fuz.reads), 96, msg = message)
+    checkEqualsNumeric(length(obs$syn.reads), 187, msg = message)
+    checkTrue(is.null(obs$syn.ratio), msg = message)
+    checkTrue(is.null(obs$ctr.reads), msg = message)
+}
+
 
