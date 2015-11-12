@@ -126,7 +126,7 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
                             as.ratio, show.plot)
 
     # Validate distribution value
-    distr <- match.arg(distr)
+    distr <- match.arg(distr, several.ok = FALSE)
 
     # Set seed if given
     if (!is.null(rnd.seed)) {
