@@ -58,7 +58,7 @@ test.syntheticNucMapFromDist_vector_wp_num <- function() {
                         as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
                         distr = "Normal"), error = conditionMessage)
     exp <- "wp.num must be a non-negative integer"
-    message <- paste0(" syntheticNucMapFromDist_vector_fuz_num() ",
+    message <- paste0(" syntheticNucMapFromDist_vector_wp_num() ",
                       "- A vector as wp.num parameter did not generated ",
                       "expected error.")
     checkEquals(obs, exp, msg = message)
