@@ -59,8 +59,8 @@ test.syntheticNucMapFromDist_vector_wp_num <- function() {
                         distr = "Normal"), error = conditionMessage)
     exp <- "wp.num must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_vector_wp_num() ",
-                      "- A vector as wp.num parameter did not generated ",
-                      "expected error.")
+                        "- A vector as wp.num parameter did not generated ",
+                        "expected error.")
     checkEquals(obs, exp, msg = message)
 }
 
@@ -76,8 +76,8 @@ test.syntheticNucMapFromDist_string_fuz_num <- function() {
                         distr = "Normal"), error = conditionMessage)
     exp <- "fuz.num must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_string_fuz_num() ",
-                      "- A string as fuz.num parameter did not generated ",
-                      "expected error.")
+                        "- A string as fuz.num parameter did not generated ",
+                        "expected error.")
     checkEquals(obs, exp, msg = message)
 }
 
@@ -119,8 +119,8 @@ test.syntheticNucMapFromDist_string_wp_del <- function() {
                     distr = "Normal"), error = conditionMessage)
     exp <- "wp.del must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_string_wp_del() ",
-                      "- A string as wp.del parameter did not generated ",
-                      "expected error.")
+                        "- A string as wp.del parameter did not generated ",
+                        "expected error.")
     checkEquals(obs, exp, msg = message)
 }
 
@@ -145,8 +145,8 @@ test.syntheticNucMapFromDist_vector_wp_del<- function() {
                     distr = "Normal"), error = conditionMessage)
     exp <- "wp.del must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_vector_wp_del() ",
-                      "- A vector as wp.del parameter did not generated ",
-                      "expected error.")
+                        "- A vector as wp.del parameter did not generated ",
+                        "expected error.")
     checkEquals(obs, exp, msg = message)
 }
 
@@ -162,8 +162,8 @@ test.syntheticNucMapFromDist_string_wp_var <- function() {
                             distr = "Normal"), error = conditionMessage)
     exp <- "wp.var must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_string_wp_var() ",
-                      "- A string as wp.var parameter did not generated ",
-                      "expected error.")
+                        "- A string as wp.var parameter did not generated ",
+                        "expected error.")
     checkEquals(obs, exp, msg = message)
 }
 
@@ -188,8 +188,8 @@ test.syntheticNucMapFromDist_vector_wp_var<- function() {
                     distr = "Normal"), error = conditionMessage)
     exp <- "wp.var must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_vector_wp_var() ",
-                      "- A vector as wp.var parameter did not generated ",
-                      "expected error.")
+                        "- A vector as wp.var parameter did not generated ",
+                        "expected error.")
     checkEquals(obs, exp, msg = message)
 }
 
@@ -205,8 +205,8 @@ test.syntheticNucMapFromDist_string_fuz_var <- function() {
                     distr = "Normal"), error = conditionMessage)
     exp <- "fuz.var must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_string_fuz_var() ",
-                      "- A string as fuz.var parameter did not generated ",
-                      "expected error.")
+                        "- A string as fuz.var parameter did not generated ",
+                        "expected error.")
     checkEquals(obs, exp, msg = message)
 }
 
@@ -231,8 +231,8 @@ test.syntheticNucMapFromDist_vector_fuz_var<- function() {
                             distr = "Normal"), error = conditionMessage)
     exp <- "fuz.var must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_vector_fuz_var() ",
-                      "- A vector as fuz.var parameter did not generated ",
-                      "expected error.")
+                        "- A vector as fuz.var parameter did not generated ",
+                        "expected error.")
     checkEquals(obs, exp, msg = message)
 }
 
@@ -271,7 +271,7 @@ test.syntheticNucMapFromDist_negative_max_cover <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
                     wp.var = 1, fuz.num = 4, fuz.var = 40, max.cover = -1,
                     as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
-                        distr = "Normal"), error = conditionMessage)
+                    distr = "Normal"), error = conditionMessage)
     exp <- "max.cover must be a positive integer"
     message <- paste0(" syntheticNucMapFromDist_negative_max_cover() ",
             "- A negative integer as max.cover parameter did not generated ",
@@ -287,8 +287,8 @@ test.syntheticNucMapFromDist_vector_max_cover <- function() {
             distr = "Normal"), error = conditionMessage)
     exp <- "max.cover must be a positive integer"
     message <- paste0(" syntheticNucMapFromDist_vector_max_cover() ",
-                      "- A vector as max.cover parameter did not generated ",
-                      "expected error.")
+                        "- A vector as max.cover parameter did not generated ",
+                        "expected error.")
     checkEquals(obs, exp, msg = message)
 }
 
@@ -300,8 +300,8 @@ test.syntheticNucMapFromDist_string_lin_len <- function() {
                         distr = "Normal"), error = conditionMessage)
     exp <- "lin.len must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_string_lin_len() ",
-                      "- A string as lin.len parameter did not generated ",
-                      "expected error.")
+                        "- A string as lin.len parameter did not generated ",
+                        "expected error.")
     checkEquals(obs, exp, msg = message)
 }
 
@@ -330,8 +330,8 @@ test.syntheticNucMapFromDist_vector_lin_len <- function() {
                     distr = "Normal"), error = conditionMessage)
     exp <- "lin.len must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_vector_lin_len() ",
-                      "- A vector as lin.len parameter did not generated ",
-                      "expected error.")
+                        "- A vector as lin.len parameter did not generated ",
+                        "expected error.")
     checkEquals(obs, exp, msg = message)
 }
 
@@ -347,8 +347,8 @@ test.syntheticNucMapFromDist_negative_len_var<- function() {
                     distr = "Normal"), error = conditionMessage)
     exp <- "len.var must be a positive integer"
     message <- paste0(" test.syntheticNucMapFromDist_negative_len_var() ",
-                      "- A negative integer as len.var parameter did not ",
-                      "generated expected error.")
+                        "- A negative integer as len.var parameter did not ",
+                        "generated expected error.")
     checkEquals(obs, exp, msg = message)
 }
 
@@ -360,8 +360,8 @@ test.syntheticNucMapFromDist_vector_len_var <- function() {
                     distr = "Normal"), error = conditionMessage)
     exp <- "len.var must be a positive integer"
     message <- paste0(" test.syntheticNucMapFromDist_vector_len_var() ",
-                      "- A vector as len.var parameter did not generated ",
-                      "expected error.")
+                        "- A vector as len.var parameter did not generated ",
+                        "expected error.")
     checkEquals(obs, exp, msg = message)
 }
 
@@ -372,8 +372,8 @@ test.syntheticNucMapFromDist_vector_len_var <- function() {
 ## Test the result when bad value is passed as distr parameter
 test.syntheticNucMapFromDist_bad_distr <- function() {
     message <- paste0(" syntheticNucMapFromDist_vector_bad_distr() ",
-                      "- A bad value as distr parameter did not generated ",
-                      "expected error.")
+                        "- A bad value as distr parameter did not generated ",
+                        "expected error.")
 
     checkException(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
                         wp.var = 3, fuz.num = 4, fuz.var = 40, lin.len = 4,
@@ -445,9 +445,10 @@ test.syntheticNucMapFromDist_good_result_02 <- function() {
 ## Test the result when as.ratio is FALSE and Uniform distribution
 test.syntheticNucMapFromDist_good_result_03 <- function() {
     obs <- syntheticNucMapFromDist(wp.num = 3, wp.del = 1,
-                                   wp.var = 2, fuz.num = 2, fuz.var = 40, lin.len = 4,
-                                   as.ratio = FALSE, show.plot = FALSE, rnd.seed = 26,
-                                   distr = "Uniform")
+                                    wp.var = 2, fuz.num = 2, fuz.var = 40,
+                                    lin.len = 4,
+                                    as.ratio = FALSE, show.plot = FALSE,
+                                    rnd.seed = 26, distr = "Uniform")
 
     exp.wp.starts  <- c(1, 152, 303)
     exp.wp.nreads  <- c(3, 0, 88)
@@ -469,4 +470,31 @@ test.syntheticNucMapFromDist_good_result_03 <- function() {
     checkTrue(is.null(obs$ctr.reads), msg = message)
 }
 
+## Test the result when as.ratio is TRUE and Uniform distribution
+test.syntheticNucMapFromDist_good_result_04 <- function() {
+    obs <- syntheticNucMapFromDist(wp.num = 5, wp.del = 2,
+                                   wp.var = 3, fuz.num = 2, fuz.var = 40,
+                                   lin.len = 4,
+                                   as.ratio = TRUE, show.plot = FALSE,
+                                   rnd.seed = 26, distr = "Uniform")
+
+    exp.wp.starts  <- c(1, 152, 303, 454, 605)
+    exp.wp.nreads  <- c(3, 0, 88, 0, 32)
+    exp.fuz.starts <- c(219, 53)
+    exp.fuz.nreads <- c(81, 61)
+
+    message     <- paste0(" test.syntheticNucMapFromDist_good_result_04() ",
+                          "- syntheticNucMapFromDist did not generated ",
+                          "expected values")
+
+    checkEqualsNumeric(obs$wp.starts, exp.wp.starts, msg = message)
+    checkEqualsNumeric(obs$wp.nreads, exp.wp.nreads, msg = message)
+    checkEqualsNumeric(obs$fuz.starts, exp.fuz.starts, msg = message)
+    checkEqualsNumeric(obs$fuz.nreads, exp.fuz.nreads, msg = message)
+    checkEqualsNumeric(length(obs$wp.reads), 123, msg = message)
+    checkEqualsNumeric(length(obs$fuz.reads), 142, msg = message)
+    checkEqualsNumeric(length(obs$syn.reads), 265, msg = message)
+    checkEqualsNumeric(length(obs$syn.ratio), 851, msg = message)
+    checkEqualsNumeric(length(obs$ctr.reads), 265, msg = message)
+}
 
