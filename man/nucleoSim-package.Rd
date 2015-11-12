@@ -12,12 +12,12 @@ distributions: Normal, Student and Uniform.
 }
 \author{
 Rawane Samb,
-Astrid Louise Deschenes,
+Astrid Deschenes,
 Pascal Belleau and
 Arnaud Droit
 
 Maintainer:
-Astrid Louise Deschenes <astrid-louise.deschenes@crchudequebec.ulaval.ca>
+Astrid Deschenes <astrid-louise.deschenes@crchudequebec.ulaval.ca>
 }
 \seealso{
 \itemize{
