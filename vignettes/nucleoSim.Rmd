@@ -1,6 +1,6 @@
 ---
 title: "Generate synthetic nucleosome maps"
-author: Rawane Samb, Astrid Louise Deschenes, Pascal Belleau and Arnaud Droit
+author: Rawane Samb, Astrid Deschenes, Pascal Belleau and Arnaud Droit
 date: '`r format(Sys.time(), "%d %B, %Y")`'
 output:
   BiocStyle::html_document:
