@@ -319,3 +319,30 @@ test.syntheticSampleFromDist_vector_offset <- function() {
 ## distr
 ################################
 
+
+
+################################
+## Good results
+################################
+
+## Test the result when as.ratio is FALSE
+test.syntheticSampleFromDist_good_result_01 <- function() {
+    obs <- syntheticSampleFromDist(wp.num = 4, wp.del = 2,
+                                    wp.var = 3, fuz.num = 1, fuz.var = 40,
+                                    lin.len = 4, rnd.seed = 125, offset = 100,
+                                    distr = "Normal")
+
+    exp.wp <- data.frame(nucleopos=c(175, 326, 477, 628), nreads=c(83, 13, 31, 0))
+    exp.fuz <- data.frame(nucleopos=c(540), nreads=c(48))
+
+    message     <- paste0(" test.syntheticSampleFromDist_good_result_01() ",
+                          "- syntheticSampleFromDist did not generated ",
+                          "expected values")
+
+    checkEqualsNumeric(obs$wp, exp.wp, msg = message)
+    checkEqualsNumeric(obs$fuz, exp.fuz, msg = message)
+    checkEqualsNumeric(length(obs$dataIP), 4, msg = message)
+    checkEqualsNumeric(nrow(obs$dataIP), 350, msg = message)
+    checkEqualsNumeric(length(obs$paired), 3, msg = message)
+    checkEqualsNumeric(nrow(obs$paired), 175, msg = message)
+}
