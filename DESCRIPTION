@@ -25,7 +25,7 @@ Suggests: BiocStyle,
     BiocGenerics,
     knitr,
     RUnit
-License: Artistic-2.0 | file LICENSE
+License: Artistic-2.0
 URL: https://github.com/adeschen/nucleoSim
 BugReports: https://github.com/adeschen/nucleoSim/issues
 VignetteBuilder: knitr
