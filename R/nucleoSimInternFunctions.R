@@ -1,6 +1,10 @@
 #' @title Parameter validation for the \code{\link{syntheticNucMapFromDist}}
 #' function
 #'
+#' @description Validate that all values passed to the function are formated
+#' for the \code{\link{syntheticNucMapFromDist}} function.
+#'
+#'
 #' @param wp.num a \code{integer}, the number of well-positioned
 #' (non overlapping) nucleosomes.
 #'
