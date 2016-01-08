@@ -1,7 +1,5 @@
 ---
-title: "Generate synthetic nucleosome maps"
-author: Rawane Samb, Astrid Deschenes, Pascal Belleau and Arnaud Droit
-date: '`r format(Sys.time(), "%d %B, %Y")`'
+title: "Synthetic nucleosome maps"
 output:
   BiocStyle::html_document:
     toc: true
@@ -15,6 +13,12 @@ vignette: >
 ```{r style, echo = FALSE, results = 'asis'}
 BiocStyle::markdown()
 ```
+<br>
+**Package**: `r Rpackage("nucleoSim")`<br />
+**Authors**: `r packageDescription("nucleoSim")[["Author"]]`<br />
+**Version**: `r packageDescription("nucleoSim")$Version`<br />
+**Compiled date**: `r Sys.Date()`<br />
+**License**: `r packageDescription("nucleoSim")[["License"]]`<br />
 
 ## Licensing
 
