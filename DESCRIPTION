@@ -3,8 +3,8 @@ Version: 0.99.0
 Date: 2015-07-24
 Title: Generate synthetic nucleosome maps
 Description: This package generate synthetic nucleosome maps using
-    parameters given by users. Users has choice between three different
-    distributions:
+    parameters given by users. Three different
+    distributions are available:
     Normal, Student and Uniform.
 Encoding: UTF-8
 Author: Rawane Samb [aut], Astrid Deschênes [cre, aut],
