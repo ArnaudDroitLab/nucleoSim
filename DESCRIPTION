@@ -6,30 +6,34 @@ Description: This package generate synthetic nucleosome maps using
     parameters given by users. Users has choice between three different
     distributions:
     Normal, Student and Uniform.
-Author: Rawane Samb [aut], Astrid Deschenes [cre, aut],
+Encoding: UTF-8
+Author: Rawane Samb [aut], Astrid Deschênes [cre, aut],
     Pascal Belleau [aut], Arnaud Droit [aut]
 Author@R: c(person("Rawane", "Samb",
     email="rawane.samb.1@ulaval.ca", role=c("aut")),
-    person("Astrid", "Deschenes",
+    person("Astrid", "Deschênes",
     email="Astrid-Louise.Deschenes@crchudequebec.ulaval.ca",
     role=c("cre","aut")),
     person("Pascal", "Belleau",
     email="pascal.belleau@crchuq.ulaval.ca", role=c("aut")),
     person("Arnaud", "Droit",
     email="arnaud.droit@crchuq.ulaval.ca", role=c("aut")))
-Imports: stats,
+Imports:
+    stats,
     IRanges,
     S4Vectors,
     graphics
-Suggests: BiocStyle,
+Suggests:
+    BiocStyle,
     BiocGenerics,
     knitr,
     RUnit
 License: Artistic-2.0
-URL: https://github.com/adeschen/nucleoSim
-BugReports: https://github.com/adeschen/nucleoSim/issues
+URL: https://github.com/arnauddroitlab/nucleoSim
+BugReports: https://github.com/arnauddroitlab/nucleoSim/issues
 VignetteBuilder: knitr
 NeedsCompilation: no
 biocViews: Genetics, Sequencing, Software, StatisticalMethod
-Maintainer: Astrid Louise Deschenes
+Maintainer: Astrid Deschenes
     <Astrid-Louise.Deschenes@crchudequebec.ulaval.ca>
+RoxygenNote: 5.0.1
