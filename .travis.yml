@@ -11,6 +11,7 @@ warnings_are_errors: true
 r_binary_packages:
   - RUnit
   - knitr
+  - rmarkdown
 
 # Package dependencies from Bioconductor
 bioc_packages:
@@ -18,7 +19,6 @@ bioc_packages:
   - IRanges
   - BiocStyle
   - S4Vectors
-
 
 # Package dependencies for codecov
 r_github_packages:
