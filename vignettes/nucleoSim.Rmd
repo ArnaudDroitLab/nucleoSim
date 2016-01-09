@@ -20,11 +20,17 @@ BiocStyle::markdown()
 **Compiled date**: `r Sys.Date()`<br />
 **License**: `r packageDescription("nucleoSim")[["License"]]`<br />
 
-## Licensing
+## Licensing and citing
 
 This package and the underlying `r Rpackage("nucleoSim")` code are 
 distributed under the Artistic license 2.0. You are free to use and 
 redistribute this software.
+
+If you use this package for a publication, we would ask you to cite the following:
+
+> Samb R, Khadraoui K, Belleau P, et al. (2015). "Using informative Multinomial-Dirichlet prior in a t-mixture with reversible jump estimation of nucleosome positions for genome-wide profiling." Statistical Applications in Genetics and Molecular Biology. Published online before print December 10, 2015. <a href="http://dx.doi.org/10.1515/sagmb-2014-0098">doi: 10.1515/sagmb-2014-0098</a>
+
+> Flores O and Orozco M (2011). “nucleR: a package for non-parametric nucleosome positioning.” Bioinformatics, 27, pp. 2149–2150. <a href="http://dx.doi.org/10.1093/bioinformatics/btr345">doi: 10.1093/bioinformatics/btr345</a>
 
 
 ## Loading nucleoSim package
@@ -34,6 +40,45 @@ first be loaded with the following command:
 
 ```{r loadingPackage, warning=FALSE, message=FALSE}
 library(nucleoSim)
+```
+
+
+## Demo
+
+
+```{r demo, warning=FALSE, message=FALSE, collapse=TRUE}
+val.num       <- 330  ### nombre de nucleosomes non-chevauchants
+val.del       <- 30
+val.var       <- 30   ### variance si autre dist
+val.fuz.var   <- 50   ### variance si sautre
+val.max.cover <- 70
+val.nuc.len   <- 147
+val.len.var   <- 10
+val.lin.len   <- 20
+val.rnd.seed  <- 100
+val.as.ratio  <- TRUE
+val.offset    <- 10000
+
+val.rnd.seed <- 202
+        
+## Create Uniform sample
+sample <- syntheticSampleFromDist(wp.num=val.num,
+                                            wp.del=val.del,
+                                            wp.var=val.var,
+                                            fuz.num=2*val.del,
+                                            fuz.var=val.fuz.var,
+                                            max.cover=val.max.cover,
+                                            nuc.len=val.nuc.len,
+                                            len.var=val.len.var,
+                                            lin.len=val.lin.len,
+                                            rnd.seed=val.rnd.seed,
+                                            as.ratio=val.as.ratio,
+                                            distr="Uniform",
+                                            offset=val.offset)
+
+head(sample$wp)
+
+head(sample$fuz)
 ```
 
 
