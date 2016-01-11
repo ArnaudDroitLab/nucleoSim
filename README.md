@@ -13,6 +13,18 @@ syntheticNucMap() function from Bioconductor
 [nucleR](http://www.bioconductor.org/packages/release/bioc/html/nucleR.html) 
 package (Flores and Orozco, 2011).
 
+
+## Licensing and Citing ##
+
+This package and the underlying nucleoSim code are distributed under the Artistic license 2.0. You are free to use and redistribute this software.
+
+If you use this package for a publication, we would ask you to cite the following:
+
+> Samb R, Khadraoui K, Belleau P, et al. (2015). "Using informative Multinomial-Dirichlet prior in a t-mixture with reversible jump estimation of nucleosome positions for genome-wide profiling." Statistical Applications in Genetics and Molecular Biology. Published online before print December 10, 2015. <a href="http://dx.doi.org/10.1515/sagmb-2014-0098">doi: 10.1515/sagmb-2014-0098</a>
+
+> Flores O and Orozco M (2011). “nucleR: a package for non-parametric nucleosome positioning.” Bioinformatics, 27, pp. 2149–2150. <a href="http://dx.doi.org/10.1093/bioinformatics/btr345">doi: 10.1093/bioinformatics/btr345</a>
+
+
 ## Authors ##
 
 [Rawane Samb](https://ca.linkedin.com/in/rawanesamb 
