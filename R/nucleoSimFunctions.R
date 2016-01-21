@@ -47,24 +47,17 @@
 #' the one in Tiling Arrays. Both control map and calculated ratio are
 #' returned. Default = \code{FALSE}.
 #'
-#' @param show.plot a \code{logical}, if \code{TRUE}, a plot of the coverage
-#' map, with the nucleosome calls and optionally the calculated ratio is
-#' outputed. Default = \code{FALSE}.
-#'
 #' @param distr the name of the distribution used to generate the nucleosome
 #' map. The choices are : \code{"Uniform"}, \code{"Normal"} and
 #' \code{"Student"}. Default = \code{"Uniform"}.
 #'
-#' @param ... arguments to be passed to \code{plot} function only
-#' when \code{show.plot=TRUE}.
-#'
-#' @return an \code{list} of \code{class} "nucleoSim" containing the
+#' @return an \code{list} of \code{class} "syntheticNucMap" containing the
 #' following elements:
 #' \itemize{
 #'     \item \code{call} the matched call.
 #'     \item \code{wp.starts} the start points of all well-positioned
 #' nucleosomes.
-#'     \item \code{wp.nreads} th number of repetitions of each well positioned
+#'     \item \code{wp.nreads} the number of repetitions of each well positioned
 #' read.
 #'     \item \code{wp.reads} a \code{IRanges} containing the well positioned
 #' nucleosome reads.
@@ -82,6 +75,7 @@
 #' (control) reads.
 #'     \item \code{syn.ratio} a \code{Rle} containing the calculated ratio
 #' between the nucleosome coverage and the control coverage.
+#'     \item \code{nuc.len} a \code{numeric}
 #' }
 #'
 #' @examples
@@ -91,12 +85,12 @@
 #' ## well-positioned nucleosomes, a variance of 40 for the fuzzy nucleosomes
 #' ## and a seed of 15
 #' syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
-#'     fuz.num = 10, fuz.var = 40, show.plot = TRUE, rnd.seed = 15,
+#'     fuz.num = 10, fuz.var = 40, rnd.seed = 15,
 #'     distr = "Normal")
 #'
 #' ## Same output but without graph
 #' syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
-#'     fuz.num = 10, fuz.var = 40, show.plot = FALSE,
+#'     fuz.num = 10, fuz.var = 40,
 #'     rnd.seed = 15, as.ratio = FALSE, distr = "Normal")
 #'
 #'
@@ -113,8 +107,7 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
                                 lin.len = 20,
                                 rnd.seed = NULL,
                                 as.ratio = FALSE,
-                                show.plot = FALSE,
-                                distr= c("Uniform", "Normal", "Student"), ...)
+                                distr= c("Uniform", "Normal", "Student"))
 {
     # Get call information
     cl <- match.call()
@@ -122,7 +115,7 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     # Validate parameters
     syntheticNucMapFromDistValidation(wp.num, wp.del, wp.var, fuz.num, fuz.var,
                             max.cover, nuc.len, len.var, lin.len, rnd.seed,
-                            as.ratio, show.plot)
+                            as.ratio)
 
     # Validate distribution value
     distr <- match.arg(distr, several.ok = FALSE)
@@ -153,23 +146,21 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     {
         wp.varstar <- wp.repstar + round(rnorm(length(wp.repstar), 0,
                                                 wp.var^0.5))
-        wp.varlen  <- nuc.len + round(rnorm(length(wp.repstar), 0,
-                                                len.var^0.5))
     }
     else if (distr == "Student")
     {
         wp.varstar <- wp.repstar + round(rt(length(wp.repstar), 4))
-        wp.varlen  <- nuc.len + round(rnorm(length(wp.repstar), 0,
-                                                len.var^0.5))
     }
     else
     {
         wp.varstar <- wp.repstar + round(runif(length(wp.repstar),
-                                                min=-wp.var,
-                                                max=wp.var))
-        wp.varlen <- nuc.len + round(rnorm(length(wp.repstar), 0,
-                                                len.var^0.5))
+                                                min=-wp.var, max=wp.var))
     }
+
+    # Add some variance to the length of the sequences
+    # The variance associated to the length of the sequences is always following
+    # a normal distribution
+    wp.varlen <- nuc.len + round(rnorm(length(wp.repstar), 0, len.var^0.5))
 
     # Putative reads
     wp.reads <- IRanges(start=wp.varstar, end=wp.varstar + wp.varlen)
@@ -193,27 +184,27 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     {
         fuz.varstar <- fuz.repstar + round(rnorm(length(fuz.repstar), 0,
                                                 fuz.var^0.5))
-        fuz.varlen <- nuc.len + round(rnorm(length(fuz.repstar), 0,
-                                                len.var^0.5))
     }
     else if (distr == "Student")
     {
         fuz.varstar <- fuz.repstar + round(rt(length(fuz.repstar), 4))
-        fuz.varlen  <- nuc.len + round(rnorm(length(fuz.repstar), 0,
-                                                len.var^0.5))
     }
     else
     {
         fuz.varstar <- fuz.repstar + round(runif(length(fuz.repstar),
                                                 min = -fuz.var,
                                                 max = fuz.var))
-        fuz.varlen <- nuc.len + round(rnorm(length(fuz.repstar), 0,
-                                                len.var^0.5))
     }
+
+    # Add some variance to the length of the sequences
+    # The variance associated to the length of the sequences is always following
+    # a normal distribution
+    fuz.varlen  <- nuc.len + round(rnorm(length(fuz.repstar), 0, len.var^0.5))
+
     # Overlapped reads
     fuz.reads <- IRanges(start = fuz.varstar, end = fuz.varstar + fuz.varlen)
 
-    # ALL SYNTHETIC READS
+    # All synthetic reads (from fuzzy and well-positioned nucleosomes)
     syn.reads <- c(wp.reads, fuz.reads)
 
     # RATIO AS HYBRIDIZATION (Tiling Array)
@@ -256,41 +247,10 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
         result[["syn.ratio"]] <- syn.ratio
     }
 
-    if(show.plot) {
-        # Set Y-lim range
-        max <- max(coverage(syn.reads), na.rm = TRUE)
-        min <- 0
-        if (as.ratio) {
-            min <- min(syn.ratio, na.rm = TRUE)
-        }
+    result[["nuc.len"]] <- nuc.len
 
-        # Plot main (coverage)
-        plot(as.vector(coverage(syn.reads)), type = "h", col = "#AADDAA",
-                            ylim = c(min, max), ...)
-
-        # Plot ratio, if asked for
-        if (as.ratio) {
-            lines(as.vector(syn.ratio), type = "l", col = "darkorange",
-                            lwd = 2)
-            abline(h = 0, col = "darkorange4")
-        }
-
-        # Plot nucleosome positions
-        points(wp.starts + 74, wp.nreads, col = "red", pch = 19)
-        points(fuz.starts + 74, fuz.nreads, col = "blue", pch = 20)
-
-        # Add legend
-        if (as.ratio) {
-            legend("top", c("Coverage", "Ratio", "Well-pos", "Fuzzy"),
-                    fill = c("#AADDAA", "darkorange", "red", "blue"),
-                    bty = "n", horiz = TRUE)
-        } else {
-            legend("top", c("Coverage", "Well-pos", "Fuzzy"),
-                    fill = c("#AADDAA", "red", "blue"), bty = "n",
-                    horiz = TRUE)
-        }
-    }
-
+    # Return a list marked as an syntheticNucMap class
+    class(result) <- "syntheticNucMap"
     return(result)
 }
 
@@ -356,7 +316,7 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 #' ensure that all nucleosome positions and read alignment are of positive
 #' values.
 #'
-#' @return an \code{list} of \code{class} "nucleoSim" containing the
+#' @return an \code{list} of \code{class} "syntheticSample" containing the
 #' following elements:
 #' \itemize{
 #' \item \code{call} the matched call.
@@ -378,12 +338,12 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 #'## Generate a synthetic map with 20 well-positioned + 10 fuzzy nucleosomes
 #'## using a Normal distribution with a variance of 30 for the well-positioned
 #'## nucleosomes, a variance of 40 for the fuzzy nucleosomes and a seed of 15
-#'res <- syntheticSampleFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
+#'res <- syntheticNucReadsFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
 #'fuz.num = 10, fuz.var = 40, as.ratio = TRUE, rnd.seed = 15, distr = "Normal",
 #'offset = 1000)
 #'
 #' @export
-syntheticSampleFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
+syntheticNucReadsFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
                                     max.cover = 100,
                                     nuc.len = 147,
                                     len.var = 10,
@@ -408,8 +368,7 @@ syntheticSampleFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
                                     fuz.var = fuz.var, max.cover = max.cover,
                                     nuc.len = nuc.len, len.var = len.var,
                                     lin.len = lin.len, rnd.seed = rnd.seed,
-                                    as.ratio = as.ratio, show.plot = FALSE,
-                                    distr = distr)
+                                    as.ratio = as.ratio, distr = distr)
 
     ## Extract reads to create a dataframe
     syn.reads <- as.data.frame(map$syn.reads)
@@ -431,7 +390,7 @@ syntheticSampleFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     paired <- paired[order(paired$start), ]
 
     ## Create dataset with forward and reverse reads for all nucleosomes
-    ## Forward and reverse reads are generated forme read paired information
+    ## Forward and reverse reads are generated from read paired information
     ## using the read.len parameter
     dataIP <- data.frame(rep("chr_SYNTHETIC", 2 * nreads),
                c(as.integer(syn.reads$start),
@@ -444,18 +403,155 @@ syntheticSampleFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     # Order reads by starting position
     dataIP <- dataIP[order(dataIP$start), ]
 
-    # Create dataframe with well-positioned nucleosomes shifted by offset value
-    wp <- data.frame(map$wp.starts + offset + round(nuc.len/2), map$wp.nreads)
+    # Create data.frame with well-positioned nucleosomes shifted by offset value
+    space <- round(nuc.len/2)
+    wp <- data.frame(map$wp.starts + offset + space, map$wp.nreads)
     colnames(wp) <- c("nucleopos", "nreads")
 
-    # Create dataframe with fuzzy nucleosomes shifted by offset value
-    fuz <- data.frame(map$fuz.starts + offset + round(nuc.len/2),
+    # Create data.frame with fuzzy nucleosomes shifted by offset value
+    fuz <- data.frame(map$fuz.starts + offset + space,
                             map$fuz.nreads)
     colnames(fuz) <- c("nucleopos", "nreads")
 
     # Create returned result list
     result <- list(call = cl, dataIP = dataIP, wp = wp, fuz = fuz,
-                   paired = paired)
+                   paired = paired, nuc.len = nuc.len)
 
+    # Return a list marked as an syntheticNucReads class
+    class(result) <- "syntheticNucReads"
     return(result)
 }
+
+
+
+#' @title Generate a graph of a synthetic nucleosome map
+#'
+#' @description Generate a graph for
+#' a list marked as an \code{syntheticNucMap} class
+#'
+#' @param x a list marked as an \code{syntheticNucMap}  class
+#'
+#' @param ... \code{...} extra arguments passed to the \code{plot} function
+#'
+#' @examples
+#'
+#' ## Generate a synthetic map with 20 well-positioned nucleosomes, 5 fuzzy
+#' ## nucleosomes and 10 deleted nucleosomes using a Student distribution
+#' ## with a variance of 10 for the well-positioned nucleosomes,
+#' ## a variance of 20 for the fuzzy nucleosomes and a seed of 15
+#' syntheticMap <- syntheticNucMapFromDist(wp.num = 30, wp.del = 10,
+#' wp.var = 10, fuz.num = 5, fuz.var = 20, rnd.seed = 15,
+#' distr = "Student")
+#'
+#' ## Create graph using the synthetic map
+#' plot(syntheticMap, xlab="Position", ylab="Coverage")
+#'
+#' @author Astrid Deschenes, Rawane Samb
+#' @importFrom IRanges coverage
+#' @importFrom graphics plot lines abline points legend
+#' @export
+plot.syntheticNucMap <- function(x, ...) {
+
+    ## Extract as.ratio parameter if present
+    as.ratio = FALSE
+    if (exists('syn.ratio', where=x)) {
+        as.ratio = TRUE
+    }
+
+    ## Set Y axis maximum range
+    max <- max(coverage(x$syn.reads), na.rm = TRUE) + 5
+
+    ## Always set Y axis minimum to zero
+    min <- 0
+
+    ## Adapt values when as.ratio present
+    if (as.ratio) {
+        min <- min(x$syn.ratio, na.rm = TRUE)
+    }
+
+    # Plot coverage
+    plot(as.vector(coverage(x$syn.reads)), type = "h", col = "gray",
+         ylim = c(min, max), ...)
+
+    # Plot ratio, if asked for
+    if (as.ratio) {
+        lines(as.vector(x$syn.ratio), type = "l", col = "darkorange",
+              lwd = 2)
+        abline(h = 0, col = "black")
+    }
+
+    # Plot nucleosome positions
+    space <- round(x$nuc.len/2)
+    points(x$wp.starts  + space, x$wp.nreads,
+            col = "forestgreen",  pch = 19)
+    points(x$fuz.starts + space, x$fuz.nreads,
+            col = "red", pch = 19)
+
+    # Add legend
+    if (as.ratio) {
+        legend("top", c("Coverage", "Ratio", "Well", "Fuzzy"),
+               fill = c("gray", "darkorange", "forestgreen", "red"),
+               bty = "n", horiz = TRUE)
+    } else {
+        legend("top", c("Coverage", "Well", "Fuzzy"),
+               fill = c("gray", "forestgreen", "red"), bty = "n",
+               horiz = TRUE)
+    }
+}
+
+#' @title Generate a graph of a synthetic nucleosome map using
+#'
+#' @description Generate a graph for
+#' a list marked as an \code{syntheticNucReads} class
+#'
+#' @param x a list marked as an \code{syntheticNucReads}  class
+#'
+#' @param ... \code{...} extra arguments passed to the \code{plot} function
+#'
+#' @examples
+#'
+#' ## Generate a synthetic map with 20 well-positioned nucleosomes, 5 fuzzy
+#' ## nucleosomes and 10 deleted nucleosomes using a Student distribution
+#' ## with a variance of 10 for the well-positioned nucleosomes,
+#' ## a variance of 20 for the fuzzy nucleosomes and a seed of 15
+#' syntheticSample <- syntheticNucMapFromDist(wp.num = 30, wp.del = 10,
+#' wp.var = 10, fuz.num = 5, fuz.var = 20, as.ratio = TRUE, rnd.seed = 15,
+#' distr = "Student")
+#'
+#' ## Create graph using the synthetic map
+#' plot(syntheticSample, xlab="Position", ylab="Coverage")
+#'
+#' @author Astrid Deschenes, Rawane Samb
+#' @importFrom IRanges IRanges coverage
+#' @importFrom graphics plot lines abline points legend
+#' @export
+plot.syntheticNucReads <- function(x, ...) {
+
+    ## Create a range using the sequences
+    seqRanges <- IRanges(start=x$dataIP$start, end=x$dataIP$end)
+
+    ## Set Y axis maximum range
+    y_max <- max(coverage(seqRanges), na.rm = TRUE) + 5
+
+    ## Always set Y axis minimum to zero
+    y_min <- 0
+
+    ## Set X axis minimum limit
+    x_min <- min(x$dataIP$start) + 5
+
+    ## Set X axis maximum limit
+    x_max <- max(x$dataIP$end) + 5
+
+    # Plot coverage
+    plot(as.vector(coverage(seqRanges)), type = "h", col = "gray",
+         ylim = c(y_min, y_max), xlim = c(x_min, x_max), ...)
+
+    # Plot nucleosome positions
+    points(x$wp$nucleopos,  x$wp$nreads,  col = "forestgreen",  pch = 19)
+    points(x$fuz$nucleopos, x$fuz$nreads, col = "red", pch = 19)
+
+    # Add legend
+    legend("top", c("Coverage", "Well", "Fuzzy"),
+               fill = c("gray", "forestgreen", "red"), bty = "n", horiz = TRUE)
+}
+

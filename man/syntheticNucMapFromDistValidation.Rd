@@ -6,7 +6,7 @@
 function}
 \usage{
 syntheticNucMapFromDistValidation(wp.num, wp.del, wp.var, fuz.num, fuz.var,
-  max.cover, nuc.len, len.var, lin.len, rnd.seed, as.ratio, show.plot)
+  max.cover, nuc.len, len.var, lin.len, rnd.seed, as.ratio)
 }
 \arguments{
 \item{wp.num}{a \code{integer}, the number of well-positioned
@@ -49,10 +49,6 @@ control map is created and the ratio between it and the nucleosome coverage
 are calculated. It can be used to simulate hybridization ratio data, like
 the one in Tiling Arrays. Both control map and calculated ratio are
 returned.}
-
-\item{show.plot}{a \code{logical}, if \code{TRUE}, a plot of the coverage
-map, with the nucleosome calls and optionally the calculated ratio is
-outputed.}
 }
 \value{
 \code{0} indicating that all parameters validations have been

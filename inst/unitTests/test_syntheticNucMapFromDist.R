@@ -29,7 +29,7 @@ if(FALSE) {
 test.syntheticNucMapFromDist_string_wp_num <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = "allo", wp.del = 0,
                             wp.var = 30, fuz.num = 10, fuz.var = 40,
-                            as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                            as.ratio = TRUE, rnd.seed = 15,
                             distr = "Normal"), error = conditionMessage)
     exp <- "wp.num must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_string_wp_num() ",
@@ -42,7 +42,7 @@ test.syntheticNucMapFromDist_string_wp_num <- function() {
 test.syntheticNucMapFromDist_negative_wp_num <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = -1, wp.del = 0,
                         wp.var = 30, fuz.num = 10, fuz.var = 40,
-                        as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                        as.ratio = TRUE, rnd.seed = 15,
                         distr = "Normal"), error = conditionMessage)
     exp <- "wp.num must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_negative_wp_num() ",
@@ -55,7 +55,7 @@ test.syntheticNucMapFromDist_negative_wp_num <- function() {
 test.syntheticNucMapFromDist_vector_wp_num <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = c(1, 2), wp.del = 0,
                         wp.var = 30, fuz.num = 3, fuz.var = 40,
-                        as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                        as.ratio = TRUE, rnd.seed = 15,
                         distr = "Normal"), error = conditionMessage)
     exp <- "wp.num must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_vector_wp_num() ",
@@ -72,7 +72,7 @@ test.syntheticNucMapFromDist_vector_wp_num <- function() {
 test.syntheticNucMapFromDist_string_fuz_num <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 3, wp.del = 0,
                         wp.var = 30, fuz.num = "allo", fuz.var = 40,
-                        as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                        as.ratio = TRUE, rnd.seed = 15,
                         distr = "Normal"), error = conditionMessage)
     exp <- "fuz.num must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_string_fuz_num() ",
@@ -85,7 +85,7 @@ test.syntheticNucMapFromDist_string_fuz_num <- function() {
 test.syntheticNucMapFromDist_negative_fuz_num <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 0,
                             wp.var = 30, fuz.num = -1, fuz.var = 40,
-                            as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                            as.ratio = TRUE, rnd.seed = 15,
                             distr = "Normal"), error = conditionMessage)
     exp <- "fuz.num must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_negative_fuz_num() ",
@@ -98,7 +98,7 @@ test.syntheticNucMapFromDist_negative_fuz_num <- function() {
 test.syntheticNucMapFromDist_vector_fuz_num <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 0,
                 wp.var = 30, fuz.num = c(1, 3), fuz.var = 40,
-                as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                as.ratio = TRUE, rnd.seed = 15,
                 distr = "Normal"), error = conditionMessage)
     exp <- "fuz.num must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_vector_fuz_num() ",
@@ -115,7 +115,7 @@ test.syntheticNucMapFromDist_vector_fuz_num <- function() {
 test.syntheticNucMapFromDist_string_wp_del <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 3, wp.del = "allo",
                     wp.var = 30, fuz.num = 4, fuz.var = 40,
-                    as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                    as.ratio = TRUE, rnd.seed = 15,
                     distr = "Normal"), error = conditionMessage)
     exp <- "wp.del must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_string_wp_del() ",
@@ -128,7 +128,7 @@ test.syntheticNucMapFromDist_string_wp_del <- function() {
 test.syntheticNucMapFromDist_negative_wp_del <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = -1,
                         wp.var = 30, fuz.num = 4, fuz.var = 40,
-                        as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                        as.ratio = TRUE, rnd.seed = 15,
                         distr = "Normal"), error = conditionMessage)
     exp <- "wp.del must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_negative_wp_del() ",
@@ -141,7 +141,7 @@ test.syntheticNucMapFromDist_negative_wp_del <- function() {
 test.syntheticNucMapFromDist_vector_wp_del<- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = c(1, 3),
                     wp.var = 30, fuz.num = 4, fuz.var = 40,
-                    as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                    as.ratio = TRUE, rnd.seed = 15,
                     distr = "Normal"), error = conditionMessage)
     exp <- "wp.del must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_vector_wp_del() ",
@@ -158,7 +158,7 @@ test.syntheticNucMapFromDist_vector_wp_del<- function() {
 test.syntheticNucMapFromDist_string_wp_var <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 3, wp.del = 2,
                             wp.var = "allo", fuz.num = 4, fuz.var = 40,
-                            as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                            as.ratio = TRUE, rnd.seed = 15,
                             distr = "Normal"), error = conditionMessage)
     exp <- "wp.var must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_string_wp_var() ",
@@ -171,7 +171,7 @@ test.syntheticNucMapFromDist_string_wp_var <- function() {
 test.syntheticNucMapFromDist_negative_wp_var <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
                         wp.var = -1, fuz.num = 4, fuz.var = 40,
-                        as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                        as.ratio = TRUE, rnd.seed = 15,
                         distr = "Normal"), error = conditionMessage)
     exp <- "wp.var must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_negative_wp_var() ",
@@ -184,7 +184,7 @@ test.syntheticNucMapFromDist_negative_wp_var <- function() {
 test.syntheticNucMapFromDist_vector_wp_var<- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
                     wp.var = c(1, 2), fuz.num = 4, fuz.var = 40,
-                    as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                    as.ratio = TRUE, rnd.seed = 15,
                     distr = "Normal"), error = conditionMessage)
     exp <- "wp.var must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_vector_wp_var() ",
@@ -201,7 +201,7 @@ test.syntheticNucMapFromDist_vector_wp_var<- function() {
 test.syntheticNucMapFromDist_string_fuz_var <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 3, wp.del = 2,
                     wp.var = 2, fuz.num = 4, fuz.var = "allo",
-                    as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                    as.ratio = TRUE, rnd.seed = 15,
                     distr = "Normal"), error = conditionMessage)
     exp <- "fuz.var must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_string_fuz_var() ",
@@ -214,7 +214,7 @@ test.syntheticNucMapFromDist_string_fuz_var <- function() {
 test.syntheticNucMapFromDist_negative_fuz_var <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
                         wp.var = 1, fuz.num = 4, fuz.var = -40,
-                        as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                        as.ratio = TRUE, rnd.seed = 15,
                         distr = "Normal"), error = conditionMessage)
     exp <- "fuz.var must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_negative_fuz_var() ",
@@ -227,7 +227,7 @@ test.syntheticNucMapFromDist_negative_fuz_var <- function() {
 test.syntheticNucMapFromDist_vector_fuz_var<- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
                             wp.var = 3, fuz.num = 4, fuz.var = c(2, 3),
-                            as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                            as.ratio = TRUE, rnd.seed = 15,
                             distr = "Normal"), error = conditionMessage)
     exp <- "fuz.var must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_vector_fuz_var() ",
@@ -244,7 +244,7 @@ test.syntheticNucMapFromDist_vector_fuz_var<- function() {
 test.syntheticNucMapFromDist_string_max_cover <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 3, wp.del = 2,
                 wp.var = 2, fuz.num = 4, fuz.var = 2, max.cover = "allo",
-                as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                as.ratio = TRUE, rnd.seed = 15,
                 distr = "Normal"), error = conditionMessage)
     exp <- "max.cover must be a positive integer"
     message <- paste0(" syntheticNucMapFromDist_string_max_cover() ",
@@ -257,7 +257,7 @@ test.syntheticNucMapFromDist_string_max_cover <- function() {
 test.syntheticNucMapFromDist_zero_max_cover <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
                     wp.var = 1, fuz.num = 4, fuz.var = 40, max.cover = 0,
-                    as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                    as.ratio = TRUE, rnd.seed = 15,
                     distr = "Normal"), error = conditionMessage)
     exp <- "max.cover must be a positive integer"
     message <- paste0(" syntheticNucMapFromDist_zero_max_cover() ",
@@ -270,7 +270,7 @@ test.syntheticNucMapFromDist_zero_max_cover <- function() {
 test.syntheticNucMapFromDist_negative_max_cover <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
                     wp.var = 1, fuz.num = 4, fuz.var = 40, max.cover = -1,
-                    as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                    as.ratio = TRUE, rnd.seed = 15,
                     distr = "Normal"), error = conditionMessage)
     exp <- "max.cover must be a positive integer"
     message <- paste0(" syntheticNucMapFromDist_negative_max_cover() ",
@@ -283,7 +283,7 @@ test.syntheticNucMapFromDist_negative_max_cover <- function() {
 test.syntheticNucMapFromDist_vector_max_cover <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
             wp.var = 3, fuz.num = 4, fuz.var = 2, max.cover = c(1, 2),
-            as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+            as.ratio = TRUE,  rnd.seed = 15,
             distr = "Normal"), error = conditionMessage)
     exp <- "max.cover must be a positive integer"
     message <- paste0(" syntheticNucMapFromDist_vector_max_cover() ",
@@ -296,7 +296,7 @@ test.syntheticNucMapFromDist_vector_max_cover <- function() {
 test.syntheticNucMapFromDist_string_lin_len <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 3, wp.del = 2,
                         wp.var = 2, fuz.num = 4, fuz.var = 2, lin.len = "allo",
-                        as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                        as.ratio = TRUE, rnd.seed = 15,
                         distr = "Normal"), error = conditionMessage)
     exp <- "lin.len must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_string_lin_len() ",
@@ -313,7 +313,7 @@ test.syntheticNucMapFromDist_string_lin_len <- function() {
 test.syntheticNucMapFromDist_negative_lin_len <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
                         wp.var = 1, fuz.num = 4, fuz.var = 40, lin.len = -1,
-                        as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                        as.ratio = TRUE, rnd.seed = 15,
                         distr = "Normal"), error = conditionMessage)
     exp <- "lin.len must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_negative_lin_len() ",
@@ -326,7 +326,7 @@ test.syntheticNucMapFromDist_negative_lin_len <- function() {
 test.syntheticNucMapFromDist_vector_lin_len <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
                     wp.var = 3, fuz.num = 4, fuz.var = 40, lin.len = c(1, 4),
-                    as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                    as.ratio = TRUE, rnd.seed = 15,
                     distr = "Normal"), error = conditionMessage)
     exp <- "lin.len must be a non-negative integer"
     message <- paste0(" syntheticNucMapFromDist_vector_lin_len() ",
@@ -343,7 +343,7 @@ test.syntheticNucMapFromDist_vector_lin_len <- function() {
 test.syntheticNucMapFromDist_negative_len_var<- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
                     wp.var = 1, fuz.num = 4, fuz.var = 40, len.var = -1,
-                    as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                    as.ratio = TRUE, rnd.seed = 15,
                     distr = "Normal"), error = conditionMessage)
     exp <- "len.var must be a positive integer"
     message <- paste0(" test.syntheticNucMapFromDist_negative_len_var() ",
@@ -356,7 +356,7 @@ test.syntheticNucMapFromDist_negative_len_var<- function() {
 test.syntheticNucMapFromDist_vector_len_var <- function() {
     obs <- tryCatch(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
                     wp.var = 3, fuz.num = 4, fuz.var = 40, len.var = c(1, 4),
-                    as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                    as.ratio = TRUE, rnd.seed = 15,
                     distr = "Normal"), error = conditionMessage)
     exp <- "len.var must be a positive integer"
     message <- paste0(" test.syntheticNucMapFromDist_vector_len_var() ",
@@ -364,6 +364,24 @@ test.syntheticNucMapFromDist_vector_len_var <- function() {
                         "expected error.")
     checkEquals(obs, exp, msg = message)
 }
+
+################################
+## as.ratio
+################################
+
+## Test the result when bad value is passed as distr parameter
+test.syntheticNucMapFromDist_bad_as_ratio <- function() {
+    message <- paste0(" syntheticNucMapFromDist_vector_bad_as_ratio() ",
+                      "- A bad value as as.ratio parameter did not generated ",
+                      "expected error.")
+
+    checkException(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
+                                           wp.var = 3, fuz.num = 4,
+                                           fuz.var = 40, lin.len = 4,
+                                           as.ratio = "ICI", rnd.seed = 15,
+                                           distr = "Student"), msg = message)
+}
+
 
 ################################
 ## distr
@@ -377,7 +395,7 @@ test.syntheticNucMapFromDist_bad_distr <- function() {
 
     checkException(syntheticNucMapFromDist(wp.num = 10, wp.del = 1,
                         wp.var = 3, fuz.num = 4, fuz.var = 40, lin.len = 4,
-                        as.ratio = TRUE, show.plot = FALSE, rnd.seed = 15,
+                        as.ratio = TRUE, rnd.seed = 15,
                         distr = "TOTO"), msg = message)
 }
 
@@ -392,7 +410,7 @@ test.syntheticNucMapFromDist_bad_distr <- function() {
 test.syntheticNucMapFromDist_good_result_01 <- function() {
     obs <- syntheticNucMapFromDist(wp.num = 4, wp.del = 2,
                 wp.var = 3, fuz.num = 1, fuz.var = 40, lin.len = 4,
-                as.ratio = FALSE, show.plot = FALSE, rnd.seed = 25,
+                as.ratio = FALSE, rnd.seed = 25,
                 distr = "Normal")
 
     exp.wp.starts  <- c(1, 152, 303, 454)
@@ -419,7 +437,7 @@ test.syntheticNucMapFromDist_good_result_01 <- function() {
 test.syntheticNucMapFromDist_good_result_02 <- function() {
     obs <- syntheticNucMapFromDist(wp.num = 4, wp.del = 1,
                                    wp.var = 2, fuz.num = 1, fuz.var = 40, lin.len = 4,
-                                   as.ratio = FALSE, show.plot = FALSE, rnd.seed = 26,
+                                   as.ratio = FALSE, rnd.seed = 26,
                                    distr = "Student")
 
     exp.wp.starts  <- c(1, 152, 303, 454)
@@ -446,8 +464,7 @@ test.syntheticNucMapFromDist_good_result_02 <- function() {
 test.syntheticNucMapFromDist_good_result_03 <- function() {
     obs <- syntheticNucMapFromDist(wp.num = 3, wp.del = 1,
                                     wp.var = 2, fuz.num = 2, fuz.var = 40,
-                                    lin.len = 4,
-                                    as.ratio = FALSE, show.plot = FALSE,
+                                    lin.len = 4, as.ratio = FALSE,
                                     rnd.seed = 26, distr = "Uniform")
 
     exp.wp.starts  <- c(1, 152, 303)
@@ -474,8 +491,7 @@ test.syntheticNucMapFromDist_good_result_03 <- function() {
 test.syntheticNucMapFromDist_good_result_04 <- function() {
     obs <- syntheticNucMapFromDist(wp.num = 5, wp.del = 2,
                                    wp.var = 3, fuz.num = 2, fuz.var = 40,
-                                   lin.len = 4,
-                                   as.ratio = TRUE, show.plot = FALSE,
+                                   lin.len = 4, as.ratio = TRUE,
                                    rnd.seed = 26, distr = "Uniform")
 
     exp.wp.starts  <- c(1, 152, 303, 454, 605)

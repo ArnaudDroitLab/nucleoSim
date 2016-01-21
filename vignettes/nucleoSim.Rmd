@@ -28,7 +28,7 @@ redistribute this software.
 
 If you use this package for a publication, we would ask you to cite the following:
 
-> Samb R, Khadraoui K, Belleau P, et al. (2015). "Using informative Multinomial-Dirichlet prior in a t-mixture with reversible jump estimation of nucleosome positions for genome-wide profiling." Statistical Applications in Genetics and Molecular Biology. Published online before print December 10, 2015. <a href="http://dx.doi.org/10.1515/sagmb-2014-0098">doi: 10.1515/sagmb-2014-0098</a>
+> Samb R, Khadraoui K, Belleau P, et al. (2015). "Using informative Multinomial-Dirichlet prior in a t-mixture with reversible jump estimation of nucleosome positions for genome-wide profiling." Statistical Applications in Genetics and Molecular Biology. Volume 14, Issue 6, Pages 517–532, ISSN (Online) 1544-6115, ISSN (Print) 2194-6302, December 2015. <a href="http://dx.doi.org/10.1515/sagmb-2014-0098">doi: 10.1515/sagmb-2014-0098</a>
 
 > Flores O and Orozco M (2011). “nucleR: a package for non-parametric nucleosome positioning.” Bioinformatics, 27, pp. 2149–2150. <a href="http://dx.doi.org/10.1093/bioinformatics/btr345">doi: 10.1093/bioinformatics/btr345</a>
 
@@ -62,7 +62,7 @@ val.offset    <- 10000
 val.rnd.seed <- 202
         
 ## Create Uniform sample
-sample <- syntheticSampleFromDist(wp.num=val.num,
+sample <- syntheticNucReadsFromDist(wp.num=val.num,
                                             wp.del=val.del,
                                             wp.var=val.var,
                                             fuz.num=2*val.del,
