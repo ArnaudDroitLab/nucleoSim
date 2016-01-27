@@ -7,7 +7,7 @@
 plot.syntheticNucReads(x, ...)
 }
 \arguments{
-\item{x}{a list marked as an \code{syntheticNucReads}  class}
+\item{x}{a list marked as an \code{syntheticNucReads} class}
 
 \item{...}{\code{...} extra arguments passed to the \code{plot} function}
 }
@@ -21,12 +21,12 @@ a list marked as an \code{syntheticNucReads} class
 ## nucleosomes and 10 deleted nucleosomes using a Student distribution
 ## with a variance of 10 for the well-positioned nucleosomes,
 ## a variance of 20 for the fuzzy nucleosomes and a seed of 15
-syntheticSample <- syntheticNucMapFromDist(wp.num = 30, wp.del = 10,
-wp.var = 10, fuz.num = 5, fuz.var = 20, as.ratio = TRUE, rnd.seed = 15,
-distr = "Student")
+syntheticNucSample <- syntheticNucReadsFromDist(wp.num = 30, wp.del = 10,
+wp.var = 10, fuz.num = 5, fuz.var = 20, rnd.seed = 15,
+distr = "Student", offset = 1000)
 
 ## Create graph using the synthetic map
-plot(syntheticSample, xlab="Position", ylab="Coverage")
+plot(syntheticNucSample, xlab="Position", ylab="Coverage")
 
 }
 \author{

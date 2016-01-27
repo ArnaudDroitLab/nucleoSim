@@ -302,12 +302,6 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 #' of the random number generator. By fixing the seed, the generated results
 #' can be reproduced. Default = \code{NULL}.
 #'
-#' @param as.ratio a \code{logical}, if \code{TRUE},  a synthetic naked DNA
-#' control map is created and the ratio between it and the nucleosome coverage
-#' are calculated. It can be used to simulate hybridization ratio data, like
-#' the one in Tiling Arrays. Both control map and calculated ratio are
-#' returned. Default = \code{FALSE}.
-#'
 #' @param distr the name of the distribution used to generate the nucleosome
 #' map. The choices are : \code{"Uniform"}, \code{"Normal"} and
 #' \code{"Student"}. Default = \code{"Uniform"}.
@@ -339,7 +333,7 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 #'## using a Normal distribution with a variance of 30 for the well-positioned
 #'## nucleosomes, a variance of 40 for the fuzzy nucleosomes and a seed of 15
 #'res <- syntheticNucReadsFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
-#'fuz.num = 10, fuz.var = 40, as.ratio = TRUE, rnd.seed = 15, distr = "Normal",
+#'fuz.num = 10, fuz.var = 40, rnd.seed = 15, distr = "Normal",
 #'offset = 1000)
 #'
 #' @export
@@ -350,7 +344,6 @@ syntheticNucReadsFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
                                     lin.len = 20,
                                     read.len = 40,
                                     rnd.seed = NULL,
-                                    as.ratio = FALSE,
                                     distr = c("Uniform", "Normal", "Student"),
                                     offset)
 {
@@ -368,7 +361,7 @@ syntheticNucReadsFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
                                     fuz.var = fuz.var, max.cover = max.cover,
                                     nuc.len = nuc.len, len.var = len.var,
                                     lin.len = lin.len, rnd.seed = rnd.seed,
-                                    as.ratio = as.ratio, distr = distr)
+                                    as.ratio = FALSE, distr = distr)
 
     ## Extract reads to create a dataframe
     syn.reads <- as.data.frame(map$syn.reads)
@@ -448,7 +441,7 @@ syntheticNucReadsFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 #'
 #' @author Astrid Deschenes, Rawane Samb
 #' @importFrom IRanges coverage
-#' @importFrom graphics plot lines abline points legend
+#' @importFrom graphics plot lines abline points legend polygon
 #' @export
 plot.syntheticNucMap <- function(x, ...) {
 
@@ -459,7 +452,7 @@ plot.syntheticNucMap <- function(x, ...) {
     }
 
     ## Set Y axis maximum range
-    max <- max(coverage(x$syn.reads), na.rm = TRUE) + 5
+    max <- max(coverage(x$syn.reads), na.rm = TRUE) + 10
 
     ## Always set Y axis minimum to zero
     min <- 0
@@ -470,8 +463,12 @@ plot.syntheticNucMap <- function(x, ...) {
     }
 
     # Plot coverage
-    plot(as.vector(coverage(x$syn.reads)), type = "h", col = "gray",
+    coverage <- c(0, as.integer(coverage(x$syn.reads)), 0)
+    position <- c(0, 1:(length(coverage)-1))
+    plot(position, coverage, type = "l", col = "gray",
          ylim = c(min, max), ...)
+    polygon(c(0, position, 0), c(0, coverage, 0), col="gray", border = "gray")
+
 
     # Plot ratio, if asked for
     if (as.ratio) {
@@ -489,12 +486,12 @@ plot.syntheticNucMap <- function(x, ...) {
 
     # Add legend
     if (as.ratio) {
-        legend("top", c("Coverage", "Ratio", "Well", "Fuzzy"),
-               fill = c("gray", "darkorange", "forestgreen", "red"),
+        legend("top", c("Ratio", "Well", "Fuzzy", "Coverage"),
+               fill = c("darkorange", "forestgreen", "red", "gray"),
                bty = "n", horiz = TRUE)
     } else {
-        legend("top", c("Coverage", "Well", "Fuzzy"),
-               fill = c("gray", "forestgreen", "red"), bty = "n",
+        legend("top", c("Well", "Fuzzy", "Coverage"),
+               fill = c("forestgreen", "red", "gray"), bty = "n",
                horiz = TRUE)
     }
 }
@@ -504,7 +501,7 @@ plot.syntheticNucMap <- function(x, ...) {
 #' @description Generate a graph for
 #' a list marked as an \code{syntheticNucReads} class
 #'
-#' @param x a list marked as an \code{syntheticNucReads}  class
+#' @param x a list marked as an \code{syntheticNucReads} class
 #'
 #' @param ... \code{...} extra arguments passed to the \code{plot} function
 #'
@@ -514,16 +511,16 @@ plot.syntheticNucMap <- function(x, ...) {
 #' ## nucleosomes and 10 deleted nucleosomes using a Student distribution
 #' ## with a variance of 10 for the well-positioned nucleosomes,
 #' ## a variance of 20 for the fuzzy nucleosomes and a seed of 15
-#' syntheticSample <- syntheticNucMapFromDist(wp.num = 30, wp.del = 10,
-#' wp.var = 10, fuz.num = 5, fuz.var = 20, as.ratio = TRUE, rnd.seed = 15,
-#' distr = "Student")
+#' syntheticNucSample <- syntheticNucReadsFromDist(wp.num = 30, wp.del = 10,
+#' wp.var = 10, fuz.num = 5, fuz.var = 20, rnd.seed = 15,
+#' distr = "Student", offset = 1000)
 #'
 #' ## Create graph using the synthetic map
-#' plot(syntheticSample, xlab="Position", ylab="Coverage")
+#' plot(syntheticNucSample, xlab="Position", ylab="Coverage")
 #'
 #' @author Astrid Deschenes, Rawane Samb
 #' @importFrom IRanges IRanges coverage
-#' @importFrom graphics plot lines abline points legend
+#' @importFrom graphics plot lines abline points legend polygon
 #' @export
 plot.syntheticNucReads <- function(x, ...) {
 
@@ -531,7 +528,7 @@ plot.syntheticNucReads <- function(x, ...) {
     seqRanges <- IRanges(start=x$dataIP$start, end=x$dataIP$end)
 
     ## Set Y axis maximum range
-    y_max <- max(coverage(seqRanges), na.rm = TRUE) + 5
+    y_max <- max(coverage(seqRanges), na.rm = TRUE) + 10
 
     ## Always set Y axis minimum to zero
     y_min <- 0
@@ -544,7 +541,15 @@ plot.syntheticNucReads <- function(x, ...) {
 
     # Plot coverage
     plot(as.vector(coverage(seqRanges)), type = "h", col = "gray",
+            ylim = c(y_min, y_max), xlim = c(x_min, x_max), ...)
+
+    # Plot coverage
+    coverage <- c(0, as.integer(coverage(seqRanges)), 0)
+    position <- c(0, 1:(length(coverage)-1))
+    plot(position, coverage, type = "l", col = "gray",
          ylim = c(y_min, y_max), xlim = c(x_min, x_max), ...)
+    polygon(c(0, position, 0), c(0, coverage, 0), col="gray", border = "gray")
+
 
     # Plot nucleosome positions
     points(x$wp$nucleopos,  x$wp$nreads,  col = "forestgreen",  pch = 19)

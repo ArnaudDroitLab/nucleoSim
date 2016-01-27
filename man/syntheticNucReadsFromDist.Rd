@@ -7,8 +7,8 @@ reverse reads}
 \usage{
 syntheticNucReadsFromDist(wp.num, wp.del, wp.var, fuz.num, fuz.var,
   max.cover = 100, nuc.len = 147, len.var = 10, lin.len = 20,
-  read.len = 40, rnd.seed = NULL, as.ratio = FALSE, distr = c("Uniform",
-  "Normal", "Student"), offset)
+  read.len = 40, rnd.seed = NULL, distr = c("Uniform", "Normal",
+  "Student"), offset)
 }
 \arguments{
 \item{wp.num}{the number of well-positioned
@@ -46,12 +46,6 @@ forward read and its paired reverse read. Default = 10.}
 \code{NULL}. If a \code{integer} is given, the value is used to set the seed
 of the random number generator. By fixing the seed, the generated results
 can be reproduced. Default = \code{NULL}.}
-
-\item{as.ratio}{a \code{logical}, if \code{TRUE},  a synthetic naked DNA
-control map is created and the ratio between it and the nucleosome coverage
-are calculated. It can be used to simulate hybridization ratio data, like
-the one in Tiling Arrays. Both control map and calculated ratio are
-returned. Default = \code{FALSE}.}
 
 \item{distr}{the name of the distribution used to generate the nucleosome
 map. The choices are : \code{"Uniform"}, \code{"Normal"} and
@@ -91,7 +85,7 @@ from Bioconductor nucleR package (Flores and Orozco, 2011).
 ## using a Normal distribution with a variance of 30 for the well-positioned
 ## nucleosomes, a variance of 40 for the fuzzy nucleosomes and a seed of 15
 res <- syntheticNucReadsFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
-fuz.num = 10, fuz.var = 40, as.ratio = TRUE, rnd.seed = 15, distr = "Normal",
+fuz.num = 10, fuz.var = 40, rnd.seed = 15, distr = "Normal",
 offset = 1000)
 
 }
