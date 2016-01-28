@@ -60,18 +60,20 @@ following elements:
 \itemize{
     \item \code{call} the matched call.
     \item \code{wp.starts} the start points of all well-positioned
-nucleosomes.
-    \item \code{wp.nreads} the number of repetitions of each well positioned
-read.
+nucleosome regions. The central position of the nucleosome is calculated as
+wp.starts + round(nuc.len/2).
+    \item \code{wp.nreads} the number of reads associated to each well
+positioned nucelosome.
     \item \code{wp.reads} a \code{IRanges} containing the well positioned
 nucleosome reads.
     \item \code{fuz.starts} the start points of all the fuzzy nucleosomes.
-    \item \code{fuz.nreads} the number of repetitions of each fuzzy
-nucleosome read.
+    \item \code{fuz.nreads} the number of reads associated to each fuzzy
+nucleosome
     \item \code{fuz.reads} a \code{IRanges} containing the fuzzy nucleosome
 reads.
     \item \code{syn.reads} a \code{IRanges} containing all the synthetic
-nucleosome reads (from fuzzy and well-positioned nucleosomes).
+nucleosome reads (from both fuzzy and well-positioned nucleosomes).
+    \item \code{nuc.len} a \code{numeric} the nucleosome length.
 }
 The following elements will be only returned if \code{as.ratio=TRUE}:
 \itemize{
@@ -79,7 +81,6 @@ The following elements will be only returned if \code{as.ratio=TRUE}:
 (control) reads.
     \item \code{syn.ratio} a \code{Rle} containing the calculated ratio
 between the nucleosome coverage and the control coverage.
-    \item \code{nuc.len} a \code{numeric}
 }
 }
 \description{

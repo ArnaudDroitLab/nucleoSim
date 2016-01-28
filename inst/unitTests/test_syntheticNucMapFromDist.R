@@ -413,10 +413,11 @@ test.syntheticNucMapFromDist_good_result_01 <- function() {
                 as.ratio = FALSE, rnd.seed = 25,
                 distr = "Normal")
 
-    exp.wp.starts  <- c(1, 152, 303, 454)
-    exp.wp.nreads  <- c(42, 70, 16,  0)
-    exp.fuz.starts <- c(283)
-    exp.fuz.nreads <- c(51)
+    exp.wp.starts  <- c(152, 454)
+    exp.wp.nreads  <- c(70, 90)
+    exp.fuz.starts <- c(92)
+    exp.fuz.nreads <- c(65)
+    exp.nuc.len    <- c(147)
 
     message     <- paste0(" test.syntheticNucMapFromDist_good_result_01() ",
                           "- syntheticNucMapFromDist did not generated ",
@@ -426,9 +427,10 @@ test.syntheticNucMapFromDist_good_result_01 <- function() {
     checkEqualsNumeric(obs$wp.nreads, exp.wp.nreads, msg = message)
     checkEqualsNumeric(obs$fuz.starts, exp.fuz.starts, msg = message)
     checkEqualsNumeric(obs$fuz.nreads, exp.fuz.nreads, msg = message)
-    checkEqualsNumeric(length(obs$wp.reads), 128, msg = message)
-    checkEqualsNumeric(length(obs$fuz.reads), 51, msg = message)
-    checkEqualsNumeric(length(obs$syn.reads), 179, msg = message)
+    checkEqualsNumeric(obs$nuc.len, exp.nuc.len, msg = message)
+    checkEqualsNumeric(length(obs$wp.reads), 160, msg = message)
+    checkEqualsNumeric(length(obs$fuz.reads), 65, msg = message)
+    checkEqualsNumeric(length(obs$syn.reads), 225, msg = message)
     checkTrue(is.null(obs$syn.ratio), msg = message)
     checkTrue(is.null(obs$ctr.reads), msg = message)
 }
@@ -436,14 +438,16 @@ test.syntheticNucMapFromDist_good_result_01 <- function() {
 ## Test the result when as.ratio is FALSE and Student distribution
 test.syntheticNucMapFromDist_good_result_02 <- function() {
     obs <- syntheticNucMapFromDist(wp.num = 4, wp.del = 1,
-                                   wp.var = 2, fuz.num = 1, fuz.var = 40, lin.len = 4,
+                                   wp.var = 2, fuz.num = 1, fuz.var = 40,
+                                   lin.len = 4,
                                    as.ratio = FALSE, rnd.seed = 26,
                                    distr = "Student")
 
-    exp.wp.starts  <- c(1, 152, 303, 454)
-    exp.wp.nreads  <- c(0, 30, 88,  80)
-    exp.fuz.starts <- c(166)
-    exp.fuz.nreads <- c(22)
+    exp.wp.starts  <- c(1, 303, 454)
+    exp.wp.nreads  <- c(3, 88, 80)
+    exp.fuz.starts <- c(11)
+    exp.fuz.nreads <- c(3)
+    exp.nuc.len    <- 147
 
     message     <- paste0(" test.syntheticNucMapFromDist_good_result_02() ",
                           "- syntheticNucMapFromDist did not generated ",
@@ -453,24 +457,26 @@ test.syntheticNucMapFromDist_good_result_02 <- function() {
     checkEqualsNumeric(obs$wp.nreads, exp.wp.nreads, msg = message)
     checkEqualsNumeric(obs$fuz.starts, exp.fuz.starts, msg = message)
     checkEqualsNumeric(obs$fuz.nreads, exp.fuz.nreads, msg = message)
-    checkEqualsNumeric(length(obs$wp.reads), 198, msg = message)
-    checkEqualsNumeric(length(obs$fuz.reads), 22, msg = message)
-    checkEqualsNumeric(length(obs$syn.reads), 220, msg = message)
+    checkEqualsNumeric(obs$nuc.len, exp.nuc.len, msg = message)
+    checkEqualsNumeric(length(obs$wp.reads), 171, msg = message)
+    checkEqualsNumeric(length(obs$fuz.reads), 3, msg = message)
+    checkEqualsNumeric(length(obs$syn.reads), 174, msg = message)
     checkTrue(is.null(obs$syn.ratio), msg = message)
     checkTrue(is.null(obs$ctr.reads), msg = message)
 }
 
 ## Test the result when as.ratio is FALSE and Uniform distribution
 test.syntheticNucMapFromDist_good_result_03 <- function() {
-    obs <- syntheticNucMapFromDist(wp.num = 3, wp.del = 1,
+    obs <- syntheticNucMapFromDist(wp.num = 3, wp.del = 1, nuc.len = 140,
                                     wp.var = 2, fuz.num = 2, fuz.var = 40,
                                     lin.len = 4, as.ratio = FALSE,
                                     rnd.seed = 26, distr = "Uniform")
 
-    exp.wp.starts  <- c(1, 152, 303)
-    exp.wp.nreads  <- c(3, 0, 88)
-    exp.fuz.starts <- c(47, 270)
-    exp.fuz.nreads <- c(94, 2)
+    exp.wp.starts  <- c(1, 145)
+    exp.wp.nreads  <- c(3, 30)
+    exp.fuz.starts <- c(36, 389)
+    exp.fuz.nreads <- c(69, 25)
+    exp.nuc.len    <- 140
 
     message     <- paste0(" test.syntheticNucMapFromDist_good_result_03() ",
                           "- syntheticNucMapFromDist did not generated ",
@@ -480,9 +486,10 @@ test.syntheticNucMapFromDist_good_result_03 <- function() {
     checkEqualsNumeric(obs$wp.nreads, exp.wp.nreads, msg = message)
     checkEqualsNumeric(obs$fuz.starts, exp.fuz.starts, msg = message)
     checkEqualsNumeric(obs$fuz.nreads, exp.fuz.nreads, msg = message)
-    checkEqualsNumeric(length(obs$wp.reads), 91, msg = message)
-    checkEqualsNumeric(length(obs$fuz.reads), 96, msg = message)
-    checkEqualsNumeric(length(obs$syn.reads), 187, msg = message)
+    checkEqualsNumeric(obs$nuc.len, exp.nuc.len, msg = message)
+    checkEqualsNumeric(length(obs$wp.reads), 33, msg = message)
+    checkEqualsNumeric(length(obs$fuz.reads), 94, msg = message)
+    checkEqualsNumeric(length(obs$syn.reads), 127, msg = message)
     checkTrue(is.null(obs$syn.ratio), msg = message)
     checkTrue(is.null(obs$ctr.reads), msg = message)
 }
@@ -494,10 +501,11 @@ test.syntheticNucMapFromDist_good_result_04 <- function() {
                                    lin.len = 4, as.ratio = TRUE,
                                    rnd.seed = 26, distr = "Uniform")
 
-    exp.wp.starts  <- c(1, 152, 303, 454, 605)
-    exp.wp.nreads  <- c(3, 0, 88, 0, 32)
-    exp.fuz.starts <- c(219, 53)
-    exp.fuz.nreads <- c(81, 61)
+    exp.wp.starts  <- c(1, 152, 605)
+    exp.wp.nreads  <- c(3, 30, 32)
+    exp.fuz.starts <- c(614, 145)
+    exp.fuz.nreads <- c(48, 54)
+    exp.nuc.len    <- 147
 
     message     <- paste0(" test.syntheticNucMapFromDist_good_result_04() ",
                           "- syntheticNucMapFromDist did not generated ",
@@ -507,10 +515,11 @@ test.syntheticNucMapFromDist_good_result_04 <- function() {
     checkEqualsNumeric(obs$wp.nreads, exp.wp.nreads, msg = message)
     checkEqualsNumeric(obs$fuz.starts, exp.fuz.starts, msg = message)
     checkEqualsNumeric(obs$fuz.nreads, exp.fuz.nreads, msg = message)
-    checkEqualsNumeric(length(obs$wp.reads), 123, msg = message)
-    checkEqualsNumeric(length(obs$fuz.reads), 142, msg = message)
-    checkEqualsNumeric(length(obs$syn.reads), 265, msg = message)
-    checkEqualsNumeric(length(obs$syn.ratio), 851, msg = message)
-    checkEqualsNumeric(length(obs$ctr.reads), 265, msg = message)
+    checkEqualsNumeric(obs$nuc.len, exp.nuc.len, msg = message)
+    checkEqualsNumeric(length(obs$wp.reads), 65, msg = message)
+    checkEqualsNumeric(length(obs$fuz.reads), 102, msg = message)
+    checkEqualsNumeric(length(obs$syn.reads), 167, msg = message)
+    checkEqualsNumeric(length(obs$syn.ratio), 858, msg = message)
+    checkEqualsNumeric(length(obs$ctr.reads), 167, msg = message)
 }
 

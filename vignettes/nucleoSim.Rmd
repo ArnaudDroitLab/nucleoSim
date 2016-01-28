@@ -1,10 +1,10 @@
 ---
-title: "Synthetic nucleosome maps"
+title: "nucleoSim: Simulate synthetic nucleosome maps"
 output:
   BiocStyle::html_document:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{Generate synthetic nucleosome maps}
+  %\VignetteIndexEntry{Simulate synthetic nucleosome maps}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignettePackage{nucleoSim}
   %\VignetteEncoding{UTF-8}
@@ -32,11 +32,18 @@ If you use this package for a publication, we would ask you to cite the followin
 
 > Flores O and Orozco M (2011). “nucleR: a package for non-parametric nucleosome positioning.” Bioinformatics, 27, pp. 2149–2150. <a href="http://dx.doi.org/10.1093/bioinformatics/btr345">doi: 10.1093/bioinformatics/btr345</a>
 
+## Introduction
+
+`r Rpackage("nucleoSim")` can simulate datasets for nucleosomes experiments. 
+It allows the user to introduce various 'contaminants' into the sequence 
+datasets, such as fuzzy nucleosomes and missing nucleosomes, in order to be 
+more realistic and to unable the evaluation of the influence of common 
+'noice' on nucleosomes detection.
 
 ## Loading nucleoSim package
 
-As with any R package, the `r Rpackage("nucleoSim")` package should 
-first be loaded with the following command:
+As with any R package, the `r Rpackage("nucleoSim")` package should first be 
+loaded with the following command:
 
 ```{r loadingPackage, warning=FALSE, message=FALSE}
 library(nucleoSim)
@@ -46,7 +53,7 @@ library(nucleoSim)
 
 syntheticNucMapFromDist
 
-A synthetic genome is splitted in `wp.num` sections of  `(nuc.len + lin.len)` based. 
+A synthetic genome is splitted in `wp.num` sections of `(nuc.len + lin.len)` based. 
 The nucleosomes are positioned at `round(nuc.len/2)` bases from the beginning of each section.
 A number of reads is assigned to each
 nucleosome using a Uniform distribution. The number of reads can vary from 
@@ -61,7 +68,7 @@ as the `wp.var` are used to add some variation to the starting position of the r
 
 
 ```{r demo, warning=FALSE, message=FALSE, collapse=TRUE}
-val.num       <- 330  ### nombre de nucleosomes non-chevauchants
+val.num       <- 130  ### nombre de nucleosomes non-chevauchants
 val.del       <- 30
 val.var       <- 30   ### variance si autre dist
 val.fuz.var   <- 50   ### variance si sautre
@@ -69,7 +76,6 @@ val.max.cover <- 70
 val.nuc.len   <- 147
 val.len.var   <- 10
 val.lin.len   <- 20
-val.rnd.seed  <- 100
 val.offset    <- 10000
 
 val.rnd.seed <- 202
@@ -91,6 +97,10 @@ sample <- syntheticNucReadsFromDist(wp.num=val.num,
 head(sample$wp)
 
 head(sample$fuz)
+```
+
+```{r showSample, fig.align='center', fig.height=5, fig.width=8}
+plot(sample, xlab="Position", ylab="Coverage")
 ```
 
 

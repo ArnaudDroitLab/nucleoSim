@@ -56,18 +56,20 @@
 #' \itemize{
 #'     \item \code{call} the matched call.
 #'     \item \code{wp.starts} the start points of all well-positioned
-#' nucleosomes.
-#'     \item \code{wp.nreads} the number of repetitions of each well positioned
-#' read.
+#' nucleosome regions. The central position of the nucleosome is calculated as
+#' wp.starts + round(nuc.len/2).
+#'     \item \code{wp.nreads} the number of reads associated to each well
+#' positioned nucelosome.
 #'     \item \code{wp.reads} a \code{IRanges} containing the well positioned
 #' nucleosome reads.
 #'     \item \code{fuz.starts} the start points of all the fuzzy nucleosomes.
-#'     \item \code{fuz.nreads} the number of repetitions of each fuzzy
-#' nucleosome read.
+#'     \item \code{fuz.nreads} the number of reads associated to each fuzzy
+#' nucleosome
 #'     \item \code{fuz.reads} a \code{IRanges} containing the fuzzy nucleosome
 #' reads.
 #'     \item \code{syn.reads} a \code{IRanges} containing all the synthetic
-#' nucleosome reads (from fuzzy and well-positioned nucleosomes).
+#' nucleosome reads (from both fuzzy and well-positioned nucleosomes).
+#'     \item \code{nuc.len} a \code{numeric} the nucleosome length.
 #' }
 #' The following elements will be only returned if \code{as.ratio=TRUE}:
 #' \itemize{
@@ -75,7 +77,6 @@
 #' (control) reads.
 #'     \item \code{syn.ratio} a \code{Rle} containing the calculated ratio
 #' between the nucleosome coverage and the control coverage.
-#'     \item \code{nuc.len} a \code{numeric}
 #' }
 #'
 #' @examples
@@ -136,7 +137,8 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     wp.nreads <- round(runif(wp.num, min = 1, max = max.cover))
 
     # Delete some reads (set repetition time to 0)
-    wp.nreads[round(runif(wp.del, min = 0, max = wp.num))] <- 0
+    wp.deleted <- sample(x = 1:wp.num, size = wp.del, replace = FALSE)
+    wp.nreads[wp.deleted] <- 0
 
     # Set each nucleosome as a repeated single start position
     wp.repstar <- rep(wp.starts, wp.nreads)
@@ -158,8 +160,8 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     }
 
     # Add some variance to the length of the sequences
-    # The variance associated to the length of the sequences is always following
-    # a normal distribution
+    # The variance associated to the length of the sequences is always
+    # following a normal distribution
     wp.varlen <- nuc.len + round(rnorm(length(wp.repstar), 0, len.var^0.5))
 
     # Putative reads
@@ -197,8 +199,8 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     }
 
     # Add some variance to the length of the sequences
-    # The variance associated to the length of the sequences is always following
-    # a normal distribution
+    # The variance associated to the length of the sequences is always
+    # following a normal distribution
     fuz.varlen  <- nuc.len + round(rnorm(length(fuz.repstar), 0, len.var^0.5))
 
     # Overlapped reads
@@ -232,8 +234,9 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     # Preparing returned list
     result <- list(call = cl)
 
-    result[["wp.starts"]] <- wp.starts
-    result[["wp.nreads"]] <- wp.nreads
+    # The deleted nucleosomes are not returned
+    result[["wp.starts"]] <- wp.starts[-c(wp.deleted)]
+    result[["wp.nreads"]] <- wp.nreads[-c(wp.deleted)]
     result[["wp.reads"]]  <- wp.reads
 
     result[["fuz.starts"]] <- fuz.starts
@@ -332,6 +335,8 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 #'## Generate a synthetic map with 20 well-positioned + 10 fuzzy nucleosomes
 #'## using a Normal distribution with a variance of 30 for the well-positioned
 #'## nucleosomes, a variance of 40 for the fuzzy nucleosomes and a seed of 15
+#'## Because of the fixed seed, each time is going to be run, the results
+#'## are going to be the seed
 #'res <- syntheticNucReadsFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
 #'fuz.num = 10, fuz.var = 40, rnd.seed = 15, distr = "Normal",
 #'offset = 1000)
@@ -540,10 +545,6 @@ plot.syntheticNucReads <- function(x, ...) {
     x_max <- max(x$dataIP$end) + 5
 
     # Plot coverage
-    plot(as.vector(coverage(seqRanges)), type = "h", col = "gray",
-            ylim = c(y_min, y_max), xlim = c(x_min, x_max), ...)
-
-    # Plot coverage
     coverage <- c(0, as.integer(coverage(seqRanges)), 0)
     position <- c(0, 1:(length(coverage)-1))
     plot(position, coverage, type = "l", col = "gray",
@@ -552,8 +553,8 @@ plot.syntheticNucReads <- function(x, ...) {
 
 
     # Plot nucleosome positions
-    points(x$wp$nucleopos,  x$wp$nreads,  col = "forestgreen",  pch = 19)
-    points(x$fuz$nucleopos, x$fuz$nreads, col = "red", pch = 19)
+    points(x$wp$nucleopos,  x$wp$nreads,  col = "forestgreen",  pch = 20)
+    points(x$fuz$nucleopos, x$fuz$nreads, col = "red",          pch = 20)
 
     # Add legend
     legend("top", c("Coverage", "Well", "Fuzzy"),

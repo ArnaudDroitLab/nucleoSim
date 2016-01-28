@@ -84,6 +84,8 @@ from Bioconductor nucleR package (Flores and Orozco, 2011).
 ## Generate a synthetic map with 20 well-positioned + 10 fuzzy nucleosomes
 ## using a Normal distribution with a variance of 30 for the well-positioned
 ## nucleosomes, a variance of 40 for the fuzzy nucleosomes and a seed of 15
+## Because of the fixed seed, each time is going to be run, the results
+## are going to be the seed
 res <- syntheticNucReadsFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
 fuz.num = 10, fuz.var = 40, rnd.seed = 15, distr = "Normal",
 offset = 1000)

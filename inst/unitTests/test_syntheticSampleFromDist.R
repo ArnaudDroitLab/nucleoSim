@@ -325,15 +325,16 @@ test.syntheticNucReadsFromDist_vector_offset <- function() {
 ## Good results
 ################################
 
-## Test the result when as.ratio is FALSE
+## Test the result for a specific case
 test.syntheticNucReadsFromDist_good_result_01 <- function() {
     obs <- syntheticNucReadsFromDist(wp.num = 4, wp.del = 2,
                                     wp.var = 3, fuz.num = 1, fuz.var = 40,
                                     lin.len = 4, rnd.seed = 125, offset = 100,
                                     distr = "Normal")
 
-    exp.wp <- data.frame(nucleopos=c(175, 326, 477, 628), nreads=c(83, 13, 31, 0))
-    exp.fuz <- data.frame(nucleopos=c(540), nreads=c(48))
+    exp.wp <- data.frame(nucleopos=c(175, 326), nreads=c(83, 13))
+    exp.fuz      <- data.frame(nucleopos=c(236), nreads=c(61))
+    exp.nuc.len <- 147
 
     message     <- paste0(" test.syntheticNucReadsFromDist_good_result_01() ",
                           "- syntheticNucReadsFromDist did not generated ",
@@ -341,8 +342,33 @@ test.syntheticNucReadsFromDist_good_result_01 <- function() {
 
     checkEqualsNumeric(obs$wp, exp.wp, msg = message)
     checkEqualsNumeric(obs$fuz, exp.fuz, msg = message)
+    checkEqualsNumeric(obs$nuc.len, exp.nuc.len, msg = message)
     checkEqualsNumeric(length(obs$dataIP), 4, msg = message)
-    checkEqualsNumeric(nrow(obs$dataIP), 350, msg = message)
+    checkEqualsNumeric(nrow(obs$dataIP), 314, msg = message)
     checkEqualsNumeric(length(obs$paired), 3, msg = message)
-    checkEqualsNumeric(nrow(obs$paired), 175, msg = message)
+    checkEqualsNumeric(nrow(obs$paired), 157, msg = message)
+}
+
+## Test the result for a specific case
+test.syntheticNucReadsFromDist_good_result_02 <- function() {
+    obs <- syntheticNucReadsFromDist(wp.num = 4, wp.del = 3, nuc.len = 144,
+                                     wp.var = 6, fuz.num = 2, fuz.var = 60,
+                                     lin.len = 4, rnd.seed = 129, offset = 1000,
+                                     distr = "Student")
+
+    exp.wp <- data.frame(nucleopos=c(1369), nreads=c(17))
+    exp.fuz      <- data.frame(nucleopos=c(1357, 1418), nreads=c(98, 54))
+    exp.nuc.len <- 144
+
+    message     <- paste0(" test.syntheticNucReadsFromDist_good_result_02() ",
+                          "- syntheticNucReadsFromDist did not generated ",
+                          "expected values")
+
+    checkEqualsNumeric(obs$wp, exp.wp, msg = message)
+    checkEqualsNumeric(obs$fuz, exp.fuz, msg = message)
+    checkEqualsNumeric(obs$nuc.len, exp.nuc.len, msg = message)
+    checkEqualsNumeric(length(obs$dataIP), 4, msg = message)
+    checkEqualsNumeric(nrow(obs$dataIP), 338, msg = message)
+    checkEqualsNumeric(length(obs$paired), 3, msg = message)
+    checkEqualsNumeric(nrow(obs$paired), 169, msg = message)
 }
