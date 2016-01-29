@@ -26,11 +26,13 @@ This package and the underlying `r Rpackage("nucleoSim")` code are
 distributed under the Artistic license 2.0. You are free to use and 
 redistribute this software.
 
-If you use this package for a publication, we would ask you to cite the following:
+If you use this package for a publication, we would ask you to cite the 
+following:
 
 > Samb R, Khadraoui K, Belleau P, et al. (2015). "Using informative Multinomial-Dirichlet prior in a t-mixture with reversible jump estimation of nucleosome positions for genome-wide profiling." Statistical Applications in Genetics and Molecular Biology. Volume 14, Issue 6, Pages 517–532, ISSN (Online) 1544-6115, ISSN (Print) 2194-6302, December 2015. <a href="http://dx.doi.org/10.1515/sagmb-2014-0098">doi: 10.1515/sagmb-2014-0098</a>
 
 > Flores O and Orozco M (2011). “nucleR: a package for non-parametric nucleosome positioning.” Bioinformatics, 27, pp. 2149–2150. <a href="http://dx.doi.org/10.1093/bioinformatics/btr345">doi: 10.1093/bioinformatics/btr345</a>
+
 
 ## Introduction
 
@@ -38,7 +40,24 @@ If you use this package for a publication, we would ask you to cite the followin
 It allows the user to introduce various 'contaminants' into the sequence 
 datasets, such as fuzzy nucleosomes and missing nucleosomes, in order to be 
 more realistic and to unable the evaluation of the influence of common 
-'noice' on nucleosomes detection.
+'noice' on the detection of nucleosome.
+
+* Select the number of well-positioned nucleosomes to generate
+* Select the number of well-positioned nucleosomes to be randomly deleted
+* Select the number of fuzzy nucleosomes to add
+* Select the type of distribution used to assign the 
+start position of the reads associated to the nucleosomes
+* Select the variance associated to the distribution for the well-positioned 
+nucleosomes
+* Select the variance associated to the distribution for the fuzzy
+nucleosomes
+* Select the variance associated to the Normal distribution used to assign
+the length of each read
+* Select the maximum read coverage associated to one nucleosome
+* Select the length of the DNA linker
+* Select a seed when results need to be reproducible
+
+
 
 ## Loading nucleoSim package
 
@@ -49,28 +68,65 @@ loaded with the following command:
 library(nucleoSim)
 ```
 
+
 ## Description
 
 syntheticNucMapFromDist
 
-A synthetic genome is splitted in `wp.num` sections of `(nuc.len + lin.len)` based. 
-The nucleosomes are positioned at `round(nuc.len/2)` bases from the beginning of each section.
-A number of reads is assigned to each
+A synthetic genome is splitted in `wp.num` sections of `(nuc.len + lin.len)` 
+bases. The nucleosomes are positioned at `round(nuc.len/2)` bases from the 
+beginning of each section. A number of reads is assigned to each
 nucleosome using a Uniform distribution. The number of reads can vary from 
 1 to `max.cover`. The defaut start position of all reads is set to the first 
 position of each section. However, the distribution selected by the user, as well
 as the `wp.var` are used to add some variation to the starting position of the reads.
 
 
+## Create a synthetic nucleosome map
 
-
-## Demo
-
-
-```{r demo, warning=FALSE, message=FALSE, collapse=TRUE}
-val.num       <- 130  ### nombre de nucleosomes non-chevauchants
-val.del       <- 30
+```{r demoMap, warning=FALSE, message=FALSE, collapse=TRUE}
+val.num       <- 20  ### nombre de nucleosomes non-chevauchants
+val.del       <- 5
 val.var       <- 30   ### variance si autre dist
+val.fuz.num   <- 5
+val.fuz.var   <- 50   ### variance si sautre
+val.max.cover <- 70
+val.nuc.len   <- 147
+val.len.var   <- 10
+val.lin.len   <- 20
+
+val.rnd.seed <- 210001
+        
+## Create Uniform sample
+sample <- syntheticNucMapFromDist(wp.num=val.num,
+                                            wp.del=val.del,
+                                            wp.var=val.var,
+                                            fuz.num=val.fuz.num,
+                                            fuz.var=val.fuz.var,
+                                            max.cover=val.max.cover,
+                                            nuc.len=val.nuc.len,
+                                            len.var=val.len.var,
+                                            lin.len=val.lin.len,
+                                            rnd.seed=val.rnd.seed,
+                                            distr="Normal")
+
+head(sample$wp)
+
+head(sample$fuz)
+```
+
+```{r showMap, fig.align='center', fig.height=5, fig.width=8}
+plot(sample, xlab="Position", ylab="Coverage")
+```
+
+
+## Create a synthetic nucleosome sample
+
+```{r demoSample, warning=FALSE, message=FALSE, collapse=TRUE}
+val.num       <- 30  ### nombre de nucleosomes non-chevauchants
+val.del       <- 10
+val.var       <- 30   ### variance si autre dist
+val.fuz.num   <- 10
 val.fuz.var   <- 50   ### variance si sautre
 val.max.cover <- 70
 val.nuc.len   <- 147
@@ -84,7 +140,7 @@ val.rnd.seed <- 202
 sample <- syntheticNucReadsFromDist(wp.num=val.num,
                                             wp.del=val.del,
                                             wp.var=val.var,
-                                            fuz.num=2*val.del,
+                                            fuz.num=val.fuz.num,
                                             fuz.var=val.fuz.var,
                                             max.cover=val.max.cover,
                                             nuc.len=val.nuc.len,
@@ -102,7 +158,6 @@ head(sample$fuz)
 ```{r showSample, fig.align='center', fig.height=5, fig.width=8}
 plot(sample, xlab="Position", ylab="Coverage")
 ```
-
 
 ## Session info
 
