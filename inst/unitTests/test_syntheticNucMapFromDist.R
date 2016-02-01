@@ -523,3 +523,32 @@ test.syntheticNucMapFromDist_good_result_04 <- function() {
     checkEqualsNumeric(length(obs$ctr.reads), 167, msg = message)
 }
 
+## Test the result when no nucleosome deleted
+test.syntheticNucMapFromDist_good_result_05 <- function() {
+    obs <- syntheticNucMapFromDist(wp.num = 5, wp.del = 0, max.cover = 15,
+                                   wp.var = 23, fuz.num = 2, fuz.var = 43,
+                                   lin.len = 12, as.ratio = FALSE,
+                                   rnd.seed = 288, distr = "Student")
+
+    exp.wp.starts  <- c(1, 160, 319, 478, 637)
+    exp.wp.nreads  <- c(3, 11, 4, 11, 3)
+    exp.fuz.starts <- c(660, 452)
+    exp.fuz.nreads <- c(13, 8)
+    exp.nuc.len    <- 147
+
+    message     <- paste0(" test.syntheticNucMapFromDist_good_result_05() ",
+                          "- syntheticNucMapFromDist did not generated ",
+                          "expected values")
+
+    checkEqualsNumeric(obs$wp.starts, exp.wp.starts, msg = message)
+    checkEqualsNumeric(obs$wp.nreads, exp.wp.nreads, msg = message)
+    checkEqualsNumeric(obs$fuz.starts, exp.fuz.starts, msg = message)
+    checkEqualsNumeric(obs$fuz.nreads, exp.fuz.nreads, msg = message)
+    checkEqualsNumeric(obs$nuc.len, exp.nuc.len, msg = message)
+    checkEqualsNumeric(length(obs$wp.reads), 32, msg = message)
+    checkEqualsNumeric(length(obs$fuz.reads), 21, msg = message)
+    checkEqualsNumeric(length(obs$syn.reads), 53, msg = message)
+    checkEqualsNumeric(length(obs$syn.ratio), 0, msg = message)
+    checkEqualsNumeric(length(obs$ctr.reads), 0, msg = message)
+}
+

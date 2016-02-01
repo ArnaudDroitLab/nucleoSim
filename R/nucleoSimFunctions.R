@@ -235,8 +235,13 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     result <- list(call = cl)
 
     # The deleted nucleosomes are not returned
-    result[["wp.starts"]] <- wp.starts[-c(wp.deleted)]
-    result[["wp.nreads"]] <- wp.nreads[-c(wp.deleted)]
+    if (wp.del > 0) {
+        result[["wp.starts"]] <- wp.starts[-c(wp.deleted)]
+        result[["wp.nreads"]] <- wp.nreads[-c(wp.deleted)]
+    } else {
+        result[["wp.starts"]] <- wp.starts
+        result[["wp.nreads"]] <- wp.nreads
+    }
     result[["wp.reads"]]  <- wp.reads
 
     result[["fuz.starts"]] <- fuz.starts
