@@ -129,7 +129,7 @@ length of the reads correpond to the length of the nucleosomes (`nuc.len`).
 
 ### Create a synthetic nucleosome map
 
-This is a demonstration of a synt
+This is an example showing how a synthetic nucleosome map can be generated.
 
 ```{r demoMap, warning=FALSE, message=FALSE, collapse=TRUE}
 wp.num         <- 20            ### Number of well-positioned nucleosomes
@@ -172,12 +172,64 @@ nucleosomeMap$wp.reads
 ```
 
 The synthetic nucleosome map can easily be visualised using `plot()` function.
+On the graph, each nucleosome is located on the graph using the 
+coordonnates:
+
+`   (x,y) = 
+(the central position of the nucleosome, the number of reads associated to
+the nucleosome)`
 
 ```{r showMap, fig.align='center', fig.height=5, fig.width=8}
 plot(nucleosomeMap, xlab="Position", ylab="Coverage")
 ```
 
 ## Synthetic Nucleosome Samples
+
+A synthetic nucleosome sample is created using the same 3 first steps than the 
+synthetic nucleosome map. However, some new steps are presents:
+
+**1. Adding well-positionned nucleosomes**
+
+The synthetic nucleosome map is splitted into a fixed number of 
+sections (`wp.num`) of  equal length (`(nuc.len + lin.len)` 
+bases). The center of the nucleosomes are positioned at a fixed number of bases 
+from the beginning of each section (`round(nuc.len/2)` bases). Reads are 
+assigned, to each nucleosome, using an uniform distribution. The number of 
+reads, assigned to each nucleosome, can vary from 1 to `max.cover`. 
+The distribution (`distr`), as 
+well as the variance (`wp.var`) are used to add some fluctuation to the 
+starting position of the reads, which as a mean position corresponding to 
+the sarting position of a region. Some fluctuation ot the length of 
+the reads is also added following
+a normal distribution with a fixed variance (`len.var`). The mean 
+length of the reads correpond to the length of the nucleosomes (`nuc.len`).
+
+**2. Deleting some well-positionned nucleosomes**
+
+Following an uniform distribution, a fixed number of nucleosomes (`wp.del`) 
+are deleted. Nucleosomes are considered deleted when all reads associated to it
+are eliminated.
+
+**3. Adding fuzzy nucleosomes**
+
+A fixed number of fuzzy nucleosomes (`fuz.num`) are added. The position of the
+fuzzy nucleosomes is selected following an uniform distribution. Such as for
+the well-positionned nucleosomes, reads are 
+assigned, to each fuzzy nucleosome, using an uniform distribution. The number 
+of reads assigned can vary from 1 to `max.cover`. 
+The distribution (`distr`), as 
+well as the variance (`wp.var`) are used to add some fluctuation to the 
+starting position of the reads, which as a mean position corresponding to 
+the sarting position of a region. Some fluctuation ot the length of 
+the reads is also added following
+a normal distribution with a fixed variance (`len.var`). The mean 
+length of the reads correpond to the length of the nucleosomes (`nuc.len`).
+
+** 4. Adding an offset
+
+An offset (`offset`) is added to all nucleosomes and
+reads positions to ensure that all values are positives (mainly pertinent for
+reads).
 
 ### Create a synthetic nucleosome sample
 
@@ -194,7 +246,7 @@ lin.len            <- 20           ### Length of the DNA linker (default: 20)
 distr              <- "Uniform"  ### Type of distribution to use
 offset            <- 10000     ### The number of bases used to offset all nucleosomes and reads
 
-val.rnd.seed    <- 202        ### Set seed when result need to be reproducible
+rnd.seed        <- 202        ### Set seed when result need to be reproducible
         
 ## Create Uniform sample
 nucleosomeSample <- syntheticNucReadsFromDist(wp.num=wp.num, wp.del=wp.del,
@@ -210,10 +262,15 @@ head(nucleosomeSample$fuz)
 ```
 
 The synthetic nucleosome sample can easily be visualised using `plot()` 
-function. The 
+function. On the graph, each nucleosome is located on the graph using the 
+coordonnates:
+
+`   (x,y) = 
+(the central position of the nucleosome, the number of reads associated to
+the nucleosome)`
 
 ```{r showSample, fig.align='center', fig.height=5, fig.width=8}
-plot(nucleosomeSample, xlab="Position", ylab="Coverage")
+plot(nucleosomeSample, xlab="Position", ylab="Coverage (number of reads)")
 ```
 
 ## Session info
