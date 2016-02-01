@@ -136,7 +136,7 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     # How many times a read is repeated
     wp.nreads <- round(runif(wp.num, min = 1, max = max.cover))
 
-    # Delete some reads (set repetition time to 0)
+    # Delete some nucleosomes (set repetition time to 0)
     wp.deleted <- sample(x = 1:wp.num, size = wp.del, replace = FALSE)
     wp.nreads[wp.deleted] <- 0
 
@@ -309,9 +309,9 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 #' map. The choices are : \code{"Uniform"}, \code{"Normal"} and
 #' \code{"Student"}. Default = \code{"Uniform"}.
 #'
-#' @param offset the number of bases used to offset all reads. This is done to
-#' ensure that all nucleosome positions and read alignment are of positive
-#' values.
+#' @param offset the number of bases used to offset all nucleosomes and reads.
+#' This is done to ensure that all nucleosome positions and read alignment
+#' are of positive values.
 #'
 #' @return an \code{list} of \code{class} "syntheticSample" containing the
 #' following elements:

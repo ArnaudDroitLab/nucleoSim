@@ -51,9 +51,9 @@ can be reproduced. Default = \code{NULL}.}
 map. The choices are : \code{"Uniform"}, \code{"Normal"} and
 \code{"Student"}. Default = \code{"Uniform"}.}
 
-\item{offset}{the number of bases used to offset all reads. This is done to
-ensure that all nucleosome positions and read alignment are of positive
-values.}
+\item{offset}{the number of bases used to offset all nucleosomes and reads.
+This is done to ensure that all nucleosome positions and read alignment
+are of positive values.}
 }
 \value{
 an \code{list} of \code{class} "syntheticSample" containing the
