@@ -1,10 +1,10 @@
 ---
-title: "Synthetic nucleosome maps"
+title: "nucleoSim: Simulate synthetic nucleosome maps"
 output:
   BiocStyle::html_document:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{Generate synthetic nucleosome maps}
+  %\VignetteIndexEntry{Simulate synthetic nucleosome maps}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignettePackage{nucleoSim}
   %\VignetteEncoding{UTF-8}
@@ -20,67 +20,278 @@ BiocStyle::markdown()
 **Compiled date**: `r Sys.Date()`<br />
 **License**: `r packageDescription("nucleoSim")[["License"]]`<br />
 
-## Licensing and citing
+# Licensing and citing
 
 This package and the underlying `r Rpackage("nucleoSim")` code are 
 distributed under the Artistic license 2.0. You are free to use and 
 redistribute this software.
 
-If you use this package for a publication, we would ask you to cite the following:
+If you use this package for a publication, we would ask you to cite the 
+following:
 
-> Samb R, Khadraoui K, Belleau P, et al. (2015). "Using informative Multinomial-Dirichlet prior in a t-mixture with reversible jump estimation of nucleosome positions for genome-wide profiling." Statistical Applications in Genetics and Molecular Biology. Published online before print December 10, 2015. <a href="http://dx.doi.org/10.1515/sagmb-2014-0098">doi: 10.1515/sagmb-2014-0098</a>
+> Samb R, Khadraoui K, Belleau P, et al. (2015). "Using informative Multinomial-Dirichlet prior in a t-mixture with reversible jump estimation of nucleosome positions for genome-wide profiling." Statistical Applications in Genetics and Molecular Biology. Volume 14, Issue 6, Pages 517–532, ISSN (Online) 1544-6115, ISSN (Print) 2194-6302, December 2015. <a href="http://dx.doi.org/10.1515/sagmb-2014-0098">doi: 10.1515/sagmb-2014-0098</a>
 
 > Flores O and Orozco M (2011). “nucleR: a package for non-parametric nucleosome positioning.” Bioinformatics, 27, pp. 2149–2150. <a href="http://dx.doi.org/10.1093/bioinformatics/btr345">doi: 10.1093/bioinformatics/btr345</a>
 
 
-## Loading nucleoSim package
+# Introduction
 
-As with any R package, the `r Rpackage("nucleoSim")` package should 
-first be loaded with the following command:
+`r Rpackage("nucleoSim")` can simulate datasets for nucleosomes experiments. 
+It allows the user to introduce various 'contaminants' into the sequence 
+datasets, such as fuzzy nucleosomes and missing nucleosomes, in order to be 
+more realistic and to unable the evaluation of the influence of common 
+'noice' on the detection of nucleosome.
+
+* Select the number of well-positioned nucleosomes to generate
+* Select the number of well-positioned nucleosomes to be randomly deleted
+* Select the number of fuzzy nucleosomes to add
+* Select the type of distribution used to assign the 
+start position to the reads associated to the nucleosomes
+* Select the variance associated to the distribution for the well-positioned 
+nucleosomes
+* Select the variance associated to the distribution for the fuzzy
+nucleosomes
+* Select the variance associated to the Normal distribution used to assign
+the length of each read
+* Select the maximum read coverage associated to one nucleosome
+* Select the length of the DNA linker
+* Select the length of the nucleosomes (not recommanded to change default value)
+* Select a seed when results need to be reproducible
+
+
+# Loading `r Rpackage("nucleoSim")` package
+
+As with any R package, the `r Rpackage("nucleoSim")` package should first be 
+loaded with the following command:
 
 ```{r loadingPackage, warning=FALSE, message=FALSE}
 library(nucleoSim)
 ```
 
 
-## Demo
+# Description
+
+The packages can generate 2 types of synthetic maps:
+
+**Synthetic Nucleosome Maps**: A map with complete reads covering the 
+nucleosome regions
+    
+**Synthetic Nucleosome Samples**: A map with forward and reverse reads 
+emulating those obtained using a next-generation sequencing technology on a
+nucleosome map 
 
 
-```{r demo, warning=FALSE, message=FALSE, collapse=TRUE}
-val.num       <- 330  ### nombre de nucleosomes non-chevauchants
-val.del       <- 30
-val.var       <- 30   ### variance si autre dist
-val.fuz.var   <- 50   ### variance si sautre
-val.max.cover <- 70
-val.nuc.len   <- 147
-val.len.var   <- 10
-val.lin.len   <- 20
-val.rnd.seed  <- 100
-val.as.ratio  <- TRUE
-val.offset    <- 10000
+## Synthetic Nucleosome Maps
 
-val.rnd.seed <- 202
+A synthetic nucleosome map is a section of genome covered by a fixed number
+of nucleosomes. Each nucleosome beeing associated to a specific number of 
+reads. The parameters passed to the `syntheticNucMapFromDist()` function are
+going to affect the distribution of the nucleosomes, as well as, the reads.
+
+Technically, the synthetic nucleosome map is separated into 3 steps:
+
+**1. Adding well-positioned nucleosomes**
+
+The synthetic nucleosome map is splitted into a fixed number of 
+sections (`wp.num`) of  equal length (`(nuc.len + lin.len)` 
+bases). The center of the nucleosomes are positioned at a fixed number of bases 
+from the beginning of each section (`round(nuc.len/2)` bases). Reads are 
+assigned, to each nucleosome, using an uniform distribution. The number of 
+reads, assigned to each nucleosome, can vary from 1 to `max.cover`. 
+The distribution (`distr`), as 
+well as the variance (`wp.var`) are used to add some fluctuation to the 
+starting position of the reads, which as a mean position corresponding to 
+the sarting position of a region. Some fluctuation ot the length of 
+the reads is also added following
+a normal distribution with a fixed variance (`len.var`). The mean 
+length of the reads correpond to the length of the nucleosomes (`nuc.len`).
+
+**2. Deleting some well-positioned nucleosomes**
+
+Following an uniform distribution, a fixed number of nucleosomes (`wp.del`) 
+are deleted. Nucleosomes are considered deleted when all reads associated to it
+are eliminated.
+
+**3. Adding fuzzy nucleosomes**
+
+A fixed number of fuzzy nucleosomes (`fuz.num`) are added. The position of the
+fuzzy nucleosomes is selected following an uniform distribution. Such as for
+the well-positioned nucleosomes, reads are 
+assigned, to each fuzzy nucleosome, using an uniform distribution. The number 
+of reads assigned can vary from 1 to `max.cover`. 
+The distribution (`distr`), as 
+well as the variance (`wp.var`) are used to add some fluctuation to the 
+starting position of the reads, which as a mean position corresponding to 
+the sarting position of a region. Some fluctuation ot the length of 
+the reads is also added following
+a normal distribution with a fixed variance (`len.var`). The mean 
+length of the reads correpond to the length of the nucleosomes (`nuc.len`).
+
+### Create a synthetic nucleosome map
+
+This is an example showing how a synthetic nucleosome map can be generated.
+
+```{r demoMap, warning=FALSE, message=FALSE, collapse=TRUE}
+wp.num           <- 20         ### Number of well-positioned nucleosomes
+wp.del           <- 5          ### Number of well-positioned nucleosomes to delete
+wp.var           <- 30         ### variance associated to the well-positioned nucleosomes
+fuz.num          <- 5          ### Number of fuzzy nucleosomes
+fuz.var          <- 50         ### Variance associated to the fuzzy nucleosomes
+max.cover        <- 70         ### Maximum reads associated to one nucleosome (default: 100)
+nuc.len          <- 147        ### Length of the nucleosome (default: 147)
+len.var          <- 12         ### variance associated to the length of the reads (default: 10)
+lin.len          <- 20         ### Length of the DNA linker (default: 20)
+distr            <- "Normal"   ### Type of distribution to use
+
+rnd.seed         <- 210001     ### Set seed when result need to be reproducible
         
-## Create Uniform sample
-sample <- syntheticSampleFromDist(wp.num=val.num,
-                                            wp.del=val.del,
-                                            wp.var=val.var,
-                                            fuz.num=2*val.del,
-                                            fuz.var=val.fuz.var,
-                                            max.cover=val.max.cover,
-                                            nuc.len=val.nuc.len,
-                                            len.var=val.len.var,
-                                            lin.len=val.lin.len,
-                                            rnd.seed=val.rnd.seed,
-                                            as.ratio=val.as.ratio,
-                                            distr="Uniform",
-                                            offset=val.offset)
+#### Create a synthetic nucleosome map
+nucleosomeMap <- syntheticNucMapFromDist(wp.num=wp.num, wp.del=wp.del,
+                                    wp.var=wp.var, fuz.num=fuz.num,
+                                    fuz.var=fuz.var, max.cover=max.cover,
+                                    nuc.len=nuc.len, len.var=len.var,
+                                    lin.len=lin.len, rnd.seed=rnd.seed,
+                                    distr=distr)
 
-head(sample$wp)
+#### The start positions of all well-positioned nucleosomes
+nucleosomeMap$wp.starts
 
-head(sample$fuz)
+#### The number of reads associated to each well-positioned nucleosome
+nucleosomeMap$wp.nreads
+
+#### A IRanges object containing all reads for the well-positioned nucleosomes
+head(nucleosomeMap$wp.reads, n = 3)
+
+#### The start positions of all fuzzy nucleosomes
+nucleosomeMap$fuz.starts
+
+#### The number of reads associated to each fuzzy nucleosome
+nucleosomeMap$fuz.nreads
+
+#### A IRanges object containing all reads for the fuzzy nucleosomes
+head(nucleosomeMap$fuz.reads, n = 3)
+
+#### A IRanges object containing all reads from well-potitioned and fuzzy nucleosomes
+head(nucleosomeMap$syn.reads, n = 3)
 ```
 
+The synthetic nucleosome map can easily be visualised using `plot()` function.
+On the graph, each nucleosome is located on the graph using the 
+coordonnates:
+
+`   (x,y) = 
+(the central position of the nucleosome, the number of reads associated to
+the nucleosome)`
+
+```{r showMap, fig.align='center', fig.height=5, fig.width=8}
+#### Create visual representation of the synthetic nucleosome map
+plot(nucleosomeMap, xlab="Position", ylab="Coverage")
+```
+
+## Synthetic Nucleosome Samples
+
+A synthetic nucleosome sample is created using the same 3 first steps than the 
+synthetic nucleosome map. However, some new steps are presents:
+
+**1. Adding well-positioned nucleosomes **
+
+The synthetic nucleosome map is splitted into a fixed number of 
+sections (`wp.num`) of  equal length (`(nuc.len + lin.len)` 
+bases). The center of the nucleosomes are positioned at a fixed number of bases 
+from the beginning of each section (`round(nuc.len/2)` bases). Reads are 
+assigned, to each nucleosome, using an uniform distribution. The number of 
+reads, assigned to each nucleosome, can vary from 1 to `max.cover`. 
+The distribution (`distr`), as 
+well as the variance (`wp.var`) are used to add some fluctuation to the 
+starting position of the reads, which as a mean position corresponding to 
+the sarting position of a region. Some fluctuation ot the length of 
+the reads is also added following
+a normal distribution with a fixed variance (`len.var`). The mean 
+length of the reads correpond to the length of the nucleosomes (`nuc.len`).
+
+**2. Deleting some well-positioned nucleosomes**
+
+Following an uniform distribution, a fixed number of nucleosomes (`wp.del`) 
+are deleted. Nucleosomes are considered deleted when all reads associated to it
+are eliminated.
+
+**3. Adding fuzzy nucleosomes**
+
+A fixed number of fuzzy nucleosomes (`fuz.num`) are added. The position of the
+fuzzy nucleosomes is selected following an uniform distribution. Such as for
+the well-positioned nucleosomes, reads are 
+assigned, to each fuzzy nucleosome, using an uniform distribution. The number 
+of reads assigned can vary from 1 to `max.cover`. 
+The distribution (`distr`), as 
+well as the variance (`wp.var`) are used to add some fluctuation to the 
+starting position of the reads, which as a mean position corresponding to 
+the sarting position of a region. Some fluctuation ot the length of 
+the reads is also added following
+a normal distribution with a fixed variance (`len.var`). The mean 
+length of the reads correpond to the length of the nucleosomes (`nuc.len`).
+
+** 4. Adding an offset
+
+An offset (`offset`) is added to all nucleosomes and
+reads positions to ensure that all values are positives (mainly pertinent for
+reads). Then, reads are splitted into forward and reverse reads of fixed length
+(`read.len`). Those reads are stored in a `data.frame` containing the name of
+a synthetic chromosome (`chr_SYNTHETIC`), the starting position, the ending
+position and the direction of all reads. 
+
+### Create a synthetic nucleosome sample
+
+```{r demoSample, warning=FALSE, message=FALSE, collapse=TRUE}
+wp.num           <- 30            ### Number of well-positioned nucleosomes
+wp.del           <- 10            ### Number of well-positioned nucleosomes to delete
+wp.var           <- 30            ### variance associated to the well-positioned nucleosomes
+fuz.num          <- 10            ### Number of fuzzy nucleosomes
+fuz.var          <- 50            ### Variance associated to the fuzzy nucleosomes
+max.cover        <- 90            ### Maximum reads associated to one nucleosome (default: 100)
+nuc.len          <- 147           ### Length of the nucleosome (default: 147)
+len.var          <- 12            ### variance associated to the length of the reads (default: 10)
+lin.len          <- 20            ### Length of the DNA linker (default: 20)
+read.len         <- 45            ### Length of the generated forward and reverse reads (default: 40)
+distr            <- "Uniform"     ### Type of distribution to use
+offset           <- 10000         ### The number of bases used to offset all nucleosomes and reads
+
+rnd.seed         <- 202           ### Set seed when result need to be reproducible
+        
+#### Create Uniform sample
+nucleosomeSample <- syntheticNucReadsFromDist(wp.num=wp.num, wp.del=wp.del,
+                                        wp.var=wp.var, fuz.num=fuz.num,
+                                        fuz.var=fuz.var, max.cover=max.cover,
+                                        nuc.len=nuc.len, len.var=len.var,
+                                        read.len=read.len, lin.len=lin.len, 
+                                        rnd.seed=rnd.seed,
+                                        distr=distr, offset=offset)
+
+#### The central position of all well-positioned nucleosomes with the
+#### number of paired-end reads each associated to each one
+head(nucleosomeSample$wp, n = 4)
+
+#### The central position of all fuzzy nucleosomes with the
+#### number of paired-end reads each associated to each one
+head(nucleosomeSample$fuz, n = 4)
+
+#### A data.frame with the name of the synthetic chromosome, the starting 
+#### position, the ending position and the direction of all forward and
+#### reverse reads
+head(nucleosomeSample$dataIP, n = 4)
+```
+
+The synthetic nucleosome sample can easily be visualised using `plot()` 
+function. On the graph, each nucleosome is located on the graph using the 
+coordonnates:
+
+`   (x,y) = 
+(the central position of the nucleosome, the number of reads associated to
+the nucleosome)`
+
+```{r showSample, fig.align='center', fig.height=5, fig.width=8}
+#### Create visual representation of the synthetic nucleosome sample
+plot(nucleosomeSample, xlab="Position", ylab="Coverage (number of reads)")
+```
 
 ## Session info
 

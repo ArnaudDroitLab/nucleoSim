@@ -6,8 +6,8 @@
 \usage{
 syntheticNucMapFromDist(wp.num, wp.del, wp.var, fuz.num, fuz.var,
   max.cover = 100, nuc.len = 147, len.var = 10, lin.len = 20,
-  rnd.seed = NULL, as.ratio = FALSE, show.plot = FALSE,
-  distr = c("Uniform", "Normal", "Student"), ...)
+  rnd.seed = NULL, as.ratio = FALSE, distr = c("Uniform", "Normal",
+  "Student"))
 }
 \arguments{
 \item{wp.num}{the number of well-positioned
@@ -50,35 +50,30 @@ are calculated. It can be used to simulate hybridization ratio data, like
 the one in Tiling Arrays. Both control map and calculated ratio are
 returned. Default = \code{FALSE}.}
 
-\item{show.plot}{a \code{logical}, if \code{TRUE}, a plot of the coverage
-map, with the nucleosome calls and optionally the calculated ratio is
-outputed. Default = \code{FALSE}.}
-
 \item{distr}{the name of the distribution used to generate the nucleosome
 map. The choices are : \code{"Uniform"}, \code{"Normal"} and
 \code{"Student"}. Default = \code{"Uniform"}.}
-
-\item{...}{arguments to be passed to \code{plot} function only
-when \code{show.plot=TRUE}.}
 }
 \value{
-an \code{list} of \code{class} "nucleoSim" containing the
+an \code{list} of \code{class} "syntheticNucMap" containing the
 following elements:
 \itemize{
     \item \code{call} the matched call.
     \item \code{wp.starts} the start points of all well-positioned
-nucleosomes.
-    \item \code{wp.nreads} th number of repetitions of each well positioned
-read.
+nucleosome regions. The central position of the nucleosome is calculated as
+wp.starts + round(nuc.len/2).
+    \item \code{wp.nreads} the number of reads associated to each well
+positioned nucelosome.
     \item \code{wp.reads} a \code{IRanges} containing the well positioned
 nucleosome reads.
     \item \code{fuz.starts} the start points of all the fuzzy nucleosomes.
-    \item \code{fuz.nreads} the number of repetitions of each fuzzy
-nucleosome read.
+    \item \code{fuz.nreads} the number of reads associated to each fuzzy
+nucleosome
     \item \code{fuz.reads} a \code{IRanges} containing the fuzzy nucleosome
 reads.
     \item \code{syn.reads} a \code{IRanges} containing all the synthetic
-nucleosome reads (from fuzzy and well-positioned nucleosomes).
+nucleosome reads (from both fuzzy and well-positioned nucleosomes).
+    \item \code{nuc.len} a \code{numeric} the nucleosome length.
 }
 The following elements will be only returned if \code{as.ratio=TRUE}:
 \itemize{
@@ -103,12 +98,12 @@ from Bioconductor nucleR package (Flores and Orozco, 2011).
 ## well-positioned nucleosomes, a variance of 40 for the fuzzy nucleosomes
 ## and a seed of 15
 syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
-    fuz.num = 10, fuz.var = 40, show.plot = TRUE, rnd.seed = 15,
+    fuz.num = 10, fuz.var = 40, rnd.seed = 15,
     distr = "Normal")
 
 ## Same output but without graph
 syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
-    fuz.num = 10, fuz.var = 40, show.plot = FALSE,
+    fuz.num = 10, fuz.var = 40,
     rnd.seed = 15, as.ratio = FALSE, distr = "Normal")
 
 

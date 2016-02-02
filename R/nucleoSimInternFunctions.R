@@ -46,10 +46,6 @@
 #' the one in Tiling Arrays. Both control map and calculated ratio are
 #' returned.
 #'
-#' @param show.plot a \code{logical}, if \code{TRUE}, a plot of the coverage
-#' map, with the nucleosome calls and optionally the calculated ratio is
-#' outputed.
-#'
 #' @return \code{0} indicating that all parameters validations have been
 #' successful.
 #'
@@ -62,8 +58,7 @@ syntheticNucMapFromDistValidation <- function(wp.num, wp.del, wp.var, fuz.num,
                                                 len.var,
                                                 lin.len,
                                                 rnd.seed,
-                                                as.ratio,
-                                                show.plot)
+                                                as.ratio)
 {
 
     if (!isInteger(wp.num) || wp.num < 0) {
@@ -100,6 +95,10 @@ syntheticNucMapFromDistValidation <- function(wp.num, wp.del, wp.var, fuz.num,
 
     if (!is.null(rnd.seed) && !isInteger(rnd.seed)) {
         stop("rnd.seed must be NULL or an integer")
+    }
+
+    if (!is.logical(as.ratio)) {
+        stop("as.ratio must be a logical value")
     }
 
     return(0)
