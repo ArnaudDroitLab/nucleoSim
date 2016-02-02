@@ -40,7 +40,7 @@ forward read and its paired reverse read. Default = 10.}
 
 \item{lin.len}{the length of the DNA linker DNA. Default = 20.}
 
-\item{read.len}{the length of each of the paired reads. Default = 40.}
+\item{read.len}{the length of each of the paired-end reads. Default = 40.}
 
 \item{rnd.seed}{a single value, interpreted as an \code{integer}, or
 \code{NULL}. If a \code{integer} is given, the value is used to set the seed
@@ -60,8 +60,9 @@ an \code{list} of \code{class} "syntheticSample" containing the
 following elements:
 \itemize{
 \item \code{call} the matched call.
-\item \code{dataIP} a \code{data.frame} with all forward and reverse reads
-for all well-positioned and fuzzy nucleosomes.
+\item \code{dataIP} a \code{data.frame} with the chromosome name, the
+starting and ending positions and the direction of all forward
+and reverse reads for all well-positioned and fuzzy nucleosomes.
 \item \code{wp} a \code{data.frame} with the positions of all the
 well-positioned nucleosomes, as well as the number of paired-reads
 associated to each one.
@@ -74,7 +75,8 @@ positions of the reads used to generate the paired-end reads.
 \description{
 Generate a synthetic nucleosome map using the distribution
 selected by the user. The user has choice between three different
-distributions: Normal, Student and Uniform.
+distributions: Normal, Student and Uniform. The final map is composed of
+paired-end reads.
 
 This function is using a modified version of the syntheticNucMap() function
 from Bioconductor nucleR package (Flores and Orozco, 2011).

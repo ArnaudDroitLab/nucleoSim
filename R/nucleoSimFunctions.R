@@ -269,7 +269,8 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 #'
 #' @description Generate a synthetic nucleosome map using the distribution
 #' selected by the user. The user has choice between three different
-#' distributions: Normal, Student and Uniform.
+#' distributions: Normal, Student and Uniform. The final map is composed of
+#' paired-end reads.
 #'
 #' This function is using a modified version of the syntheticNucMap() function
 #' from Bioconductor nucleR package (Flores and Orozco, 2011).
@@ -303,7 +304,7 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 #'
 #' @param lin.len the length of the DNA linker DNA. Default = 20.
 #'
-#' @param read.len the length of each of the paired reads. Default = 40.
+#' @param read.len the length of each of the paired-end reads. Default = 40.
 #'
 #' @param rnd.seed a single value, interpreted as an \code{integer}, or
 #' \code{NULL}. If a \code{integer} is given, the value is used to set the seed
@@ -322,8 +323,9 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 #' following elements:
 #' \itemize{
 #' \item \code{call} the matched call.
-#' \item \code{dataIP} a \code{data.frame} with all forward and reverse reads
-#' for all well-positioned and fuzzy nucleosomes.
+#' \item \code{dataIP} a \code{data.frame} with the chromosome name, the
+#' starting and ending positions and the direction of all forward
+#' and reverse reads for all well-positioned and fuzzy nucleosomes.
 #' \item \code{wp} a \code{data.frame} with the positions of all the
 #' well-positioned nucleosomes, as well as the number of paired-reads
 #' associated to each one.
@@ -405,6 +407,7 @@ syntheticNucReadsFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 
     # Order reads by starting position
     dataIP <- dataIP[order(dataIP$start), ]
+    rownames(dataIP)<-1:nrow(dataIP)
 
     # Create data.frame with well-positioned nucleosomes shifted by offset value
     space <- round(nuc.len/2)

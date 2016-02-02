@@ -4,7 +4,7 @@
 \alias{plot.syntheticNucReads}
 \title{Generate a graph of a synthetic nucleosome map using}
 \usage{
-\method{plot}{syntheticNucReads}(x, ...)
+plot.syntheticNucReads(x, ...)
 }
 \arguments{
 \item{x}{a list marked as an \code{syntheticNucReads} class}
