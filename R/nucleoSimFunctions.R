@@ -7,34 +7,40 @@
 #' This function is a modified version of the syntheticNucMap() function
 #' from Bioconductor nucleR package (Flores and Orozco, 2011).
 #'
-#' @param wp.num the number of well-positioned
+#' @param wp.num a non-negative \code{integer}, the number of well-positioned
 #' (non overlapping) nucleosomes.
 #'
-#' @param wp.del the number of well-positioned nucleosomes to remove to create
-#' uncovered regions.
+#' @param wp.del a non-negative \code{integer}, the number of well-positioned
+#' nucleosomes to remove to create uncovered regions.
 #'
-#' @param wp.var the maximum variance in basepairs of the well-positioned
+#' @param wp.var a non-negative \code{integer}, the maximum variance in
+#' basepairs of the well-positioned
 #' nucleosomes. This parameter introduces some variation in the position of
 #' the reads describing a nucleosome.
 #'
-#' @param fuz.num the number of fuzzy nucleosomes. Those nucleosomes are
+#' @param fuz.num a non-negative \code{integer}, the number of
+#' fuzzy nucleosomes. Those nucleosomes are
 #' distributed accordingly to selected distribution all over the region.
 #' Those nucleosomes can overlap other well-positioned or fuzzy nucleosomes.
 #'
-#' @param fuz.var the maximum variance of the fuzzy nucleosomes. This variance
+#' @param fuz.var a non-negative \code{integer}, the maximum variance of the
+#' fuzzy nucleosomes. This variance
 #' can be different than the one used for the well-positioned
 #' nucleosome reads.
 #'
-#' @param max.cover the maximum coverage for one nucleosome. The final coverage
+#' @param max.cover a positive \code{integer}, the maximum coverage for
+#' one nucleosome. The final coverage
 #' can have a higher value than \code{max.cover} since reads from differents
 #' nucleosomes can be overlapping. Default = 100.
 #'
-#' @param nuc.len a \code{numeric}, the nucleosome length. Default = 147.
+#' @param nuc.len a non-negative \code{numeric}, the nucleosome length.
+#' Default = 147.
 #'
-#' @param len.var a \code{numeric}, the variance of the distance between a
-#' forward read and its paired reverse read. Default = 10.
+#' @param len.var a non-negative \code{integer}, the variance of the
+#' distance between a forward read and its paired reverse read. Default = 10.
 #'
-#' @param lin.len a \code{numeric}, the length of the DNA linker. Default = 20.
+#' @param lin.len a non-negative \code{integer}, the length of
+#' the DNA linker. Default = 20.
 #'
 #' @param rnd.seed a single value, interpreted as an \code{integer}, or
 #' \code{NULL}. If a \code{integer} is given, the value is used to set the seed
@@ -55,16 +61,17 @@
 #' following elements:
 #' \itemize{
 #'     \item \code{call} the matched call.
-#'     \item \code{wp.starts} the start points of all well-positioned
-#' nucleosome regions. The central position of the nucleosome is calculated as
-#' wp.starts + round(nuc.len/2).
-#'     \item \code{wp.nreads} the number of reads associated to each well
-#' positioned nucelosome.
+#'     \item \code{wp.starts} a \code{vector} of \code{integer}, the start
+#' positions of all well-positioned nucleosome regions. The central
+#' position of the nucleosome is calculated as wp.starts + round(nuc.len/2).
+#'     \item \code{wp.nreads} a \code{vector} of \code{integer}, the number of
+#' reads associated to each well-positioned nucelosome.
 #'     \item \code{wp.reads} a \code{IRanges} containing the well positioned
 #' nucleosome reads.
-#'     \item \code{fuz.starts} the start points of all the fuzzy nucleosomes.
-#'     \item \code{fuz.nreads} the number of reads associated to each fuzzy
-#' nucleosome
+#'     \item \code{fuz.starts} a \code{vector} of \code{integer}, the
+#' start position of all the fuzzy nucleosomes.
+#'     \item \code{fuz.nreads} a \code{vector} of \code{integer}, the number
+#' of reads associated to each fuzzy nucleosome.
 #'     \item \code{fuz.reads} a \code{IRanges} containing the fuzzy nucleosome
 #' reads.
 #'     \item \code{syn.reads} a \code{IRanges} containing all the synthetic
@@ -89,10 +96,10 @@
 #'     fuz.num = 10, fuz.var = 40, rnd.seed = 15,
 #'     distr = "Normal")
 #'
-#' ## Same output but without graph
+#' ## Same output but with ratio
 #' syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
 #'     fuz.num = 10, fuz.var = 40,
-#'     rnd.seed = 15, as.ratio = FALSE, distr = "Normal")
+#'     rnd.seed = 15, as.ratio = TRUE, distr = "Normal")
 #'
 #'
 #' @author Rawane Samb, Astrid Deschenes
@@ -226,7 +233,7 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
         syn.ratio <- suppressWarnings(log2(as.vector(coverage(syn.reads))) -
                                         log2(as.vector(coverage(ctr.reads))))
 
-        # Some lost bases... as reality
+        # Some lost bases... such as in reality
         syn.ratio[abs(syn.ratio) == Inf] <- NA
         syn.ratio <- Rle(syn.ratio)
     }
@@ -263,7 +270,6 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 }
 
 
-
 #' @title Generate a synthetic nucleosome map containing forward and
 #' reverse reads
 #'
@@ -285,26 +291,31 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 #' nucleosomes. This parameter introduces some variation in the position of
 #' the reads describing a nucleosome.
 #'
-#' @param fuz.num the number of fuzzy nucleosomes. Those nucleosomes are
+#' @param fuz.num a non-negative \code{numeric}, the number of fuzzy
+#' nucleosomes. Those nucleosomes are
 #' distributed accordingly to selected distribution all over the region.
 #' Those nucleosomes can overlap other well-positioned or fuzzy nucleosomes.
 #'
-#' @param fuz.var the maximum variance of the fuzzy nucleosomes. This variance
+#' @param fuz.var a non-negative \code{numeric}, the maximum variance of the
+#' fuzzy nucleosomes. This variance
 #' can be different than the one used for the well-positioned
 #' nucleosome reads.
 #'
-#' @param max.cover the maximum coverage for one nucleosome. The final coverage
-#' can have a higher value than \code{max.cover} since reads from differents
-#' nucleosomes can be overlapping. Default = 100.
+#' @param max.cover a positive \code{numeric}, the maximum coverage for one
+#' nucleosome. The final coverage can have a higher value than \code{max.cover}
+#' since reads from differents nucleosomes can be overlapping. Default = 100.
 #'
-#' @param nuc.len the nucleosome length. Default = 147.
+#' @param nuc.len a positive \code{integer}, the nucleosome length.
+#' Default = 147.
 #'
-#' @param len.var a \code{numeric}, the variance of the distance between a
-#' forward read and its paired reverse read. Default = 10.
+#' @param len.var a positive \code{numeric}, the variance of the distance
+#' between a forward read and its paired reverse read. Default = 10.
 #'
-#' @param lin.len the length of the DNA linker DNA. Default = 20.
+#' @param lin.len a non-negative \code{integer}, the length of the DNA linker
+#' DNA. Default = 20.
 #'
-#' @param read.len the length of each of the paired-end reads. Default = 40.
+#' @param read.len a positive \code{integer}, the length of each of the
+#' paired-end reads. Default = 40.
 #'
 #' @param rnd.seed a single value, interpreted as an \code{integer}, or
 #' \code{NULL}. If a \code{integer} is given, the value is used to set the seed
@@ -315,9 +326,9 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 #' map. The choices are : \code{"Uniform"}, \code{"Normal"} and
 #' \code{"Student"}. Default = \code{"Uniform"}.
 #'
-#' @param offset the number of bases used to offset all nucleosomes and reads.
-#' This is done to ensure that all nucleosome positions and read alignment
-#' are of positive values.
+#' @param offset a non-negative \code{integer}, the number of bases used to
+#' offset all nucleosomes and reads. This is done to ensure that all
+#' nucleosome positions and read alignment are of positive values.
 #'
 #' @return an \code{list} of \code{class} "syntheticSample" containing the
 #' following elements:
@@ -359,10 +370,8 @@ syntheticNucReadsFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
                                     distr = c("Uniform", "Normal", "Student"),
                                     offset)
 {
-    ## Validate that offset is a non-negative integer
-    if (!isInteger(offset) || offset < 0) {
-        stop("offset must be a non-negative integer")
-    }
+    ## Validation of parameters not used by syntheticNucMapFromDist() function
+    syntheticNucReadsValidation(read.len, offset)
 
     ## Get call information
     cl <- match.call()
@@ -428,6 +437,73 @@ syntheticNucReadsFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     return(result)
 }
 
+
+
+#' @title Generate a synthetic nucleosome map containing forward and
+#' reverse reads
+#'
+#' @description Generate a synthetic nucleosome map using a synthetic
+#' nucleosome map.
+#'
+#' This function is using a modified version of the syntheticNucMap() function
+#' from Bioconductor nucleR package (Flores and Orozco, 2011).
+#'
+#' @param syntheticNucMap a \code{list} of \code{class} "syntheticNucMap"
+#'
+#' @param read.len the length of each of the paired-end reads. Default = 40.
+#'
+#' @param offset the number of bases used to offset all nucleosomes and reads.
+#' This is done to ensure that all nucleosome positions and read alignment
+#' are of positive values.
+#'
+#' @return an \code{list} of \code{class} "syntheticNucReads" containing the
+#' following elements:
+#' \itemize{
+#' \item \code{call} the matched call.
+#' \item \code{dataIP} a \code{data.frame} with the chromosome name, the
+#' starting and ending positions and the direction of all forward
+#' and reverse reads for all well-positioned and fuzzy nucleosomes.
+#' \item \code{wp} a \code{data.frame} with the positions of all the
+#' well-positioned nucleosomes, as well as the number of paired-reads
+#' associated to each one.
+#' \item \code{fuz} a \code{data.frame} with the positions of all the fuzzy
+#' nucleosomes, as well as the number of paired-reads associated to each one.
+#' \item \code{paired} a \code{data.frame} with the starting and ending
+#' positions of the reads used to generate the paired-end reads.
+#' }
+#'
+#' @author Pascal Belleau, Rawane Samb, Astrid Deschenes
+#'
+#' @examples
+#'
+#'## Generate a synthetic map with 20 well-positioned + 10 fuzzy nucleosomes
+#'## using a Normal distribution with a variance of 30 for the well-positioned
+#'## nucleosomes, a variance of 40 for the fuzzy nucleosomes and a seed of 15
+#'## Because of the fixed seed, each time is going to be run, the results
+#'## are going to be the seed
+#'
+#'syntheticMap <- syntheticNucMapFromDist(wp.num = 20, wp.del = 0,
+#'wp.var = 30, fuz.num = 10, fuz.var = 40,
+#'rnd.seed = 335, as.ratio = FALSE, distr = "Uniform")
+#'
+#'res <- syntheticNucReadsFromMap(syntheticMap, read.len = 45, offset = 1000)
+#'
+#' @export
+syntheticNucReadsFromMap <- function(syntheticNucMap, read.len = 40, offset) {
+
+    ## Validate that object is of type "syntheticNucMap"
+    if (!is(syntheticNucMap, "syntheticNucMap")) {
+        stop("syntheticNucMap must be an object of class \'syntheticNucMap\'")
+    }
+
+    ## Validation of remaining parameters
+    syntheticNucReadsValidation(read.len, offset)
+
+    ## Get call information
+    cl <- match.call()
+
+    return(createNucReadsFromNucMap(syntheticNucMap, read.len, offset, cl))
+}
 
 
 #' @title Generate a graph of a synthetic nucleosome map

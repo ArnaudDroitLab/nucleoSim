@@ -32,7 +32,7 @@ test.syntheticNucReadsFromDist_string_wp_num <- function() {
                                 distr = "Normal"), error = conditionMessage)
     exp <- "wp.num must be a non-negative integer"
     message <- paste0(" test.syntheticNucReadsFromDist_string_wp_num() ",
-                        "- A string as wp.num parameter did not generated ",
+                        "- A string as wp.num parameter did not generate ",
                         "expected error.")
     checkEquals(obs, exp, msg = message)
 }
@@ -45,7 +45,7 @@ test.syntheticNucReadsFromDist_negative_wp_num <- function() {
                                         distr = "Normal"), error = conditionMessage)
     exp <- "wp.num must be a non-negative integer"
     message <- paste0(" test.syntheticNucReadsFromDist_negative_wp_num() ",
-                      "- A negative integer as wp.num parameter did not generated ",
+                      "- A negative integer as wp.num parameter did not generate ",
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
@@ -58,7 +58,7 @@ test.syntheticNucReadsFromDist_vector_wp_num <- function() {
                                             distr = "Normal"), error = conditionMessage)
     exp <- "wp.num must be a non-negative integer"
     message <- paste0(" syntheticNucReadsFromDist_vector_wp_num() ",
-                      "- A vector as wp.num parameter did not generated ",
+                      "- A vector as wp.num parameter did not generate ",
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
@@ -76,7 +76,7 @@ test.syntheticNucReadsFromDist_string_wp_del <- function() {
                                 distr = "Normal"), error = conditionMessage)
     exp <- "wp.del must be a non-negative integer"
     message <- paste0(" test.syntheticNucReadsFromDist_string_wp_del() ",
-                      "- A string as wp.del parameter did not generated ",
+                      "- A string as wp.del parameter did not generate ",
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
@@ -89,7 +89,7 @@ test.syntheticNucReadsFromDist_negative_wp_del <- function() {
                                             distr = "Normal"), error = conditionMessage)
     exp <- "wp.del must be a non-negative integer"
     message <- paste0(" test.syntheticNucReadsFromDist_negative_wp_del() ",
-                      "- A negative integer as wp.del parameter did not generated ",
+                      "- A negative integer as wp.del parameter did not generate ",
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
@@ -102,7 +102,7 @@ test.syntheticNucReadsFromDist_vector_wp_del <- function() {
                                             distr = "Normal"), error = conditionMessage)
     exp <- "wp.del must be a non-negative integer"
     message <- paste0(" test.syntheticNucReadsFromDist_vector_wp_del() ",
-                      "- A vector as wp.del parameter did not generated ",
+                      "- A vector as wp.del parameter did not generate ",
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
@@ -120,7 +120,7 @@ test.syntheticNucReadsFromDist_string_wp_var <- function() {
                                     distr = "Normal"), error = conditionMessage)
     exp <- "wp.var must be a non-negative integer"
     message <- paste0(" test.syntheticNucReadsFromDist_string_wp_var() ",
-                      "- A string as wp.var parameter did not generated ",
+                      "- A string as wp.var parameter did not generate ",
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
@@ -133,7 +133,7 @@ test.syntheticNucReadsFromDist_negative_wp_var <- function() {
                                             distr = "Normal"), error = conditionMessage)
     exp <- "wp.var must be a non-negative integer"
     message <- paste0(" test.syntheticNucReadsFromDist_negative_wp_var() ",
-                      "- A negative integer as wp.var parameter did not generated ",
+                      "- A negative integer as wp.var parameter did not generate ",
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
@@ -146,7 +146,7 @@ test.syntheticNucReadsFromDist_vector_wp_var <- function() {
                                             distr = "Normal"), error = conditionMessage)
     exp <- "wp.var must be a non-negative integer"
     message <- paste0(" test.syntheticNucReadsFromDist_vector_wp_var() ",
-                      "- A vector as wp.var parameter did not generated ",
+                      "- A vector as wp.var parameter did not generate ",
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
@@ -164,7 +164,7 @@ test.syntheticNucReadsFromDist_string_fuz_num <- function() {
                                     distr = "Normal"), error = conditionMessage)
     exp <- "fuz.num must be a non-negative integer"
     message <- paste0(" test.syntheticNucReadsFromDist_string_fuz_num() ",
-                      "- A string as fuz.num parameter did not generated ",
+                      "- A string as fuz.num parameter did not generate ",
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
@@ -177,7 +177,7 @@ test.syntheticNucReadsFromDist_negative_fuz_num <- function() {
                                             distr = "Normal"), error = conditionMessage)
     exp <- "fuz.num must be a non-negative integer"
     message <- paste0(" test.syntheticNucReadsFromDist_negative_fuz_num() ",
-                      "- A negative integer as fuz.num parameter did not generated ",
+                      "- A negative integer as fuz.num parameter did not generate ",
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
@@ -190,7 +190,7 @@ test.syntheticNucReadsFromDist_vector_fuz_num <- function() {
                                             distr = "Normal"), error = conditionMessage)
     exp <- "fuz.num must be a non-negative integer"
     message <- paste0(" test.syntheticNucReadsFromDist_vector_fuz_num() ",
-                      "- A vector as fuz.num parameter did not generated ",
+                      "- A vector as fuz.num parameter did not generate ",
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
@@ -208,7 +208,7 @@ test.syntheticNucReadsFromDist_string_fuz_var <- function() {
                                             distr = "Normal"), error = conditionMessage)
     exp <- "fuz.var must be a non-negative integer"
     message <- paste0(" test.syntheticNucReadsFromDist_string_fuz_var() ",
-                      "- A string as fuz.var parameter did not generated ",
+                      "- A string as fuz.var parameter did not generate ",
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
@@ -221,7 +221,7 @@ test.syntheticNucReadsFromDist_negative_fuz_var <- function() {
                                             distr = "Normal"), error = conditionMessage)
     exp <- "fuz.var must be a non-negative integer"
     message <- paste0(" test.syntheticNucReadsFromDist_negative_fuz_var() ",
-                      "- A negative integer as fuz.var parameter did not generated ",
+                      "- A negative integer as fuz.var parameter did not generate ",
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
@@ -234,11 +234,227 @@ test.syntheticNucReadsFromDist_vector_fuz_var <- function() {
                                             distr = "Normal"), error = conditionMessage)
     exp <- "fuz.var must be a non-negative integer"
     message <- paste0(" test.syntheticNucReadsFromDist_vector_fuz_var() ",
-                      "- A vector as fuz.var parameter did not generated ",
+                      "- A vector as fuz.var parameter did not generate ",
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
 
+
+################################
+## max.cover
+################################
+
+## Test the result when a string is passed as max.cover parameter
+test.syntheticNucReadsFromDist_string_max_cover <- function() {
+    obs <- tryCatch(syntheticNucReadsFromDist(wp.num = 2, wp.del = 0,
+                                              wp.var = 30, fuz.num = 10, fuz.var = 88,
+                                              max.cover = "allo",
+                                              rnd.seed = 15, offset = 2,
+                                              distr = "Normal"), error = conditionMessage)
+    exp <- "max.cover must be a positive integer"
+    message <- paste0(" test.syntheticNucReadsFromDist_string_max_cover() ",
+                      "- A string as max.cover parameter did not generate ",
+                      "expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result when a zero is passed as max.cover parameter
+test.syntheticNucReadsFromDist_zero_max_cover <- function() {
+    obs <- tryCatch(syntheticNucReadsFromDist(wp.num = 2, wp.del = 0,
+                                              wp.var = 0, fuz.num = 10, fuz.var = 88,
+                                              max.cover = 0,
+                                              rnd.seed = 15, offset = 2,
+                                              distr = "Normal"), error = conditionMessage)
+    exp <- "max.cover must be a positive integer"
+    message <- paste0(" test.syntheticNucReadsFromDist_zero_max_cover() ",
+                      "- Zero as max.cover parameter did not generate ",
+                      "expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result when negative value is passed as max.cover parameter
+test.syntheticNucReadsFromDist_negative_max_cover <- function() {
+    obs <- tryCatch(syntheticNucReadsFromDist(wp.num = 2, wp.del = 0,
+                                              wp.var = 0, fuz.num = 10, fuz.var = 88,
+                                              max.cover = -1,
+                                              rnd.seed = 125, offset = 12,
+                                              distr = "Normal"), error = conditionMessage)
+    exp <- "max.cover must be a positive integer"
+    message <- paste0(" test.syntheticNucReadsFromDist_negative_max_cover() ",
+                      "- Negative value as max.cover parameter did not ",
+                      "generate expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+
+################################
+## nuc.len
+################################
+
+## Test the result when a string is passed as nuc.len parameter
+test.syntheticNucReadsFromDist_string_nuc_len <- function() {
+    obs <- tryCatch(syntheticNucReadsFromDist(wp.num = 2, wp.del = 0,
+                                              wp.var = 30, fuz.num = 10, fuz.var = 88,
+                                              max.cover = 22, nuc.len = "ici",
+                                              rnd.seed = 15, offset = 2,
+                                              distr = "Normal"), error = conditionMessage)
+    exp <- "nuc.len must be a positive integer"
+    message <- paste0(" test.syntheticNucReadsFromDist_string_nuc_len() ",
+                      "- A string as nuc.len parameter did not generate ",
+                      "expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result when a zero is passed as nuc.len parameter
+test.syntheticNucReadsFromDist_zero_nuc_len <- function() {
+    obs <- tryCatch(syntheticNucReadsFromDist(wp.num = 2, wp.del = 0,
+                                              wp.var = 0, fuz.num = 10, fuz.var = 88,
+                                              max.cover = 10, nuc.len = 0,
+                                              rnd.seed = 15, offset = 2,
+                                              distr = "Normal"), error = conditionMessage)
+    exp <- "nuc.len must be a positive integer"
+    message <- paste0(" test.syntheticNucReadsFromDist_zero_nuc_len() ",
+                      "- Zero as nuc.len parameter did not generate ",
+                      "expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result when negative value is passed as nuc.len parameter
+test.syntheticNucReadsFromDist_negative_nuc_len <- function() {
+    obs <- tryCatch(syntheticNucReadsFromDist(wp.num = 2, wp.del = 0,
+                                              wp.var = 0, fuz.num = 10, fuz.var = 88,
+                                              max.cover = 11, nuc.len = -1,
+                                              rnd.seed = 125, offset = 12,
+                                              distr = "Normal"), error = conditionMessage)
+    exp <- "nuc.len must be a positive integer"
+    message <- paste0(" test.syntheticNucReadsFromDist_negative_nuc_len() ",
+                      "- Negative value as nuc.len parameter did not ",
+                      "generate expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+
+################################
+## lin.len
+################################
+
+## Test the result when a string is passed as lin.len parameter
+test.syntheticNucReadsFromDist_string_lin_len <- function() {
+    obs <- tryCatch(syntheticNucReadsFromDist(wp.num = 2, wp.del = 0,
+                                              wp.var = 30, fuz.num = 10, fuz.var = 88,
+                                              max.cover = 22, lin.len = "ici",
+                                              rnd.seed = 15, offset = 2,
+                                              distr = "Normal"), error = conditionMessage)
+    exp <- "lin.len must be a non-negative integer"
+    message <- paste0(" test.syntheticNucReadsFromDist_string_lin_len() ",
+                      "- A string as lin.len parameter did not generate ",
+                      "expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result when negative value is passed as lin.len parameter
+test.syntheticNucReadsFromDist_negative_lin_len <- function() {
+    obs <- tryCatch(syntheticNucReadsFromDist(wp.num = 2, wp.del = 0,
+                                              wp.var = 0, fuz.num = 10, fuz.var = 88,
+                                              max.cover = 11, lin.len = -1,
+                                              rnd.seed = 125, offset = 12,
+                                              distr = "Normal"), error = conditionMessage)
+    exp <- "lin.len must be a non-negative integer"
+    message <- paste0(" test.syntheticNucReadsFromDist_negative_lin_len() ",
+                      "- Negative value as lin.len parameter did not ",
+                      "generate expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+
+################################
+## lin.len
+################################
+
+## Test the result when a string is passed as lin.len parameter
+test.syntheticNucReadsFromDist_string_lin_len <- function() {
+    obs <- tryCatch(syntheticNucReadsFromDist(wp.num = 2, wp.del = 0,
+                                              wp.var = 30, fuz.num = 10, fuz.var = 88,
+                                              max.cover = 22, lin.len = "ici",
+                                              rnd.seed = 15, offset = 2,
+                                              distr = "Normal"), error = conditionMessage)
+    exp <- "lin.len must be a non-negative integer"
+    message <- paste0(" test.syntheticNucReadsFromDist_string_lin_len() ",
+                      "- A string as lin.len parameter did not generate ",
+                      "expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result when negative value is passed as lin.len parameter
+test.syntheticNucReadsFromDist_negative_lin_len <- function() {
+    obs <- tryCatch(syntheticNucReadsFromDist(wp.num = 2, wp.del = 0,
+                                              wp.var = 0, fuz.num = 10, fuz.var = 88,
+                                              max.cover = 11, lin.len = -1,
+                                              rnd.seed = 125, offset = 12,
+                                              distr = "Normal"), error = conditionMessage)
+    exp <- "lin.len must be a non-negative integer"
+    message <- paste0(" test.syntheticNucReadsFromDist_negative_lin_len() ",
+                      "- Negative value as lin.len parameter did not ",
+                      "generate expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+
+################################
+## read.len
+################################
+
+## Test the result when a string is passed as read.len parameter
+test.syntheticNucReadsFromDist_string_read_len <- function() {
+    obs <- tryCatch(syntheticNucReadsFromDist(wp.num = 2, wp.del = 0, read.len = "allo",
+                                              wp.var = 30, fuz.num = 10, fuz.var = 40,
+                                              rnd.seed = 15, offset = 100,
+                                              distr = "Normal"), error = conditionMessage)
+    exp <- "read.len must be a positive integer"
+    message <- paste0(" test.syntheticNucReadsFromDist_read_len() ",
+                      "- A string as read.len parameter did not generate ",
+                      "expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result when a negative is passed as read.len parameter
+test.syntheticNucReadsFromDist_negative_read_len <- function() {
+    obs <- tryCatch(syntheticNucReadsFromDist(wp.num = 12, wp.del = 1, read.len = -2,
+                                              wp.var = 1, fuz.num = 12, fuz.var = 1,
+                                              rnd.seed = 15, offset = 2,
+                                              distr = "Normal"), error = conditionMessage)
+    exp <- "read.len must be a positive integer"
+    message <- paste0(" test.syntheticNucReadsFromDist_negative_read_len() ",
+                      "- A negative integer as read.len parameter did not generate ",
+                      "expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result when a zero is passed as read.len parameter
+test.syntheticNucReadsFromDist_zero_read_len <- function() {
+    obs <- tryCatch(syntheticNucReadsFromDist(wp.num = 12, wp.del = 1, read.len = 0,
+                                              wp.var = 1, fuz.num = 12, fuz.var = 1,
+                                              rnd.seed = 15, offset = 2,
+                                              distr = "Normal"), error = conditionMessage)
+    exp <- "read.len must be a positive integer"
+    message <- paste0(" test.syntheticNucReadsFromDist_zero_read_len() ",
+                      "- A negative integer as read.len parameter did not generate ",
+                      "expected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result when a vector is passed as read.len parameter
+test.syntheticNucReadsFromDist_vector_read_len <- function() {
+    obs <- tryCatch(syntheticNucReadsFromDist(wp.num = 11, wp.del = 1, read.len = c(1, 2),
+                                              wp.var = 4, fuz.num = 1, fuz.var = 1,
+                                              rnd.seed = 15, offset = 100,
+                                              distr = "Student"), error = conditionMessage)
+    exp <- "read.len must be a positive integer"
+    message <- paste0(" test.syntheticNucReadsFromDist_vector_read_len() ",
+                      "- A vector as _read.len parameter did not generate ",
+                      "expected error.")
+    checkEquals(obs, exp, msg = message)
+}
 
 ################################
 ## rnd.seed
@@ -252,7 +468,7 @@ test.syntheticNucReadsFromDist_string_rnd_seed <- function() {
                                             distr = "Normal"), error = conditionMessage)
     exp <- "rnd.seed must be NULL or an integer"
     message <- paste0(" test.syntheticNucReadsFromDist_string_rnd_seed() ",
-                      "- A string as rnd.seed parameter did not generated ",
+                      "- A string as rnd.seed parameter did not generate ",
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
@@ -265,7 +481,7 @@ test.syntheticNucReadsFromDist_vector_rnd_seed <- function() {
                                             distr = "Normal"), error = conditionMessage)
     exp <- "rnd.seed must be NULL or an integer"
     message <- paste0(" test.syntheticNucReadsFromDist_vector_rnd_seed() ",
-                      "- A vector as rnd.seed parameter did not generated ",
+                      "- A vector as rnd.seed parameter did not generate ",
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
@@ -283,7 +499,7 @@ test.syntheticNucReadsFromDist_string_offset <- function() {
                                             distr = "Normal"), error = conditionMessage)
     exp <- "offset must be a non-negative integer"
     message <- paste0(" test.syntheticNucReadsFromDist_string_offset() ",
-                      "- A string as offset parameter did not generated ",
+                      "- A string as offset parameter did not generate ",
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
@@ -296,7 +512,7 @@ test.syntheticNucReadsFromDist_negative_offset <- function() {
                                             distr = "Normal"), error = conditionMessage)
     exp <- "offset must be a non-negative integer"
     message <- paste0(" test.syntheticNucReadsFromDist_negative_offset() ",
-                      "- A negative integer as offset  parameter did not generated ",
+                      "- A negative integer as offset  parameter did not generate ",
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
@@ -309,7 +525,7 @@ test.syntheticNucReadsFromDist_vector_offset <- function() {
                                             distr = "Student"), error = conditionMessage)
     exp <- "offset must be a non-negative integer"
     message <- paste0(" test.syntheticNucReadsFromDist_vector_offset() ",
-                      "- A vector as offset parameter did not generated ",
+                      "- A vector as offset parameter did not generate ",
                       "expected error.")
     checkEquals(obs, exp, msg = message)
 }
@@ -319,6 +535,18 @@ test.syntheticNucReadsFromDist_vector_offset <- function() {
 ## distr
 ################################
 
+## Test the result when bad value is passed as distr parameter
+test.syntheticNucReadsFromDist_bad_distr <- function() {
+    message <- paste0(" syntheticNucReadsFromDist_vector_bad_distr() ",
+                      "- A bad value as distr parameter did not generate ",
+                      "expected error.")
+
+    checkException(syntheticNucReadsFromDist(wp.num = 10, wp.del = 1,
+                                    offset = 10, wp.var = 3, fuz.num = 4,
+                                    fuz.var = 40, lin.len = 4,
+                                    rnd.seed = 15, distr = "TOTO"),
+                                    msg = message)
+}
 
 
 ################################
@@ -337,7 +565,7 @@ test.syntheticNucReadsFromDist_good_result_01 <- function() {
     exp.nuc.len <- 147
 
     message     <- paste0(" test.syntheticNucReadsFromDist_good_result_01() ",
-                          "- syntheticNucReadsFromDist did not generated ",
+                          "- syntheticNucReadsFromDist did not generate ",
                           "expected values")
 
     checkEqualsNumeric(obs$wp, exp.wp, msg = message)
@@ -361,7 +589,7 @@ test.syntheticNucReadsFromDist_good_result_02 <- function() {
     exp.nuc.len <- 144
 
     message     <- paste0(" test.syntheticNucReadsFromDist_good_result_02() ",
-                          "- syntheticNucReadsFromDist did not generated ",
+                          "- syntheticNucReadsFromDist did not generate ",
                           "expected values")
 
     checkEqualsNumeric(obs$wp, exp.wp, msg = message)

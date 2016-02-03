@@ -345,7 +345,7 @@ test.syntheticNucMapFromDist_negative_len_var<- function() {
                     wp.var = 1, fuz.num = 4, fuz.var = 40, len.var = -1,
                     as.ratio = TRUE, rnd.seed = 15,
                     distr = "Normal"), error = conditionMessage)
-    exp <- "len.var must be a positive integer"
+    exp <- "len.var must be a non-negative integer"
     message <- paste0(" test.syntheticNucMapFromDist_negative_len_var() ",
                         "- A negative integer as len.var parameter did not ",
                         "generated expected error.")
@@ -358,7 +358,7 @@ test.syntheticNucMapFromDist_vector_len_var <- function() {
                     wp.var = 3, fuz.num = 4, fuz.var = 40, len.var = c(1, 4),
                     as.ratio = TRUE, rnd.seed = 15,
                     distr = "Normal"), error = conditionMessage)
-    exp <- "len.var must be a positive integer"
+    exp <- "len.var must be a non-negative integer"
     message <- paste0(" test.syntheticNucMapFromDist_vector_len_var() ",
                         "- A vector as len.var parameter did not generated ",
                         "expected error.")

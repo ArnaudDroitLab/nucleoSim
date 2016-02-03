@@ -9,35 +9,40 @@ syntheticNucMapFromDistValidation(wp.num, wp.del, wp.var, fuz.num, fuz.var,
   max.cover, nuc.len, len.var, lin.len, rnd.seed, as.ratio)
 }
 \arguments{
-\item{wp.num}{a \code{integer}, the number of well-positioned
+\item{wp.num}{a non-negative \code{integer}, the number of well-positioned
 (non overlapping) nucleosomes.}
 
-\item{wp.del}{a \code{integer}, the number of well-positioned nucleosomes
-to remove to create uncovered regions.}
+\item{wp.del}{a non-negative \code{integer}, the number of well-positioned
+nucleosomes to remove to create uncovered regions.}
 
-\item{wp.var}{the variance in base pairs of the well-positioned
+\item{wp.var}{a non-negative \code{integer}, the variance in base pairs
+of the well-positioned
 nucleosomes. This parameter introduces some variation in the position of
 the reads describing a nucleosome.}
 
-\item{fuz.num}{a \code{integer}, the number of fuzzy nucleosomes. Those
-nucleosomes are distributed accordingly to selected distribution all over
+\item{fuz.num}{a non-negative \code{integer}, the number of fuzzy
+nucleosomes. Those nucleosomes are distributed accordingly to selected
+distribution all over
 the region. Those nucleosomes can overlap other well-positioned or
 fuzzy nucleosomes.}
 
-\item{fuz.var}{the variance of the fuzzy nucleosomes. This variance
+\item{fuz.var}{a non-negative \code{integer}, the variance of the fuzzy
+nucleosomes. This variance
 can be different than the one used for the well-positioned
 nucleosome reads.}
 
-\item{max.cover}{the maximum coverage for one nucleosome. The final coverage
+\item{max.cover}{a positive \code{integer}, the maximum coverage for one
+nucleosome. The final coverage
 can have a higher value than \code{max.cover} since reads from differents
 nucleosomes can be overlapping.}
 
-\item{nuc.len}{the nucleosome length.}
+\item{nuc.len}{a non-negative \code{integer}, the nucleosome length.}
 
-\item{len.var}{a \code{numeric}, the variance of the distance between a
-forward read and its paired reverse read.}
+\item{len.var}{a non-negative \code{integer}, the variance of the
+distance between a forward read and its paired reverse read.}
 
-\item{lin.len}{the length of the DNA linker DNA.}
+\item{lin.len}{a non-negative \code{integer}, the length of the DNA
+linker DNA.}
 
 \item{rnd.seed}{a single value, interpreted as an \code{integer}, or
 \code{NULL}. If a \code{integer} is given, the value is used to set the seed

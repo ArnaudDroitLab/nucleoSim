@@ -10,34 +10,40 @@ syntheticNucMapFromDist(wp.num, wp.del, wp.var, fuz.num, fuz.var,
   "Student"))
 }
 \arguments{
-\item{wp.num}{the number of well-positioned
+\item{wp.num}{a non-negative \code{integer}, the number of well-positioned
 (non overlapping) nucleosomes.}
 
-\item{wp.del}{the number of well-positioned nucleosomes to remove to create
-uncovered regions.}
+\item{wp.del}{a non-negative \code{integer}, the number of well-positioned
+nucleosomes to remove to create uncovered regions.}
 
-\item{wp.var}{the maximum variance in basepairs of the well-positioned
+\item{wp.var}{a non-negative \code{integer}, the maximum variance in
+basepairs of the well-positioned
 nucleosomes. This parameter introduces some variation in the position of
 the reads describing a nucleosome.}
 
-\item{fuz.num}{the number of fuzzy nucleosomes. Those nucleosomes are
+\item{fuz.num}{a non-negative \code{integer}, the number of
+fuzzy nucleosomes. Those nucleosomes are
 distributed accordingly to selected distribution all over the region.
 Those nucleosomes can overlap other well-positioned or fuzzy nucleosomes.}
 
-\item{fuz.var}{the maximum variance of the fuzzy nucleosomes. This variance
+\item{fuz.var}{a non-negative \code{integer}, the maximum variance of the
+fuzzy nucleosomes. This variance
 can be different than the one used for the well-positioned
 nucleosome reads.}
 
-\item{max.cover}{the maximum coverage for one nucleosome. The final coverage
+\item{max.cover}{a positive \code{integer}, the maximum coverage for
+one nucleosome. The final coverage
 can have a higher value than \code{max.cover} since reads from differents
 nucleosomes can be overlapping. Default = 100.}
 
-\item{nuc.len}{a \code{numeric}, the nucleosome length. Default = 147.}
+\item{nuc.len}{a non-negative \code{numeric}, the nucleosome length.
+Default = 147.}
 
-\item{len.var}{a \code{numeric}, the variance of the distance between a
-forward read and its paired reverse read. Default = 10.}
+\item{len.var}{a non-negative \code{integer}, the variance of the
+distance between a forward read and its paired reverse read. Default = 10.}
 
-\item{lin.len}{a \code{numeric}, the length of the DNA linker. Default = 20.}
+\item{lin.len}{a non-negative \code{integer}, the length of
+the DNA linker. Default = 20.}
 
 \item{rnd.seed}{a single value, interpreted as an \code{integer}, or
 \code{NULL}. If a \code{integer} is given, the value is used to set the seed
@@ -59,16 +65,17 @@ an \code{list} of \code{class} "syntheticNucMap" containing the
 following elements:
 \itemize{
     \item \code{call} the matched call.
-    \item \code{wp.starts} the start points of all well-positioned
-nucleosome regions. The central position of the nucleosome is calculated as
-wp.starts + round(nuc.len/2).
-    \item \code{wp.nreads} the number of reads associated to each well
-positioned nucelosome.
+    \item \code{wp.starts} a \code{vector} of \code{integer}, the start
+positions of all well-positioned nucleosome regions. The central
+position of the nucleosome is calculated as wp.starts + round(nuc.len/2).
+    \item \code{wp.nreads} a \code{vector} of \code{integer}, the number of
+reads associated to each well-positioned nucelosome.
     \item \code{wp.reads} a \code{IRanges} containing the well positioned
 nucleosome reads.
-    \item \code{fuz.starts} the start points of all the fuzzy nucleosomes.
-    \item \code{fuz.nreads} the number of reads associated to each fuzzy
-nucleosome
+    \item \code{fuz.starts} a \code{vector} of \code{integer}, the
+start position of all the fuzzy nucleosomes.
+    \item \code{fuz.nreads} a \code{vector} of \code{integer}, the number
+of reads associated to each fuzzy nucleosome.
     \item \code{fuz.reads} a \code{IRanges} containing the fuzzy nucleosome
 reads.
     \item \code{syn.reads} a \code{IRanges} containing all the synthetic
@@ -101,10 +108,10 @@ syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
     fuz.num = 10, fuz.var = 40, rnd.seed = 15,
     distr = "Normal")
 
-## Same output but without graph
+## Same output but with ratio
 syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
     fuz.num = 10, fuz.var = 40,
-    rnd.seed = 15, as.ratio = FALSE, distr = "Normal")
+    rnd.seed = 15, as.ratio = TRUE, distr = "Normal")
 
 
 }

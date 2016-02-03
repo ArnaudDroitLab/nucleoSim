@@ -21,26 +21,31 @@ uncovered regions.}
 nucleosomes. This parameter introduces some variation in the position of
 the reads describing a nucleosome.}
 
-\item{fuz.num}{the number of fuzzy nucleosomes. Those nucleosomes are
+\item{fuz.num}{a non-negative \code{numeric}, the number of fuzzy
+nucleosomes. Those nucleosomes are
 distributed accordingly to selected distribution all over the region.
 Those nucleosomes can overlap other well-positioned or fuzzy nucleosomes.}
 
-\item{fuz.var}{the maximum variance of the fuzzy nucleosomes. This variance
+\item{fuz.var}{a non-negative \code{numeric}, the maximum variance of the
+fuzzy nucleosomes. This variance
 can be different than the one used for the well-positioned
 nucleosome reads.}
 
-\item{max.cover}{the maximum coverage for one nucleosome. The final coverage
-can have a higher value than \code{max.cover} since reads from differents
-nucleosomes can be overlapping. Default = 100.}
+\item{max.cover}{a positive \code{numeric}, the maximum coverage for one
+nucleosome. The final coverage can have a higher value than \code{max.cover}
+since reads from differents nucleosomes can be overlapping. Default = 100.}
 
-\item{nuc.len}{the nucleosome length. Default = 147.}
+\item{nuc.len}{a positive \code{integer}, the nucleosome length.
+Default = 147.}
 
-\item{len.var}{a \code{numeric}, the variance of the distance between a
-forward read and its paired reverse read. Default = 10.}
+\item{len.var}{a positive \code{numeric}, the variance of the distance
+between a forward read and its paired reverse read. Default = 10.}
 
-\item{lin.len}{the length of the DNA linker DNA. Default = 20.}
+\item{lin.len}{a non-negative \code{integer}, the length of the DNA linker
+DNA. Default = 20.}
 
-\item{read.len}{the length of each of the paired-end reads. Default = 40.}
+\item{read.len}{a positive \code{integer}, the length of each of the
+paired-end reads. Default = 40.}
 
 \item{rnd.seed}{a single value, interpreted as an \code{integer}, or
 \code{NULL}. If a \code{integer} is given, the value is used to set the seed
@@ -51,9 +56,9 @@ can be reproduced. Default = \code{NULL}.}
 map. The choices are : \code{"Uniform"}, \code{"Normal"} and
 \code{"Student"}. Default = \code{"Uniform"}.}
 
-\item{offset}{the number of bases used to offset all nucleosomes and reads.
-This is done to ensure that all nucleosome positions and read alignment
-are of positive values.}
+\item{offset}{a non-negative \code{integer}, the number of bases used to
+offset all nucleosomes and reads. This is done to ensure that all
+nucleosome positions and read alignment are of positive values.}
 }
 \value{
 an \code{list} of \code{class} "syntheticSample" containing the
