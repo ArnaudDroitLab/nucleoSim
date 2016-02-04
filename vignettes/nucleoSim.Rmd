@@ -47,11 +47,11 @@ more realistic and to enable the evaluation of the influence of common
 * Select the number of fuzzy nucleosomes to add
 * Select the type of distribution used to assign the 
 start position to the reads associated to the nucleosomes
-* Select the variance associated to the distribution for the well-positioned 
+* Select the variance associated with the distribution for the well-positioned 
 nucleosomes
-* Select the variance associated to the distribution for the fuzzy
+* Select the variance associated with the distribution for the fuzzy
 nucleosomes
-* Select the variance associated to the Normal distribution used to assign
+* Select the variance associated with the Normal distribution used to assign
 the length of each read
 * Select the maximum read coverage associated to one nucleosome
 * Select the length of the DNA linker
@@ -109,7 +109,7 @@ starting position of the reads, which as a mean position corresponding to
 the starting position of a region. Some fluctuation of the length of 
 the reads is also added following
 a normal distribution with a fixed variance (`len.var`). The mean 
-length of the reads correponds to the length of the nucleosomes (`nuc.len`).
+length of the reads corresponds to the length of the nucleosomes (`nuc.len`).
 
 **2. Deleting some well-positioned nucleosomes**
 
@@ -127,10 +127,10 @@ of reads assigned can vary from 1 to `max.cover`.
 The distribution (`distr`), as 
 well as the variance (`wp.var`) are used to add some fluctuation to the 
 starting position of the reads, which as a mean position corresponding to 
-the starting position of a region. Some fluctuation ot the length of 
+the starting position of a region. Some fluctuation of the length of 
 the reads is also added following
 a normal distribution with a fixed variance (`len.var`). The mean 
-length of the reads correponds to the length of the nucleosomes (`nuc.len`).
+length of the reads corresponds to the length of the nucleosomes (`nuc.len`).
 
 ### Create a nucleosome map using syntheticNucMapFromDist()
 
@@ -203,7 +203,7 @@ This is an example showing how a synthetic nucleosome map can be generated.
 
 ```{r demoMapTiling, warning=FALSE, message=FALSE, collapse=TRUE}
 as.ratio         <- TRUE       ### Activate the simulation of hybridization data
-rnd.seed         <- 212309     ### Set seed when result need to be reproducible
+rnd.seed         <- 212309     ### Set seed when result needs to be reproducible
         
 #### Create a synthetic nucleosome map with hybridization data
 nucleosomeMapTiling <- syntheticNucMapFromDist(wp.num=10, wp.del=2, wp.var=20, 
@@ -227,12 +227,12 @@ plot(nucleosomeMapTiling)
 
 A synthetic nucleosome sample is a map with forward and reverse reads 
 emulating those obtained using a next-generation sequencing technology. It
-is created using the same 3 first steps than the 
+is created using the same first 3 steps than the 
 synthetic nucleosome map. However, some new steps are present:
 
 **1. Adding well-positioned nucleosomes **
 
-The synthetic nucleosome map is splitted into a fixed number of 
+The synthetic nucleosome map is split into a fixed number of 
 sections (`wp.num`) of  equal length (`(nuc.len + lin.len)` 
 bases). The center of the nucleosomes are positioned at a fixed number of bases 
 from the beginning of each section (`round(nuc.len/2)` bases). Reads are 
@@ -241,10 +241,10 @@ reads, assigned to each nucleosome, can vary from 1 to `max.cover`.
 The distribution (`distr`), as 
 well as the variance (`wp.var`) are used to add some fluctuation to the 
 starting position of the reads, which as a mean position corresponding to 
-the sarting position of a region. Some fluctuation ot the length of 
+the starting position of a region. Some fluctuation of the length of 
 the reads is also added following
 a normal distribution with a fixed variance (`len.var`). The mean 
-length of the reads correpond to the length of the nucleosomes (`nuc.len`).
+length of the reads corresponds to the length of the nucleosomes (`nuc.len`).
 
 **2. Deleting some well-positioned nucleosomes**
 
@@ -262,10 +262,10 @@ of reads assigned can vary from 1 to `max.cover`.
 The distribution (`distr`), as 
 well as the variance (`wp.var`) are used to add some fluctuation to the 
 starting position of the reads, which as a mean position corresponding to 
-the sarting position of a region. Some fluctuation ot the length of 
+the starting position of a region. Some fluctuation of the length of 
 the reads is also added following
 a normal distribution with a fixed variance (`len.var`). The mean 
-length of the reads correpond to the length of the nucleosomes (`nuc.len`).
+length of the reads corresponds to the length of the nucleosomes (`nuc.len`).
 
 **4. Adding an offset**
 
@@ -275,7 +275,7 @@ reads).
 
 **5. Splitting reads into forward and reverse reads**
 
-The reads are splitted into forward and reverse reads of fixed length
+The reads are split into forward and reverse reads of fixed length
 (`read.len`). Both ends of the reads are used as starting positions for the
 paired-end reads.
 
@@ -303,7 +303,7 @@ read.len         <- 45            ### Length of the generated forward and revers
 distr            <- "Uniform"     ### Type of distribution to use
 offset           <- 10000         ### The number of bases used to offset all nucleosomes and reads
 
-rnd.seed         <- 202           ### Set seed when result need to be reproducible
+rnd.seed         <- 202           ### Set seed when result needs to be reproducible
         
 #### Create Uniform sample
 nucleosomeSample <- syntheticNucReadsFromDist(wp.num=wp.num, wp.del=wp.del, wp.var=wp.var,
