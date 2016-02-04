@@ -71,7 +71,7 @@ library(nucleoSim)
 
 # Description
 
-The packages can generate 2 types of synthetic maps:
+The packages can generate 2 types of synthetic data sets:
 
 **Synthetic Nucleosome Maps**: A map with complete reads covering the 
 nucleosome regions
@@ -127,7 +127,7 @@ the reads is also added following
 a normal distribution with a fixed variance (`len.var`). The mean 
 length of the reads correpond to the length of the nucleosomes (`nuc.len`).
 
-### Create a synthetic nucleosome map
+### Create a nucleosome map using syntheticNucMapFromDist()
 
 This is an example showing how a synthetic nucleosome map can be generated.
 
@@ -146,12 +146,10 @@ distr            <- "Normal"   ### Type of distribution to use
 rnd.seed         <- 210001     ### Set seed when result need to be reproducible
         
 #### Create a synthetic nucleosome map
-nucleosomeMap <- syntheticNucMapFromDist(wp.num=wp.num, wp.del=wp.del,
-                                    wp.var=wp.var, fuz.num=fuz.num,
-                                    fuz.var=fuz.var, max.cover=max.cover,
-                                    nuc.len=nuc.len, len.var=len.var,
-                                    lin.len=lin.len, rnd.seed=rnd.seed,
-                                    distr=distr)
+nucleosomeMap <- syntheticNucMapFromDist(wp.num=wp.num, wp.del=wp.del, wp.var=wp.var, 
+                                    fuz.num=fuz.num, fuz.var=fuz.var, max.cover=max.cover,
+                                    nuc.len=nuc.len, len.var=len.var, lin.len=lin.len, 
+                                    rnd.seed=rnd.seed, distr=distr)
 
 #### The start positions of all well-positioned nucleosomes
 nucleosomeMap$wp.starts
@@ -160,7 +158,7 @@ nucleosomeMap$wp.starts
 nucleosomeMap$wp.nreads
 
 #### A IRanges object containing all reads for the well-positioned nucleosomes
-head(nucleosomeMap$wp.reads, n = 3)
+head(nucleosomeMap$wp.reads, n = 2)
 
 #### The start positions of all fuzzy nucleosomes
 nucleosomeMap$fuz.starts
@@ -169,10 +167,10 @@ nucleosomeMap$fuz.starts
 nucleosomeMap$fuz.nreads
 
 #### A IRanges object containing all reads for the fuzzy nucleosomes
-head(nucleosomeMap$fuz.reads, n = 3)
+head(nucleosomeMap$fuz.reads, n = 2)
 
 #### A IRanges object containing all reads from well-potitioned and fuzzy nucleosomes
-head(nucleosomeMap$syn.reads, n = 3)
+head(nucleosomeMap$syn.reads, n = 2)
 ```
 
 The synthetic nucleosome map can easily be visualised using `plot()` function.
@@ -190,7 +188,9 @@ plot(nucleosomeMap, xlab="Position", ylab="Coverage")
 
 ## Synthetic Nucleosome Samples
 
-A synthetic nucleosome sample is created using the same 3 first steps than the 
+A synthetic nucleosome sample is a map with forward and reverse reads 
+emulating those obtained using a next-generation sequencing technology. It
+is created using the same 3 first steps than the 
 synthetic nucleosome map. However, some new steps are presents:
 
 **1. Adding well-positioned nucleosomes **
@@ -230,16 +230,27 @@ the reads is also added following
 a normal distribution with a fixed variance (`len.var`). The mean 
 length of the reads correpond to the length of the nucleosomes (`nuc.len`).
 
-** 4. Adding an offset
+**4. Adding an offset**
 
 An offset (`offset`) is added to all nucleosomes and
 reads positions to ensure that all values are positives (mainly pertinent for
-reads). Then, reads are splitted into forward and reverse reads of fixed length
-(`read.len`). Those reads are stored in a `data.frame` containing the name of
-a synthetic chromosome (`chr_SYNTHETIC`), the starting position, the ending
-position and the direction of all reads. 
+reads).
 
-### Create a synthetic nucleosome sample
+**5. Splitting reads into forward and reverse reads**
+
+The reads are splitted into forward and reverse reads of fixed length
+(`read.len`). Both ends of the reads are used as starting positions for the
+paired-end reads.
+
+The forward and reverse reads are stored in a `data.frame` containing the name 
+of a synthetic chromosome (`chr_SYNTHETIC`), the starting position, the ending
+position and the direction of all reads.
+
+
+### Create a nucleosome sample using syntheticNucReadsFromDist()
+
+This funciton needs information about the nucleosomes and their distribution to 
+generate a nucleosome sample. The output is of class `syntheticNucMap`.
 
 ```{r demoSample, warning=FALSE, message=FALSE, collapse=TRUE}
 wp.num           <- 30            ### Number of well-positioned nucleosomes
@@ -258,26 +269,24 @@ offset           <- 10000         ### The number of bases used to offset all nuc
 rnd.seed         <- 202           ### Set seed when result need to be reproducible
         
 #### Create Uniform sample
-nucleosomeSample <- syntheticNucReadsFromDist(wp.num=wp.num, wp.del=wp.del,
-                                        wp.var=wp.var, fuz.num=fuz.num,
-                                        fuz.var=fuz.var, max.cover=max.cover,
-                                        nuc.len=nuc.len, len.var=len.var,
-                                        read.len=read.len, lin.len=lin.len, 
-                                        rnd.seed=rnd.seed,
-                                        distr=distr, offset=offset)
+nucleosomeSample <- syntheticNucReadsFromDist(wp.num=wp.num, wp.del=wp.del, wp.var=wp.var,
+                                        fuz.num=fuz.num, fuz.var=fuz.var, max.cover=max.cover,
+                                        nuc.len=nuc.len, len.var=len.var, read.len=read.len, 
+                                        lin.len=lin.len, rnd.seed=rnd.seed, distr=distr, 
+                                        offset=offset)
 
 #### The central position of all well-positioned nucleosomes with the
 #### number of paired-end reads each associated to each one
-head(nucleosomeSample$wp, n = 4)
+head(nucleosomeSample$wp, n = 2)
 
 #### The central position of all fuzzy nucleosomes with the
 #### number of paired-end reads each associated to each one
-head(nucleosomeSample$fuz, n = 4)
+head(nucleosomeSample$fuz, n = 2)
 
 #### A data.frame with the name of the synthetic chromosome, the starting 
 #### position, the ending position and the direction of all forward and
 #### reverse reads
-head(nucleosomeSample$dataIP, n = 4)
+head(nucleosomeSample$dataIP, n = 2)
 ```
 
 The synthetic nucleosome sample can easily be visualised using `plot()` 
@@ -293,7 +302,34 @@ the nucleosome)`
 plot(nucleosomeSample, xlab="Position", ylab="Coverage (number of reads)")
 ```
 
-## Session info
+### Create a nucleosome sample using syntheticNucReadsFromMap()
+
+A synthetic nucleosome sample can be created using a nucleosome map. The 
+nucleosomes and reads present in the nucleosome map will be added an offset. 
+Forward and reverse reads will also be generated. The output is of class
+`syntheticNucMap`.
+
+```{r demoSampleFromMap, warning=FALSE, message=FALSE, collapse=TRUE}
+
+#### A nucleosome map has already been created 
+class(nucleosomeMap)
+
+#### 
+read.len         <- 45   ### The length of the reverse and forward reads
+offset           <- 500  ### The number of bases used to offset all nucleosomes and reads
+
+#### Create nucleosome sample
+nucleosomeSampleFromMap <- syntheticNucReadsFromMap(nucleosomeMap, read.len=read.len, 
+                                                        offset=offset)
+
+#### A data.frame with the name of the synthetic chromosome, the starting 
+#### position, the ending position and the direction of all forward and
+#### reverse reads
+head(nucleosomeSampleFromMap$dataIP, n = 2)
+```
+
+
+# Session info
 
 Here is the output of `sessionInfo()` on the system on which this document was 
 compiled:

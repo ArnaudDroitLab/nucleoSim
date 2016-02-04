@@ -400,7 +400,6 @@ test.syntheticNucMapFromDist_bad_distr <- function() {
 }
 
 
-
 ################################
 ## Good results
 ################################
