@@ -15,8 +15,8 @@ if(FALSE) {
 
 ### }}}
 
-NUCLEO_MAP <- syntheticNucMapFromDist(wp.num=6, wp.del=1, wp.var=12,
-                                         fuz.num=3, fuz.var=44, max.cover=65,
+NUCLEO_MAP <- syntheticNucMapFromDist(wp.num=3, wp.del=1, wp.var=12,
+                                         fuz.num=1, fuz.var=44, max.cover=65,
                                          nuc.len=147, len.var=2, lin.len=40,
                                          rnd.seed=155, distr="Uniform")
 
@@ -120,3 +120,29 @@ test.syntheticNucReadsFromMap_negative_integer_offset <- function() {
 }
 
 
+################################
+## Good results
+################################
+
+## Test the result for a specific case
+test.syntheticNucReadsFromMap_good_result_01 <- function() {
+    obs <- syntheticNucReadsFromMap(syntheticNucMap = NUCLEO_MAP,
+                                                        read.len = 40,
+                                                        offset = 1000)
+
+    exp.wp <- data.frame(nucleopos=c(1075, 1262), nreads=c(51, 29))
+    exp.fuz <- data.frame(nucleopos=c(1140), nreads=c(39))
+    exp.nuc.len <- 147
+
+    message     <- paste0(" test.syntheticNucReadsFromMap_good_result_01() ",
+                          "- syntheticNucReadsFromMap did not generate ",
+                          "expected values")
+
+    checkEqualsNumeric(obs$wp, exp.wp, msg = message)
+    checkEqualsNumeric(obs$fuz, exp.fuz, msg = message)
+    checkEqualsNumeric(obs$nuc.len, exp.nuc.len, msg = message)
+    checkEqualsNumeric(length(obs$dataIP), 4, msg = message)
+    checkEqualsNumeric(nrow(obs$dataIP), 238, msg = message)
+    checkEqualsNumeric(length(obs$paired), 3, msg = message)
+    checkEqualsNumeric(nrow(obs$paired), 119, msg = message)
+}
