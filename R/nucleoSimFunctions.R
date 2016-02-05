@@ -518,20 +518,18 @@ plot.syntheticNucMap <- function(x, ...) {
 
     # Plot nucleosome positions
     space <- round(x$nuc.len/2)
-    points(x$wp.starts  + space, x$wp.nreads,
-            col = "forestgreen",  pch = 19)
-    points(x$fuz.starts + space, x$fuz.nreads,
-            col = "red", pch = 19)
+    points(x$wp.starts  + space, x$wp.nreads,  col = "forestgreen",  pch = 19)
+    points(x$fuz.starts + space, x$fuz.nreads, col = "red", pch = 19)
 
     # Add legend
     if (as.ratio) {
         legend("top", c("Ratio", "Well", "Fuzzy", "Coverage"),
-               fill = c("darkorange", "forestgreen", "red", "gray"),
-               bty = "n", horiz = TRUE)
+                fill = c("darkorange", "forestgreen", "red", "gray"),
+                bty = "n", horiz = TRUE)
     } else {
         legend("top", c("Well", "Fuzzy", "Coverage"),
-               fill = c("forestgreen", "red", "gray"), bty = "n",
-               horiz = TRUE)
+                fill = c("forestgreen", "red", "gray"), bty = "n",
+                horiz = TRUE)
     }
 }
 
@@ -582,7 +580,7 @@ plot.syntheticNucReads <- function(x, ...) {
     coverage <- c(0, as.integer(coverage(seqRanges)), 0)
     position <- c(0, 1:(length(coverage)-1))
     plot(position, coverage, type = "l", col = "gray",
-         ylim = c(y_min, y_max), xlim = c(x_min, x_max), ...)
+            ylim = c(y_min, y_max), xlim = c(x_min, x_max), ...)
     polygon(c(0, position, 0), c(0, coverage, 0), col="gray", border = "gray")
 
 
@@ -592,6 +590,6 @@ plot.syntheticNucReads <- function(x, ...) {
 
     # Add legend
     legend("top", c("Coverage", "Well", "Fuzzy"),
-               fill = c("gray", "forestgreen", "red"), bty = "n", horiz = TRUE)
+            fill = c("gray", "forestgreen", "red"), bty = "n", horiz = TRUE)
 }
 

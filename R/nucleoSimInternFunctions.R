@@ -198,7 +198,6 @@ syntheticNucReadsValidation <- function(read.len, offset)
 #' @keywords internal
 createNucReadsFromNucMap <- function(map, read.len, offset, call) {
 
-
     ## Extract reads to create a dataframe
     syn.reads <- as.data.frame(map$syn.reads)
 
@@ -211,8 +210,8 @@ createNucReadsFromNucMap <- function(map, read.len, offset, call) {
 
     # Store read paired information
     paired <- data.frame(rep("chr1", nreads),
-                         as.integer(syn.reads$start),
-                         as.integer(syn.reads$end))
+                            as.integer(syn.reads$start),
+                            as.integer(syn.reads$end))
     colnames(paired) <- c("chr", "start", "end")
 
     # Order paired reads by starting position
@@ -222,16 +221,16 @@ createNucReadsFromNucMap <- function(map, read.len, offset, call) {
     ## Forward and reverse reads are generated from read paired information
     ## using the read.len parameter
     dataIP <- data.frame(rep("chr_SYNTHETIC", 2 * nreads),
-                         c(as.integer(syn.reads$start),
-                           as.integer(syn.reads$end - read.len)),
-                         c(as.integer(syn.reads$start + read.len),
-                           as.integer(syn.reads$end)),
-                         c(rep("+", nreads), rep("-", nreads)))
-    colnames(dataIP) = c("chr", "start", "end", "strand")
+                            c(as.integer(syn.reads$start),
+                                as.integer(syn.reads$end - read.len)),
+                            c(as.integer(syn.reads$start + read.len),
+                                as.integer(syn.reads$end)),
+                            c(rep("+", nreads), rep("-", nreads)))
+                        colnames(dataIP) = c("chr", "start", "end", "strand")
 
     # Order reads by starting position
     dataIP <- dataIP[order(dataIP$start), ]
-    rownames(dataIP)<-1:nrow(dataIP)
+    rownames(dataIP) <- 1:nrow(dataIP)
 
     # Create data.frame with well-positioned nucleosomes shifted by offset value
     space <- round(map$nuc.len/2)
@@ -239,13 +238,12 @@ createNucReadsFromNucMap <- function(map, read.len, offset, call) {
     colnames(wp) <- c("nucleopos", "nreads")
 
     # Create data.frame with fuzzy nucleosomes shifted by offset value
-    fuz <- data.frame(map$fuz.starts + offset + space,
-                      map$fuz.nreads)
+    fuz <- data.frame(map$fuz.starts + offset + space, map$fuz.nreads)
     colnames(fuz) <- c("nucleopos", "nreads")
 
     # Create returned result list
     result <- list(call = call, dataIP = dataIP, wp = wp, fuz = fuz,
-                   paired = paired, nuc.len = map$nuc.len)
+                        paired = paired, nuc.len = map$nuc.len)
 
     # Return a list marked as an syntheticNucReads class
     class(result) <- "syntheticNucReads"
