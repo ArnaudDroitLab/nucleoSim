@@ -300,13 +300,16 @@ wp.del           <- 10            ### Number of well-positioned nucleosomes to d
 wp.var           <- 30            ### variance associated with the well-positioned nucleosomes
 fuz.num          <- 10            ### Number of fuzzy nucleosomes
 fuz.var          <- 50            ### Variance associated with the fuzzy nucleosomes
-max.cover        <- 90            ### Maximum reads associated with one nucleosome (default: 100)
+max.cover        <- 90            ### Maximum paired-end reads associated with 
+                                  ###   one nucleosome (default: 100)
 nuc.len          <- 147           ### Length of the nucleosome (default: 147)
-len.var          <- 12            ### variance associated with the length of the reads (default: 10)
+len.var          <- 12            ### variance associated with the distance between
+                                  ###   start positions of paired-end reads(default: 10)
 lin.len          <- 20            ### Length of the DNA linker (default: 20)
 read.len         <- 45            ### Length of the generated forward and reverse reads (default: 40)
 distr            <- "Uniform"     ### Type of distribution to use
-offset           <- 10000         ### The number of bases used to offset all nucleosomes and reads
+offset           <- 10000         ### The number of bases used to offset 
+                                  ###   all nucleosomes and reads
 
 rnd.seed         <- 202           ### Set seed when result needs to be reproducible
         
@@ -336,7 +339,7 @@ function. On the graph, each nucleosome is located on the graph using the
 coordinates:
 
 `   (x,y) = 
-(the central position of the nucleosome, the number of reads associated with
+(the central position of the nucleosome, the number of paired-end reads associated with
 the nucleosome)`
 
 ```{r showSample, fig.align='center', fig.height=5, fig.width=8}
