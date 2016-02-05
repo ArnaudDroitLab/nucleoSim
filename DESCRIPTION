@@ -2,10 +2,11 @@ Package: nucleoSim
 Version: 0.99.0
 Date: 2015-07-24
 Title: Generate synthetic nucleosome maps
-Description: This package generate synthetic nucleosome maps using
-    parameters given by users. Three different
-    distributions are available:
-    Normal, Student and Uniform.
+Description: This package can generate a synthetic map with reads covering
+    the nucleosome regions as well as a synthetic map with
+    forward and reverse reads emulating next-generation sequencing.
+    The user has choice between three different
+    distributions for the read positionning: Normal, Student and Uniform.
 Encoding: UTF-8
 Author: Rawane Samb [aut], Astrid Deschênes [cre, aut],
     Pascal Belleau [aut], Arnaud Droit [aut]
@@ -33,7 +34,7 @@ URL: https://github.com/arnauddroitlab/nucleoSim
 BugReports: https://github.com/arnauddroitlab/nucleoSim/issues
 VignetteBuilder: knitr
 NeedsCompilation: no
-biocViews: Genetics, Sequencing, Software, StatisticalMethod
+biocViews: Genetics, Sequencing, Software, StatisticalMethod, Alignment
 Maintainer: Astrid Deschenes
     <Astrid-Louise.Deschenes@crchudequebec.ulaval.ca>
 RoxygenNote: 5.0.1
