@@ -4,6 +4,10 @@ sudo: required
 # Packages from Bioconductor needed
 bioc_required: true
 
+env:
+  global:
+    - BIOC_USE_DEVEL="TRUE"
+
 # Be strict when checking package
 warnings_are_errors: true
 
