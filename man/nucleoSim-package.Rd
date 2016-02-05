@@ -4,11 +4,13 @@
 \name{nucleoSim-package}
 \alias{nucleoSim}
 \alias{nucleoSim-package}
-\title{nucleoSim: Generate a synthetic nucleosome map}
+\title{nucleoSim: Generate synthetic nucleosome maps}
 \description{
-This package generate a synthetic nucleosome map using the parameters
-given by the user. The user has choice between three different
-distributions: Normal, Student and Uniform.
+This package can generate a synthetic map with
+reads covering the nucleosome regions as well as a synthetic map with
+forward and reverse reads emulating next-generation sequencing.
+The user has choice between three different
+distributions for the read positionning: Normal, Student and Uniform.
 }
 \author{
 Rawane Samb,
