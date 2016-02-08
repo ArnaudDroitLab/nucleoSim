@@ -563,6 +563,10 @@ test.syntheticNucReadsFromDist_good_result_01 <- function() {
     exp.wp <- data.frame(nucleopos=c(175, 326), nreads=c(83, 13))
     exp.fuz      <- data.frame(nucleopos=c(236), nreads=c(61))
     exp.nuc.len <- 147
+    exp.dataIP.colnames <- c("chr", "start", "end", "strand", "ID")
+    exp.dataIP.chr <- rep("chr_SYNTHETIC", 314)
+    exp.paired.colnames <- c("chr", "start", "end", "ID")
+    exp.paired.chr <- rep("chr_SYNTHETIC", 157)
 
     message     <- paste0(" test.syntheticNucReadsFromDist_good_result_01() ",
                           "- syntheticNucReadsFromDist did not generate ",
@@ -571,10 +575,14 @@ test.syntheticNucReadsFromDist_good_result_01 <- function() {
     checkEqualsNumeric(obs$wp, exp.wp, msg = message)
     checkEqualsNumeric(obs$fuz, exp.fuz, msg = message)
     checkEqualsNumeric(obs$nuc.len, exp.nuc.len, msg = message)
-    checkEqualsNumeric(length(obs$dataIP), 4, msg = message)
+    checkEqualsNumeric(length(obs$dataIP), 5, msg = message)
+    checkEqualsNumeric(colnames(obs$dataIP), exp.dataIP.colnames, msg = message)
     checkEqualsNumeric(nrow(obs$dataIP), 314, msg = message)
-    checkEqualsNumeric(length(obs$paired), 3, msg = message)
+    checkEquals(as.character(obs$dataIP$chr), exp.dataIP.chr, msg = message)
+    checkEqualsNumeric(length(obs$paired), 4, msg = message)
+    checkEqualsNumeric(colnames(obs$paired), exp.paired.colnames, msg = message)
     checkEqualsNumeric(nrow(obs$paired), 157, msg = message)
+    checkEquals(as.character(obs$paired$chr), exp.paired.chr, msg = message)
 }
 
 ## Test the result for a specific case
@@ -587,6 +595,9 @@ test.syntheticNucReadsFromDist_good_result_02 <- function() {
     exp.wp <- data.frame(nucleopos=c(1369), nreads=c(17))
     exp.fuz      <- data.frame(nucleopos=c(1357, 1418), nreads=c(98, 54))
     exp.nuc.len <- 144
+    exp.dataIP.colnames <- c("chr", "start", "end", "strand", "ID")
+    exp.paired.colnames <- c("chr", "start", "end", "ID")
+    exp.paired.chr <- rep("chr_SYNTHETIC", 169)
 
     message     <- paste0(" test.syntheticNucReadsFromDist_good_result_02() ",
                           "- syntheticNucReadsFromDist did not generate ",
@@ -595,8 +606,11 @@ test.syntheticNucReadsFromDist_good_result_02 <- function() {
     checkEqualsNumeric(obs$wp, exp.wp, msg = message)
     checkEqualsNumeric(obs$fuz, exp.fuz, msg = message)
     checkEqualsNumeric(obs$nuc.len, exp.nuc.len, msg = message)
-    checkEqualsNumeric(length(obs$dataIP), 4, msg = message)
+    checkEqualsNumeric(length(obs$dataIP), 5, msg = message)
+    checkEqualsNumeric(colnames(obs$dataIP), exp.dataIP.colnames, msg = message)
     checkEqualsNumeric(nrow(obs$dataIP), 338, msg = message)
-    checkEqualsNumeric(length(obs$paired), 3, msg = message)
+    checkEqualsNumeric(length(obs$paired), 4, msg = message)
+    checkEqualsNumeric(colnames(obs$paired), exp.paired.colnames, msg = message)
     checkEqualsNumeric(nrow(obs$paired), 169, msg = message)
+    checkEquals(as.character(obs$paired$chr), exp.paired.chr, msg = message)
 }

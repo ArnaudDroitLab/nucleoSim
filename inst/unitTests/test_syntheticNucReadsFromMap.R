@@ -133,6 +133,10 @@ test.syntheticNucReadsFromMap_good_result_01 <- function() {
     exp.wp <- data.frame(nucleopos=c(1075, 1262), nreads=c(51, 29))
     exp.fuz <- data.frame(nucleopos=c(1140), nreads=c(39))
     exp.nuc.len <- 147
+    exp.dataIP.colnames <- c("chr", "start", "end", "strand", "ID")
+    exp.dataIP.chr <- rep("chr_SYNTHETIC", 238)
+    exp.paired.colnames <- c("chr", "start", "end", "ID")
+    exp.paired.chr <- rep("chr_SYNTHETIC", 119)
 
     message     <- paste0(" test.syntheticNucReadsFromMap_good_result_01() ",
                           "- syntheticNucReadsFromMap did not generate ",
@@ -141,8 +145,13 @@ test.syntheticNucReadsFromMap_good_result_01 <- function() {
     checkEqualsNumeric(obs$wp, exp.wp, msg = message)
     checkEqualsNumeric(obs$fuz, exp.fuz, msg = message)
     checkEqualsNumeric(obs$nuc.len, exp.nuc.len, msg = message)
-    checkEqualsNumeric(length(obs$dataIP), 4, msg = message)
+    checkEqualsNumeric(length(obs$dataIP), 5, msg = message)
+    checkEqualsNumeric(colnames(obs$dataIP), exp.dataIP.colnames, msg = message)
     checkEqualsNumeric(nrow(obs$dataIP), 238, msg = message)
-    checkEqualsNumeric(length(obs$paired), 3, msg = message)
+    checkEquals(as.character(obs$dataIP$chr), exp.dataIP.chr, msg = message)
+    checkEqualsNumeric(length(obs$paired), 4, msg = message)
+    checkEqualsNumeric(colnames(obs$paired), exp.paired.colnames, msg = message)
     checkEqualsNumeric(nrow(obs$paired), 119, msg = message)
+    checkEquals(as.character(obs$paired$chr), exp.paired.chr, msg = message)
+
 }

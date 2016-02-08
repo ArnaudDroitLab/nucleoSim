@@ -207,10 +207,11 @@ createNucReadsFromNucMap <- function(map, read.len, offset, call) {
     syn.reads$end   <- syn.reads$end   + offset
 
     # Store read paired information
-    paired <- data.frame(rep("chr1", nreads),
+    paired <- data.frame(rep("chr_SYNTHETIC", nreads),
                             as.integer(syn.reads$start),
-                            as.integer(syn.reads$end))
-    colnames(paired) <- c("chr", "start", "end")
+                            as.integer(syn.reads$end),
+                            1:nreads)
+    colnames(paired) <- c("chr", "start", "end", "ID")
 
     # Order paired reads by starting position
     paired <- paired[order(paired$start), ]
@@ -223,8 +224,10 @@ createNucReadsFromNucMap <- function(map, read.len, offset, call) {
                                 as.integer(syn.reads$end - read.len)),
                             c(as.integer(syn.reads$start + read.len),
                                 as.integer(syn.reads$end)),
-                            c(rep("+", nreads), rep("-", nreads)))
-                        colnames(dataIP) = c("chr", "start", "end", "strand")
+                            c(rep("+", nreads), rep("-", nreads)),
+                            c(1:nreads, 1:nreads))
+                        colnames(dataIP) = c("chr", "start", "end",
+                                                "strand", "ID")
 
     # Order reads by starting position
     dataIP <- dataIP[order(dataIP$start), ]

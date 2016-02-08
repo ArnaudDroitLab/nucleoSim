@@ -69,13 +69,15 @@ following elements:
 \item \code{dataIP} a \code{data.frame} with the chromosome name, the
 starting and ending positions and the direction of all forward
 and reverse reads for all well-positioned and fuzzy nucleosomes.
+Paired-end reads are identified with an unique id.
 \item \code{wp} a \code{data.frame} with the positions of all the
 well-positioned nucleosomes, as well as the number of paired-reads
 associated to each one.
 \item \code{fuz} a \code{data.frame} with the positions of all the fuzzy
 nucleosomes, as well as the number of paired-reads associated to each one.
 \item \code{paired} a \code{data.frame} with the starting and ending
-positions of the reads used to generate the paired-end reads.
+positions of the reads used to generate the paired-end reads. Paired-end
+reads are identified with an unique id.
 }
 }
 \description{
