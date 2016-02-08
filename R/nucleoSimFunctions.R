@@ -515,6 +515,8 @@ syntheticNucReadsFromMap <- function(syntheticNucMap, read.len = 40, offset) {
 #'
 #' @param ... \code{...} extra arguments passed to the \code{plot} function
 #'
+#' @return a graph of a synthetic nucleosome map
+#'
 #' @examples
 #'
 #' ## Generate a synthetic map with 20 well-positioned nucleosomes, 5 fuzzy
@@ -583,7 +585,8 @@ plot.syntheticNucMap <- function(x, ...) {
     }
 }
 
-#' @title Generate a graph of a synthetic nucleosome map using
+#' @title Generate a graph of a synthetic nucleosome map containing forward and
+#' reverse reads
 #'
 #' @description Generate a graph for
 #' a list marked as an \code{syntheticNucReads} class
@@ -593,6 +596,9 @@ plot.syntheticNucMap <- function(x, ...) {
 #' @param x a list marked as a \code{syntheticNucReads} class
 #'
 #' @param ... \code{...} extra arguments passed to the \code{plot} function
+#'
+#' @return a graph of a synthetic nucleosome map containing forward and
+#' reverse reads
 #'
 #' @examples
 #'

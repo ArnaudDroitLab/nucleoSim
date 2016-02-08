@@ -11,6 +11,9 @@
 
 \item{...}{\code{...} extra arguments passed to the \code{plot} function}
 }
+\value{
+a graph of a synthetic nucleosome map
+}
 \description{
 Generate a graph for
 a list marked as an \code{syntheticNucMap} class

@@ -2,7 +2,8 @@
 % Please edit documentation in R/nucleoSimFunctions.R
 \name{plot.syntheticNucReads}
 \alias{plot.syntheticNucReads}
-\title{Generate a graph of a synthetic nucleosome map using}
+\title{Generate a graph of a synthetic nucleosome map containing forward and
+reverse reads}
 \usage{
 \method{plot}{syntheticNucReads}(x, ...)
 }
@@ -10,6 +11,10 @@
 \item{x}{a list marked as a \code{syntheticNucReads} class}
 
 \item{...}{\code{...} extra arguments passed to the \code{plot} function}
+}
+\value{
+a graph of a synthetic nucleosome map containing forward and
+reverse reads
 }
 \description{
 Generate a graph for
