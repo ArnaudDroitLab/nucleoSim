@@ -10,14 +10,16 @@ syntheticNucReadsFromMap(syntheticNucMap, read.len = 40, offset)
 \arguments{
 \item{syntheticNucMap}{a \code{list} of \code{class} "syntheticNucMap"}
 
-\item{read.len}{the length of each of the paired-end reads. Default = 40.}
+\item{read.len}{a positive \code{integer}, the length of each of
+the paired-end reads. Default = 40.}
 
-\item{offset}{the number of bases used to offset all nucleosomes and reads.
-This is done to ensure that all nucleosome positions and read alignment
+\item{offset}{a non-negatvie \code{integer},the number of bases used to
+offset all nucleosomes and reads.
+This is done to ensure that all nucleosome positions and read alignments
 are of positive values.}
 }
 \value{
-an \code{list} of \code{class} "syntheticNucReads" containing the
+a \code{list} of \code{class} "syntheticNucReads" containing the
 following elements:
 \itemize{
 \item \code{call} the matched call.

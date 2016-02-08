@@ -7,7 +7,7 @@
 plot.syntheticNucReads(x, ...)
 }
 \arguments{
-\item{x}{a list marked as an \code{syntheticNucReads} class}
+\item{x}{a list marked as a \code{syntheticNucReads} class}
 
 \item{...}{\code{...} extra arguments passed to the \code{plot} function}
 }

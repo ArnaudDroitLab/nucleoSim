@@ -10,15 +10,13 @@
 #' @param wp.del a non-negative \code{integer}, the number of well-positioned
 #' nucleosomes to remove to create uncovered regions.
 #'
-#' @param wp.var a non-negative \code{integer}, the variance in base pairs
-#' of the well-positioned
-#' nucleosomes. This parameter introduces some variation in the position of
-#' the reads describing a nucleosome.
+#' @param wp.var a non-negative \code{integer}, the variance
+#' of the starting position of the sequences associated with well-positioned
+#' nucleosomes. This parameter introduces some variation in the starting
+#' position of the sequences describing a nucleosome.
 #'
 #' @param fuz.num a non-negative \code{integer}, the number of fuzzy
-#' nucleosomes. Those nucleosomes are distributed accordingly to selected
-#' distribution all over
-#' the region. Those nucleosomes can overlap other well-positioned or
+#' nucleosomes. Those nucleosomes can overlap other well-positioned or
 #' fuzzy nucleosomes.
 #'
 #' @param fuz.var a non-negative \code{integer}, the variance of the fuzzy
