@@ -509,6 +509,8 @@ syntheticNucReadsFromMap <- function(syntheticNucMap, read.len = 40, offset) {
 #' @description Generate a graph for
 #' a list marked as an \code{syntheticNucMap} class
 #'
+#' @method plot syntheticNucMap
+#'
 #' @param x a list marked as an \code{syntheticNucMap}  class
 #'
 #' @param ... \code{...} extra arguments passed to the \code{plot} function
@@ -585,6 +587,8 @@ plot.syntheticNucMap <- function(x, ...) {
 #'
 #' @description Generate a graph for
 #' a list marked as an \code{syntheticNucReads} class
+#'
+#' @method plot syntheticNucReads
 #'
 #' @param x a list marked as a \code{syntheticNucReads} class
 #'
