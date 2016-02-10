@@ -14,9 +14,7 @@ syntheticNucMap() function from Bioconductor
 package (Flores and Orozco, 2011).
 
 
-## Licensing and Citing ##
-
-This package and the underlying nucleoSim code are distributed under the Artistic license 2.0. You are free to use and redistribute this software.
+## Citing ##
 
 If you use this package for a publication, we would ask you to cite the following:
 
