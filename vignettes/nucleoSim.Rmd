@@ -5,13 +5,12 @@ output:
     toc: true
 vignette: >
   %\VignetteIndexEntry{Simulate synthetic nucleosome maps}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignettePackage{nucleoSim}
   %\VignetteEncoding{UTF-8}
 ---
-
 ```{r style, echo = FALSE, results = 'asis'}
 BiocStyle::markdown()
+library(knitr)
 ```
 <br>
 **Package**: `r Rpackage("nucleoSim")`<br />
