@@ -1,17 +1,15 @@
 ---
-title: "nucleoSim: Generate synthetic nucleosome maps"
+title: "Generate synthetic nucleosome maps"
 output:
   BiocStyle::html_document:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{Simulate synthetic nucleosome maps}
+  %\VignetteIndexEntry{Generate synthetic nucleosome maps}
   %\VignettePackage{nucleoSim}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-```{r style, echo = FALSE, results = 'asis'}
-BiocStyle::markdown()
-library(knitr)
-```
+
 <br>
 **Package**: `r Rpackage("nucleoSim")`<br />
 **Authors**: `r packageDescription("nucleoSim")[["Author"]]`<br />
