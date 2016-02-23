@@ -216,6 +216,20 @@ syntheticNucReadsValidation <- function(read.len, offset)
 #' positions of the reads used to generate the paired-end reads.
 #' }
 #'
+#' @examples
+#'
+#' ## Generate a synthetic map with 30 well-positioned nucleosomes, 5 fuzzy
+#' ## nucleosomes and 6 deleted nucleosomes using a Student distribution
+#' ## with a variance of 10 for the well-positioned nucleosomes,
+#' ## a variance of 15 for the fuzzy nucleosomes and a seed of 1335
+#' map_call <- call("syntheticNucMapFromDist", wp.num = 30, wp.del = 6,
+#' wp.var = 10, fuz.num = 5, fuz.var = 15, rnd.seed = 1335,
+#' distr = "Student")
+#' syntheticMap <- eval(map_call)
+#'
+#' syntheticReads <- nucleoSim:::createNucReadsFromNucMap(syntheticMap,
+#' read.len = 40, offset = 1000, call = map_call)
+#'
 #' @author Astrid Deschenes
 #' @keywords internal
 createNucReadsFromNucMap <- function(map, read.len, offset, call) {

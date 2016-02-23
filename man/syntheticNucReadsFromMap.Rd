@@ -51,12 +51,12 @@ from Bioconductor nucleR package (Flores and Orozco, 2011).
 ## nucleosomes, a variance of 40 for the fuzzy nucleosomes and a seed of 15
 ## Because of the fixed seed, each time is going to be run, the results
 ## are going to be the seed
-
 syntheticMap <- syntheticNucMapFromDist(wp.num = 20, wp.del = 0,
 wp.var = 30, fuz.num = 10, fuz.var = 40,
 rnd.seed = 335, as.ratio = FALSE, distr = "Uniform")
 
-res <- syntheticNucReadsFromMap(syntheticMap, read.len = 45, offset = 1000)
+res <- nucleoSim:::syntheticNucReadsFromMap(syntheticMap, read.len = 45,
+offset = 1000)
 
 }
 \author{

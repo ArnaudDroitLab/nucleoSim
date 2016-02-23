@@ -474,17 +474,17 @@ syntheticNucReadsFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 #'
 #' @examples
 #'
-#'## Generate a synthetic map with 20 well-positioned + 10 fuzzy nucleosomes
-#'## using a Normal distribution with a variance of 30 for the well-positioned
-#'## nucleosomes, a variance of 40 for the fuzzy nucleosomes and a seed of 15
-#'## Because of the fixed seed, each time is going to be run, the results
-#'## are going to be the seed
+#' ## Generate a synthetic map with 20 well-positioned + 10 fuzzy nucleosomes
+#' ## using a Normal distribution with a variance of 30 for the well-positioned
+#' ## nucleosomes, a variance of 40 for the fuzzy nucleosomes and a seed of 15
+#' ## Because of the fixed seed, each time is going to be run, the results
+#' ## are going to be the seed
+#' syntheticMap <- syntheticNucMapFromDist(wp.num = 20, wp.del = 0,
+#' wp.var = 30, fuz.num = 10, fuz.var = 40,
+#' rnd.seed = 335, as.ratio = FALSE, distr = "Uniform")
 #'
-#'syntheticMap <- syntheticNucMapFromDist(wp.num = 20, wp.del = 0,
-#'wp.var = 30, fuz.num = 10, fuz.var = 40,
-#'rnd.seed = 335, as.ratio = FALSE, distr = "Uniform")
-#'
-#'res <- syntheticNucReadsFromMap(syntheticMap, read.len = 45, offset = 1000)
+#' res <- nucleoSim:::syntheticNucReadsFromMap(syntheticMap, read.len = 45,
+#' offset = 1000)
 #'
 #' @export
 syntheticNucReadsFromMap <- function(syntheticNucMap, read.len = 40, offset) {
