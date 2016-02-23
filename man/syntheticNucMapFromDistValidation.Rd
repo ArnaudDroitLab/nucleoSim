@@ -69,8 +69,12 @@ wp.var = 3, fuz.num = 10, fuz.var = 5, max.cover = 100, nuc.len = 147,
 len.var = 4, lin.len = 40, rnd.seed = 201, as.ratio = FALSE)
 
 ## The function raises an error when at least one paramater is not valid
-\dontrun{nucleoSim:::syntheticNucMapFromDistValidation(read.len = 0, offset = 100)}
-\dontrun{nucleoSim:::syntheticNucMapFromDistValidation(read.len = 30, offset = -1)}
+\dontrun{nucleoSim:::syntheticNucMapFromDistValidation(wp.num = -1,
+wp.del = 2, wp.var = 3, fuz.num = 10, fuz.var = 5, max.cover = 100,
+nuc.len = 147, len.var = 4, lin.len = 40, rnd.seed = 201, as.ratio = FALSE)}
+\dontrun{nucleoSim:::syntheticNucMapFromDistValidation(wp.num = 20,
+wp.del = 2, wp.var = -3, fuz.num = 10, fuz.var = 5, max.cover = 100,
+nuc.len = 147, len.var = 4, lin.len = 40, rnd.seed = 201, as.ratio = FALSE)}
 
 }
 \author{
