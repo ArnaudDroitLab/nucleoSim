@@ -10,7 +10,7 @@ This package can generate a synthetic map with
 reads covering the nucleosome regions as well as a synthetic map with
 forward and reverse reads emulating next-generation sequencing.
 The user has choice between three different
-distributions for the read positionning: Normal, Student and Uniform.
+distributions for the read positioning: Normal, Student and Uniform.
 }
 \author{
 Rawane Samb,
