@@ -51,6 +51,17 @@
 #' @return \code{0} indicating that all parameters validations have been
 #' successful.
 #'
+#' @examples
+#'
+#' ## The function returns 0 when all paramaters are valid
+#' nucleoSim:::syntheticNucMapFromDistValidation(wp.num = 20, wp.del = 2,
+#' wp.var = 3, fuz.num = 10, fuz.var = 5, max.cover = 100, nuc.len = 147,
+#' len.var = 4, lin.len = 40, rnd.seed = 201, as.ratio = FALSE)
+#'
+#' ## The function raises an error when at least one paramater is not valid
+#' \dontrun{nucleoSim:::syntheticNucMapFromDistValidation(read.len = 0, offset = 100)}
+#' \dontrun{nucleoSim:::syntheticNucMapFromDistValidation(read.len = 30, offset = -1)}
+#'
 #' @author Astrid Deschenes
 #' @importFrom S4Vectors isSingleInteger isSingleNumber
 #' @keywords internal
@@ -130,8 +141,24 @@ syntheticNucMapFromDistValidation <- function(wp.num, wp.del, wp.var, fuz.num,
 #' \code{syntheticNucReadsFromMap} and \code{syntheticNucReadsFromDist}
 #' functions are correctly formatted.
 #'
+#' @param read.len a positive \code{integer}, the length of each of the
+#' paired-end reads.
+#'
+#' @param offset a non-negative \code{integer}, the number of bases used to
+#' offset all nucleosomes and reads. This is done to ensure that all
+#' nucleosome positions and read alignment are of positive values.
+#'
 #' @return \code{0} indicating that all parameters validations have been
 #' successful.
+#'
+#' @examples
+#'
+#' ## The function returns 0 when all paramaters are valid
+#' nucleoSim:::syntheticNucReadsValidation(read.len = 40, offset = 100)
+#'
+#' ## The function raises an error when at least one paramater is not valid
+#' \dontrun{nucleoSim:::syntheticNucReadsValidation(read.len = 0, offset = 100)}
+#' \dontrun{nucleoSim:::syntheticNucReadsValidation(read.len = 30, offset = -1)}
 #'
 #' @author Astrid Deschenes
 #' @importFrom S4Vectors isSingleInteger isSingleNumber

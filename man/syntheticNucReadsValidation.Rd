@@ -8,6 +8,14 @@ functions.}
 \usage{
 syntheticNucReadsValidation(read.len, offset)
 }
+\arguments{
+\item{read.len}{a positive \code{integer}, the length of each of the
+paired-end reads.}
+
+\item{offset}{a non-negative \code{integer}, the number of bases used to
+offset all nucleosomes and reads. This is done to ensure that all
+nucleosome positions and read alignment are of positive values.}
+}
 \value{
 \code{0} indicating that all parameters validations have been
 successful.
@@ -16,6 +24,16 @@ successful.
 Validate that identical values passed to both
 \code{syntheticNucReadsFromMap} and \code{syntheticNucReadsFromDist}
 functions are correctly formatted.
+}
+\examples{
+
+## The function returns 0 when all paramaters are valid
+nucleoSim:::syntheticNucReadsValidation(read.len = 40, offset = 100)
+
+## The function raises an error when at least one paramater is not valid
+\dontrun{nucleoSim:::syntheticNucReadsValidation(read.len = 0, offset = 100)}
+\dontrun{nucleoSim:::syntheticNucReadsValidation(read.len = 30, offset = -1)}
+
 }
 \author{
 Astrid Deschenes
