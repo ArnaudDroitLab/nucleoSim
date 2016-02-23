@@ -33,7 +33,7 @@ Suggests:
 License: Artistic-2.0
 URL: https://github.com/arnauddroitlab/nucleoSim
 BugReports: https://github.com/arnauddroitlab/nucleoSim/issues
-VignetteBuilder: knitr
+VignetteBuilder: rmarkdown
 NeedsCompilation: no
 biocViews: Genetics, Sequencing, Software, StatisticalMethod, Alignment
 Maintainer: Astrid Deschenes
