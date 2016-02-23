@@ -52,6 +52,7 @@
 #' successful.
 #'
 #' @author Astrid Deschenes
+#' @importFrom S4Vectors isSingleInteger isSingleNumber
 #' @keywords internal
 syntheticNucMapFromDistValidation <- function(wp.num, wp.del, wp.var, fuz.num,
                                                 fuz.var,
@@ -63,43 +64,53 @@ syntheticNucMapFromDistValidation <- function(wp.num, wp.del, wp.var, fuz.num,
                                                 as.ratio)
 {
 
-    if (!isInteger(wp.num) || wp.num < 0) {
+    if (!(isSingleInteger(wp.num) || isSingleNumber(wp.num)) ||
+            wp.num < 0) {
         stop("wp.num must be a non-negative integer")
     }
 
-    if (!isInteger(wp.del) || wp.del < 0) {
+    if (!(isSingleInteger(wp.del) || isSingleNumber(wp.del)) ||
+            wp.del < 0) {
         stop("wp.del must be a non-negative integer")
     }
 
-    if (!isInteger(wp.var) || wp.var < 0) {
+    if (!(isSingleInteger(wp.var) || isSingleNumber(wp.var)) ||
+            wp.var < 0) {
         stop("wp.var must be a non-negative integer")
     }
 
-    if (!isInteger(fuz.num) || fuz.num < 0) {
+    if (!(isSingleInteger(fuz.num) || isSingleNumber(fuz.num)) ||
+            fuz.num < 0) {
         stop("fuz.num must be a non-negative integer")
     }
 
-    if (!isInteger(fuz.var) || fuz.var < 0) {
+    if (!(isSingleInteger(fuz.var) || isSingleNumber(fuz.var)) ||
+            fuz.var < 0) {
         stop("fuz.var must be a non-negative integer")
     }
 
-    if (!isInteger(max.cover) || max.cover < 1) {
+    if (!(isSingleInteger(max.cover) || isSingleNumber(max.cover)) ||
+            max.cover < 1) {
         stop("max.cover must be a positive integer")
     }
 
-    if (!isInteger(nuc.len) || nuc.len < 1) {
+    if (!(isSingleInteger(nuc.len) || isSingleNumber(nuc.len)) ||
+            nuc.len < 1) {
         stop("nuc.len must be a positive integer")
     }
 
-    if (!isInteger(len.var) || len.var < 0) {
+    if (!(isSingleInteger(len.var) || isSingleNumber(len.var)) ||
+            len.var < 0) {
         stop("len.var must be a non-negative integer")
     }
 
-    if (!isInteger(lin.len) || lin.len < 0) {
+    if (!(isSingleInteger(lin.len) || isSingleNumber(lin.len)) ||
+            lin.len < 0) {
         stop("lin.len must be a non-negative integer")
     }
 
-    if (!is.null(rnd.seed) && !isInteger(rnd.seed)) {
+    if (!is.null(rnd.seed) &&
+            !(isSingleInteger(rnd.seed) || isSingleNumber(rnd.seed))) {
         stop("rnd.seed must be NULL or an integer")
     }
 
@@ -108,27 +119,6 @@ syntheticNucMapFromDistValidation <- function(wp.num, wp.del, wp.var, fuz.num,
     }
 
     return(0)
-}
-
-
-#' @title Validate if a value is an integer
-#'
-#' @description Validate if the value passed to the function is an integer or
-#' not. To be considered as an integer, the value must have a length
-#' of 1. The type of value can be a \code{integer} or \code{numerical}.
-#' However, a \code{numerical} must have the same value
-#' once casted to a \code{integer}.  A \code{vector} of
-#' integers will returned \code{FALSE}.
-#'
-#' @param value an object to validate.
-#'
-#' @return \code{TRUE} is the parameter is a integer; otherwise \code{FALSE}
-#'
-#' @author Astrid Deschenes
-#' @keywords internal
-isInteger <- function(value) {
-    return((is.integer(value) && length(value) == 1) || (is.numeric(value) &&
-            as.integer(value) == value) && length(value) == 1)
 }
 
 
@@ -144,16 +134,19 @@ isInteger <- function(value) {
 #' successful.
 #'
 #' @author Astrid Deschenes
+#' @importFrom S4Vectors isSingleInteger isSingleNumber
 #' @keywords internal
 syntheticNucReadsValidation <- function(read.len, offset)
 {
     ## Validate that offset is a positive integer
-    if (!isInteger(read.len) || read.len <= 0) {
+    if (!(isSingleInteger(read.len) || isSingleNumber(read.len)) ||
+            read.len <= 0) {
         stop("read.len must be a positive integer")
     }
 
     ## Validate that offset is a non-negative integer
-    if (!isInteger(offset) || offset < 0) {
+    if (!(isSingleInteger(offset) || isSingleNumber(offset)) ||
+            offset < 0) {
         stop("offset must be a non-negative integer")
     }
 
