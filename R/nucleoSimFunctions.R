@@ -353,8 +353,8 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 #' @param len.var a positive \code{numeric}, the variance of the distance
 #' between a forward read and its paired reverse read. Default = 10.
 #'
-#' @param lin.len a non-negative \code{integer}, the length of the DNA linker
-#' DNA. Default = 20.
+#' @param lin.len a non-negative \code{integer}, the length of the DNA linker.
+#' Default = 20.
 #'
 #' @param read.len a positive \code{integer}, the length of each of the
 #' paired-end reads. Default = 40.
