@@ -14,6 +14,15 @@ Bioconductor [nucleR](http://www.bioconductor.org/packages/release/bioc/html/nuc
 package (Flores and Orozco, 2011).
 
 
+## Bioconductor Package ##
+
+[![Bioconductor Time](http://bioconductor.org/shields/years-in-bioc/nucleoSim.svg)](http://bioconductor.org/packages/nucleoSim "Bioconductor status")
+
+*nucleoSim* is now an official package of [Bioconductor](http://bioconductor.org/). 
+The current release can be directly downloaded from their website:
+[Current devel release](http://bioconductor.org/packages/nucleoSim)
+
+
 ## Citing ##
 
 If you use this package for a publication, we would ask you to cite the following:
@@ -21,7 +30,6 @@ If you use this package for a publication, we would ask you to cite the followin
 > Samb R, Khadraoui K, Belleau P, et al. (2015). "Using informative Multinomial-Dirichlet prior in a t-mixture with reversible jump estimation of nucleosome positions for genome-wide profiling." Statistical Applications in Genetics and Molecular Biology. Volume 14, Issue 6, Pages 517-532, ISSN (Online) 1544-6115, ISSN (Print) 2194-6302, December 2015, <a href="http://dx.doi.org/10.1515/sagmb-2014-0098">doi: 10.1515/sagmb-2014-0098</a>
 
 > Flores O and Orozco M (2011). “nucleR: a package for non-parametric nucleosome positioning.” Bioinformatics, 27, pp. 2149–2150. <a href="http://dx.doi.org/10.1093/bioinformatics/btr345">doi: 10.1093/bioinformatics/btr345</a>
-
 
 ## Authors ##
 
@@ -46,7 +54,7 @@ See [Arnaud Droit Lab](http://bioinformatique.ulaval.ca/home/
 
 ## License ##
 
-This package and the underlying nucleoSim code are distributed under the 
+This package and the underlying *nucleoSim* code are distributed under the 
 Artistic license 2.0. You are free to use and redistribute this software. 
 
 For more information on Artistic 2.0 License see
