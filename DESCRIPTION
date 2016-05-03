@@ -1,5 +1,5 @@
 Package: nucleoSim
-Version: 0.99.5
+Version: 1.0.0
 Date: 2015-07-24
 Title: Generate synthetic nucleosome maps
 Description: This package can generate a synthetic map with reads
