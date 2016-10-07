@@ -15,9 +15,7 @@ warnings_are_errors: true
 
 # Package dependencies from CRAN
 r_binary_packages:
-  - RUnit
-  - knitr
-  - rmarkdown
+  - covr
 
 # Package dependencies from Bioconductor
 bioc_packages:
@@ -25,10 +23,6 @@ bioc_packages:
   - IRanges
   - BiocStyle
   - S4Vectors
-
-# Package dependencies for codecov
-r_github_packages:
-  - jimhester/covr
 
 after_success:
   - Rscript -e 'library(covr);codecov()'
