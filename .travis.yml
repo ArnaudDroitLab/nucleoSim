@@ -17,12 +17,5 @@ warnings_are_errors: true
 r_binary_packages:
   - covr
 
-# Package dependencies from Bioconductor
-bioc_packages:
-  - BiocGenerics
-  - IRanges
-  - BiocStyle
-  - S4Vectors
-
 after_success:
   - Rscript -e 'library(covr);codecov()'
