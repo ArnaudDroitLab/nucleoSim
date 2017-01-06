@@ -21,7 +21,7 @@ package (Flores and Orozco, 2011).
 
 *nucleoSim* is now an official package of [Bioconductor](http://bioconductor.org/). 
 The current release can be directly downloaded from their website:
-[Current devel release](http://bioconductor.org/packages/nucleoSim)
+[Current release](http://bioconductor.org/packages/nucleoSim)
 
 
 ## Citing ##
