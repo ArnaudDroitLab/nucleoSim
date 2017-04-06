@@ -52,14 +52,13 @@ from Bioconductor nucleR package (Flores and Orozco, 2011).
 ## Because of the fixed seed, each time is going to be run, the results
 ## are going to be the seed
 syntheticMap <- syntheticNucMapFromDist(wp.num = 20, wp.del = 0,
-wp.var = 30, fuz.num = 10, fuz.var = 40,
-rnd.seed = 335, as.ratio = FALSE, distr = "Uniform")
+    wp.var = 30, fuz.num = 10, fuz.var = 40,
+    rnd.seed = 335, as.ratio = FALSE, distr = "Uniform")
 
 res <- nucleoSim:::syntheticNucReadsFromMap(syntheticMap, read.len = 45,
-offset = 1000)
+    offset = 1000)
 
 }
 \author{
 Pascal Belleau, Rawane Samb, Astrid Deschenes
 }
-

@@ -126,4 +126,3 @@ offset = 1000)
 \author{
 Pascal Belleau, Rawane Samb, Astrid Deschenes
 }
-

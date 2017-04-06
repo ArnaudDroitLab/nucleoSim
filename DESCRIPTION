@@ -13,17 +13,18 @@ Author: Rawane Samb [aut], Astrid Deschênes [cre, aut],
 Author@R: c(person("Rawane", "Samb",
     email="rawane.samb.1@ulaval.ca", role=c("aut")),
     person("Astrid", "Deschênes",
-    email="Astrid-Louise.Deschenes@crchudequebec.ulaval.ca",
+    email="adeschen@hotmail.com",
     role=c("cre","aut")),
     person("Pascal", "Belleau",
-    email="pascal.belleau@crchuq.ulaval.ca", role=c("aut")),
+    email="pascal_belleau@hotmail.com", role=c("aut")),
     person("Arnaud", "Droit",
     email="arnaud.droit@crchuq.ulaval.ca", role=c("aut")))
 Imports:
     stats,
     IRanges,
     S4Vectors,
-    graphics
+    graphics,
+    methods
 Suggests:
     BiocStyle,
     BiocGenerics,
@@ -37,5 +38,5 @@ VignetteBuilder: knitr
 NeedsCompilation: no
 biocViews: Genetics, Sequencing, Software, StatisticalMethod, Alignment
 Maintainer: Astrid Deschenes
-    <Astrid-Louise.Deschenes@crchudequebec.ulaval.ca>
-RoxygenNote: 5.0.1
+    <adeschen@hotmail.com>
+RoxygenNote: 6.0.1

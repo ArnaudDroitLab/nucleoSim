@@ -37,4 +37,3 @@ plot(syntheticNucSample, xlab="Position", ylab="Coverage")
 \author{
 Astrid Deschenes, Rawane Samb
 }
-

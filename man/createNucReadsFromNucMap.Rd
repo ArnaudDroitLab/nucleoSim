@@ -57,4 +57,3 @@ read.len = 40, offset = 1000, call = map_call)
 Astrid Deschenes
 }
 \keyword{internal}
-

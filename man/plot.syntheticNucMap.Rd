@@ -35,4 +35,3 @@ plot(syntheticMap, xlab="Position", ylab="Coverage")
 \author{
 Astrid Deschenes, Rawane Samb
 }
-

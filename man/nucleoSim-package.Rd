@@ -2,8 +2,8 @@
 % Please edit documentation in R/nucleoSim.R
 \docType{package}
 \name{nucleoSim-package}
-\alias{nucleoSim}
 \alias{nucleoSim-package}
+\alias{nucleoSim}
 \title{nucleoSim: Generate synthetic nucleosome maps}
 \description{
 This package can generate a synthetic map with
@@ -12,6 +12,12 @@ forward and reverse reads emulating next-generation sequencing.
 The user has choice between three different
 distributions for the read positioning: Normal, Student and Uniform.
 }
+\seealso{
+\itemize{
+    \item \code{\link{syntheticNucMapFromDist}} {to generate a synthetic
+nucleosome map}
+}
+}
 \author{
 Rawane Samb,
 Astrid Deschenes,
@@ -19,13 +25,6 @@ Pascal Belleau and
 Arnaud Droit
 
 Maintainer:
-Astrid Deschenes <astrid-louise.deschenes@crchudequebec.ulaval.ca>
-}
-\seealso{
-\itemize{
-    \item \code{\link{syntheticNucMapFromDist}} {to generate a synthetic
-nucleosome map}
-}
+Astrid Deschenes <adeschen@hotmail.com>
 }
 \keyword{package}
-
