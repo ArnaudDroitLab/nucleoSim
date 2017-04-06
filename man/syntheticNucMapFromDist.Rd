@@ -137,4 +137,3 @@ syntheticNucMapFromDist(wp.num = 20, wp.del = 0, wp.var = 30,
 \author{
 Rawane Samb, Astrid Deschenes
 }
-
