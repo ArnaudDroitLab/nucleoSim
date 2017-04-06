@@ -43,8 +43,8 @@ If you use this package for a publication, we would ask you to cite the followin
 and [Arnaud Droit](http://ca.linkedin.com/in/drarnaud 
 "Arnaud Droit").
 
-See [Arnaud Droit Lab](http://bioinformatique.ulaval.ca/home/ 
-"Arnaud Droit Lab") website.
+See [AD Lab](http://compbio.ulaval.ca/ 
+"AD Lab") website.
 
 
 ## Maintainer ##
