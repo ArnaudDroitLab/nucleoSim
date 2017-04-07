@@ -1,3 +1,4 @@
+###################################################
 # Created by Astrid Deschenes
 # 2016-02-04
 ###################################################
@@ -155,3 +156,4 @@ test.syntheticNucReadsFromMap_good_result_01 <- function() {
     checkEquals(as.character(obs$paired$chr), exp.paired.chr, msg = message)
 
 }
+

@@ -39,4 +39,3 @@ nucleoSim:::syntheticNucReadsValidation(read.len = 40, offset = 100)
 Astrid Deschenes
 }
 \keyword{internal}
-

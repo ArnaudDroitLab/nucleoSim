@@ -42,8 +42,8 @@ Default = 147.}
 \item{len.var}{a positive \code{numeric}, the variance of the distance
 between a forward read and its paired reverse read. Default = 10.}
 
-\item{lin.len}{a non-negative \code{integer}, the length of the DNA linker
-DNA. Default = 20.}
+\item{lin.len}{a non-negative \code{integer}, the length of the DNA linker.
+Default = 20.}
 
 \item{read.len}{a positive \code{integer}, the length of each of the
 paired-end reads. Default = 40.}
@@ -126,4 +126,3 @@ offset = 1000)
 \author{
 Pascal Belleau, Rawane Samb, Astrid Deschenes
 }
-

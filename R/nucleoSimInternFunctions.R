@@ -271,7 +271,8 @@ createNucReadsFromNucMap <- function(map, read.len, offset, call) {
     dataIP <- dataIP[order(dataIP$start), ]
     rownames(dataIP) <- 1:nrow(dataIP)
 
-    # Create data.frame with well-positioned nucleosomes shifted by offset value
+    # Create data.frame with well-positioned nucleosomes shifted by offset
+    # value
     space <- round(map$nuc.len/2)
     wp <- data.frame(map$wp.starts + offset + space, map$wp.nreads)
     colnames(wp) <- c("nucleopos", "nreads")

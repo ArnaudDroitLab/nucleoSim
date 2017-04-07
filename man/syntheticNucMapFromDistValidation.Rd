@@ -81,4 +81,3 @@ nuc.len = 147, len.var = 4, lin.len = 40, rnd.seed = 201, as.ratio = FALSE)}
 Astrid Deschenes
 }
 \keyword{internal}
-

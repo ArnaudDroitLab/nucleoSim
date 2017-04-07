@@ -353,8 +353,8 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 #' @param len.var a positive \code{numeric}, the variance of the distance
 #' between a forward read and its paired reverse read. Default = 10.
 #'
-#' @param lin.len a non-negative \code{integer}, the length of the DNA linker
-#' DNA. Default = 20.
+#' @param lin.len a non-negative \code{integer}, the length of the DNA linker.
+#' Default = 20.
 #'
 #' @param read.len a positive \code{integer}, the length of each of the
 #' paired-end reads. Default = 40.
@@ -480,12 +480,13 @@ syntheticNucReadsFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
 #' ## Because of the fixed seed, each time is going to be run, the results
 #' ## are going to be the seed
 #' syntheticMap <- syntheticNucMapFromDist(wp.num = 20, wp.del = 0,
-#' wp.var = 30, fuz.num = 10, fuz.var = 40,
-#' rnd.seed = 335, as.ratio = FALSE, distr = "Uniform")
+#'     wp.var = 30, fuz.num = 10, fuz.var = 40,
+#'     rnd.seed = 335, as.ratio = FALSE, distr = "Uniform")
 #'
 #' res <- nucleoSim:::syntheticNucReadsFromMap(syntheticMap, read.len = 45,
-#' offset = 1000)
+#'     offset = 1000)
 #'
+#' @importFrom methods is
 #' @export
 syntheticNucReadsFromMap <- function(syntheticNucMap, read.len = 40, offset) {
 
@@ -557,14 +558,14 @@ plot.syntheticNucMap <- function(x, ...) {
     coverage <- c(0, as.integer(coverage(x$syn.reads)), 0)
     position <- c(0, 1:(length(coverage)-1))
     plot(position, coverage, type = "l", col = "gray",
-         ylim = c(min, max), ...)
+            ylim = c(min, max), ...)
     polygon(c(0, position, 0), c(0, coverage, 0), col="gray", border = "gray")
 
 
     # Plot ratio, if asked for
     if (as.ratio) {
         lines(as.vector(x$syn.ratio), type = "l", col = "darkorange",
-              lwd = 2)
+                lwd = 2)
         abline(h = 0, col = "black")
     }
 
