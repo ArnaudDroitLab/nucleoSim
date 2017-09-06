@@ -172,10 +172,10 @@ distr            <- "Normal"   ### Type of distribution to use
 rnd.seed         <- 210001     ### Set seed when result needs to be reproducible
         
 #### Create a synthetic nucleosome map
-nucleosomeMap <- syntheticNucMapFromDist(wp.num=wp.num, wp.del=wp.del, wp.var=wp.var, 
-                                    fuz.num=fuz.num, fuz.var=fuz.var, max.cover=max.cover,
-                                    nuc.len=nuc.len, len.var=len.var, lin.len=lin.len, 
-                                    rnd.seed=rnd.seed, distr=distr)
+nucleosomeMap <- syntheticNucMapFromDist(wp.num=wp.num, wp.del=wp.del, 
+                        wp.var=wp.var, fuz.num=fuz.num, fuz.var=fuz.var, 
+                        max.cover=max.cover, nuc.len=nuc.len, len.var=len.var, 
+                        lin.len=lin.len, rnd.seed=rnd.seed, distr=distr)
 
 #### The start positions of all well-positioned nucleosomes
 nucleosomeMap$wp.starts
@@ -183,7 +183,7 @@ nucleosomeMap$wp.starts
 #### The number of sequences associated with each well-positioned nucleosome
 nucleosomeMap$wp.nreads
 
-#### A IRanges object containing all sequences for the well-positioned nucleosomes
+#### IRanges object containing all sequences for the well-positioned nucleosomes
 head(nucleosomeMap$wp.reads, n = 2)
 
 #### The start positions of all fuzzy nucleosomes
@@ -233,10 +233,10 @@ nucleosomeMapTiling <- syntheticNucMapFromDist(wp.num=10, wp.del=2, wp.var=20,
                                     rnd.seed=rnd.seed, as.ratio=as.ratio,
                                     distr="Uniform")
 
-#### Control sequences for hybridization data (only available when as.ratio is TRUE)
+#### Control sequences for hybridization data (only when as.ratio = TRUE)
 head(nucleosomeMapTiling$ctr.reads, n=4)
 
-#### Ratio for hybridization data (only available when as.ratio is TRUE)
+#### Ratio for hybridization data (only when as.ratio = TRUE)
 head(nucleosomeMapTiling$syn.ratio, n=4)
 
 #### Create visual representation of the synthetic nucleosome map
@@ -306,7 +306,8 @@ to generate a nucleosome sample. The output is of class `syntheticNucMap`.
 
 ```{r demoSample, warning=FALSE, message=FALSE, collapse=TRUE}
 wp.num           <- 30            ### Number of well-positioned nucleosomes
-wp.del           <- 10            ### Number of well-positioned nucleosomes to delete
+wp.del           <- 10            ### Number of well-positioned nucleosomes 
+                                  ###   to delete
 wp.var           <- 30            ### variance associated with the starting 
                                   ###   positions of the sequences for the 
                                   ###   well-positioned nucleosomes
@@ -327,14 +328,15 @@ distr            <- "Uniform"     ### Type of distribution to use
 offset           <- 10000         ### The number of bases used to offset 
                                   ###   all nucleosomes and reads
 
-rnd.seed         <- 202           ### Set seed when result needs to be reproducible
+rnd.seed         <- 202           ### Set seed when result needs to be 
+                                  ###   reproducible
         
 #### Create Uniform sample
-nucleosomeSample <- syntheticNucReadsFromDist(wp.num=wp.num, wp.del=wp.del, wp.var=wp.var,
-                                        fuz.num=fuz.num, fuz.var=fuz.var, max.cover=max.cover,
-                                        nuc.len=nuc.len, len.var=len.var, read.len=read.len, 
-                                        lin.len=lin.len, rnd.seed=rnd.seed, distr=distr, 
-                                        offset=offset)
+nucleosomeSample <- syntheticNucReadsFromDist(wp.num=wp.num, wp.del=wp.del, 
+                        wp.var=wp.var, fuz.num=fuz.num, fuz.var=fuz.var, 
+                        max.cover=max.cover, nuc.len=nuc.len, len.var=len.var, 
+                        read.len=read.len, lin.len=lin.len, rnd.seed=rnd.seed, 
+                        distr=distr, offset=offset)
 
 #### The central position of all well-positioned nucleosomes with the
 #### number of paired-end reads each associated with each one
