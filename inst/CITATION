@@ -1,0 +1,33 @@
+citEntry(entry="article",
+        title = "Using informative Multinomial-Dirichlet prior in a t-mixture with reversible jump estimation of nucleosome positions for genome-wide profiling",
+        author = personList( as.person("Rawane Samb" ),
+           as.person("Khader Khadraoui" ),
+           as.person("Pascal Belleau" ),
+           as.person("Astrid Desch\\^enes" ),
+           as.person("Lajmi Lakhal-Chaieb" ),
+           as.person("Arnaud Droit" )),
+        year = 2015,
+        journal = "Statistical Applications in Genetics and Molecular Biology",
+        volume = "14",
+        issue = "6",
+        pages   = "517–532",
+        doi = "10.1515/sagmb-2014-0098",
+        url = "http://www.degruyter.com/view/j/sagmb.ahead-of-print/sagmb-2014-0098/sagmb-2014-0098.xml",
+        textVersion =
+            "Samb R, Khadraoui K, Belleau P, et al. (2015) Using informative Multinomial-Dirichlet prior in a t-mixture with reversible jump estimation of nucleosome positions for genome-wide profiling. Statistical Applications in Genetics and Molecular Biology. Volume 14, Issue 6, Pages 517-532, ISSN (Online) 1544-6115, ISSN (Print) 2194-6302, DOI: 10.1515/sagmb-2014-0098, December 2015"
+)
+
+citEntry(entry="article",
+        title = "nucleR: a package for non-parametric nucleosome positioning.",
+        author = personList( as.person("Oscar Flores" ),
+           as.person("Modesto Orozco" )),
+        year = 2011,
+        journal = "Bioinformatics",
+        volume = "27",
+        issue = "15",
+        pages   = "2149–2150",
+        doi = "10.1093/bioinformatics/btr345",
+        url = "https://academic.oup.com/bioinformatics/article-lookup/doi/10.1093/bioinformatics/btr345",
+        textVersion =
+            "Flores O and Orozco M (2011). “nucleR: a package for non-parametric nucleosome positioning.” Bioinformatics, 27, pp. 2149–2150. DOI: 10.1093/bioinformatics/btr345"
+)
