@@ -163,7 +163,7 @@ syntheticNucMapFromDist <- function(wp.num, wp.del, wp.var, fuz.num, fuz.var,
     wp.nreads <- round(runif(wp.num, min = 1, max = max.cover))
 
     # Delete some nucleosomes
-    wp.deleted <- sample(x = 1:wp.num, size = wp.del, replace = FALSE)
+    wp.deleted <- sample(x = seq_len(wp.num), size = wp.del, replace = FALSE)
     wp.nreads[wp.deleted] <- 0
 
     # Set each nucleosome as a repeated single start position
@@ -556,7 +556,7 @@ plot.syntheticNucMap <- function(x, ...) {
 
     # Plot coverage
     coverage <- c(0, as.integer(coverage(x$syn.reads)), 0)
-    position <- c(0, 1:(length(coverage)-1))
+    position <- c(0, seq_len((length(coverage)-1)))
     plot(position, coverage, type = "l", col = "gray",
             ylim = c(min, max), ...)
     polygon(c(0, position, 0), c(0, coverage, 0), col="gray", border = "gray")
@@ -637,7 +637,7 @@ plot.syntheticNucReads <- function(x, ...) {
 
     # Plot coverage
     coverage <- c(0, as.integer(coverage(seqRanges)), 0)
-    position <- c(0, 1:(length(coverage)-1))
+    position <- c(0, seq_len((length(coverage)-1)))
     plot(position, coverage, type = "l", col = "gray",
             ylim = c(y_min, y_max), xlim = c(x_min, x_max), ...)
     polygon(c(0, position, 0), c(0, coverage, 0), col="gray", border = "gray")
