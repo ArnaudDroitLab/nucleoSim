@@ -592,12 +592,12 @@ test.syntheticNucReadsFromDist_good_result_02 <- function() {
                                      lin.len = 4, rnd.seed = 129, offset = 1000,
                                      distr = "Student")
 
-    exp.wp <- data.frame(nucleopos=c(1369), nreads=c(17))
-    exp.fuz      <- data.frame(nucleopos=c(1357, 1418), nreads=c(98, 54))
+    exp.wp <- data.frame(nucleopos=c(1073 ), nreads=c(14))
+    exp.fuz      <- data.frame(nucleopos=c(1416, 1202), nreads=c(23, 87))
     exp.nuc.len <- 144
     exp.dataIP.colnames <- c("chr", "start", "end", "strand", "ID")
     exp.paired.colnames <- c("chr", "start", "end", "ID")
-    exp.paired.chr <- rep("chr_SYNTHETIC", 169)
+    exp.paired.chr <- rep("chr_SYNTHETIC", 124)
 
     message     <- paste0(" test.syntheticNucReadsFromDist_good_result_02() ",
                           "- syntheticNucReadsFromDist did not generate ",
@@ -608,9 +608,9 @@ test.syntheticNucReadsFromDist_good_result_02 <- function() {
     checkEqualsNumeric(obs$nuc.len, exp.nuc.len, msg = message)
     checkEqualsNumeric(length(obs$dataIP), 5, msg = message)
     checkEqualsNumeric(colnames(obs$dataIP), exp.dataIP.colnames, msg = message)
-    checkEqualsNumeric(nrow(obs$dataIP), 338, msg = message)
+    checkEqualsNumeric(nrow(obs$dataIP), 248, msg = message)
     checkEqualsNumeric(length(obs$paired), 4, msg = message)
     checkEqualsNumeric(colnames(obs$paired), exp.paired.colnames, msg = message)
-    checkEqualsNumeric(nrow(obs$paired), 169, msg = message)
+    checkEqualsNumeric(nrow(obs$paired), 124, msg = message)
     checkEquals(as.character(obs$paired$chr), exp.paired.chr, msg = message)
 }
