@@ -8,9 +8,7 @@ Description: This package can generate a synthetic map with reads covering
     The user has choice between three different
     distributions for the read positioning: Normal, Student and Uniform.
 Encoding: UTF-8
-Author: Rawane Samb [aut], Astrid Deschênes [cre, aut],
-    Pascal Belleau [aut], Arnaud Droit [aut]
-Author@R: c(person("Rawane", "Samb",
+Authors@R: c(person("Rawane", "Samb",
     email="rawane.samb.1@ulaval.ca", role=c("aut")),
     person("Astrid", "Deschênes",
     email="adeschen@hotmail.com",
