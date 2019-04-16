@@ -248,7 +248,7 @@ createNucReadsFromNucMap <- function(map, read.len, offset, call) {
     paired <- data.frame(rep("chr_SYNTHETIC", nreads),
                             as.integer(syn.reads$start),
                             as.integer(syn.reads$end),
-                            1:nreads)
+                            seq_len(nreads))
     colnames(paired) <- c("chr", "start", "end", "ID")
 
     # Order paired reads by starting position
@@ -263,13 +263,13 @@ createNucReadsFromNucMap <- function(map, read.len, offset, call) {
                             c(as.integer(syn.reads$start + read.len),
                                 as.integer(syn.reads$end)),
                             c(rep("+", nreads), rep("-", nreads)),
-                            c(1:nreads, 1:nreads))
+                            c(seq_len(nreads), seq_len(nreads)))
                         colnames(dataIP) = c("chr", "start", "end",
                                                 "strand", "ID")
 
     # Order reads by starting position
     dataIP <- dataIP[order(dataIP$start), ]
-    rownames(dataIP) <- 1:nrow(dataIP)
+    rownames(dataIP) <- seq_len(nrow(dataIP))
 
     # Create data.frame with well-positioned nucleosomes shifted by offset
     # value

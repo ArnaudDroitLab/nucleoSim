@@ -412,10 +412,10 @@ test.syntheticNucMapFromDist_good_result_01 <- function() {
                 as.ratio = FALSE, rnd.seed = 25,
                 distr = "Normal")
 
-    exp.wp.starts  <- c(152, 454)
-    exp.wp.nreads  <- c(70, 90)
-    exp.fuz.starts <- c(92)
-    exp.fuz.nreads <- c(65)
+    exp.wp.starts  <- c(152, 303)
+    exp.wp.nreads  <- c(70, 16)
+    exp.fuz.starts <- c(390)
+    exp.fuz.nreads <- c(57)
     exp.nuc.len    <- c(147)
 
     message     <- paste0(" test.syntheticNucMapFromDist_good_result_01() ",
@@ -427,9 +427,9 @@ test.syntheticNucMapFromDist_good_result_01 <- function() {
     checkEqualsNumeric(obs$fuz.starts, exp.fuz.starts, msg = message)
     checkEqualsNumeric(obs$fuz.nreads, exp.fuz.nreads, msg = message)
     checkEqualsNumeric(obs$nuc.len, exp.nuc.len, msg = message)
-    checkEqualsNumeric(length(obs$wp.reads), 160, msg = message)
-    checkEqualsNumeric(length(obs$fuz.reads), 65, msg = message)
-    checkEqualsNumeric(length(obs$syn.reads), 225, msg = message)
+    checkEqualsNumeric(length(obs$wp.reads), 86, msg = message)
+    checkEqualsNumeric(length(obs$fuz.reads), 57, msg = message)
+    checkEqualsNumeric(length(obs$syn.reads), 143, msg = message)
     checkTrue(is.null(obs$syn.ratio), msg = message)
     checkTrue(is.null(obs$ctr.reads), msg = message)
 }
@@ -442,10 +442,10 @@ test.syntheticNucMapFromDist_good_result_02 <- function() {
                                    as.ratio = FALSE, rnd.seed = 26,
                                    distr = "Student")
 
-    exp.wp.starts  <- c(1, 303, 454)
-    exp.wp.nreads  <- c(3, 88, 80)
-    exp.fuz.starts <- c(11)
-    exp.fuz.nreads <- c(3)
+    exp.wp.starts  <- c(1, 152, 303)
+    exp.wp.nreads  <- c(3, 30, 88)
+    exp.fuz.starts <- c(334)
+    exp.fuz.nreads <- c(74)
     exp.nuc.len    <- 147
 
     message     <- paste0(" test.syntheticNucMapFromDist_good_result_02() ",
@@ -457,9 +457,9 @@ test.syntheticNucMapFromDist_good_result_02 <- function() {
     checkEqualsNumeric(obs$fuz.starts, exp.fuz.starts, msg = message)
     checkEqualsNumeric(obs$fuz.nreads, exp.fuz.nreads, msg = message)
     checkEqualsNumeric(obs$nuc.len, exp.nuc.len, msg = message)
-    checkEqualsNumeric(length(obs$wp.reads), 171, msg = message)
-    checkEqualsNumeric(length(obs$fuz.reads), 3, msg = message)
-    checkEqualsNumeric(length(obs$syn.reads), 174, msg = message)
+    checkEqualsNumeric(length(obs$wp.reads), 121, msg = message)
+    checkEqualsNumeric(length(obs$fuz.reads), 74, msg = message)
+    checkEqualsNumeric(length(obs$syn.reads), 195, msg = message)
     checkTrue(is.null(obs$syn.ratio), msg = message)
     checkTrue(is.null(obs$ctr.reads), msg = message)
 }
@@ -473,8 +473,8 @@ test.syntheticNucMapFromDist_good_result_03 <- function() {
 
     exp.wp.starts  <- c(1, 145)
     exp.wp.nreads  <- c(3, 30)
-    exp.fuz.starts <- c(36, 389)
-    exp.fuz.nreads <- c(69, 25)
+    exp.fuz.starts <- c(299, 107)
+    exp.fuz.nreads <- c(42, 9)
     exp.nuc.len    <- 140
 
     message     <- paste0(" test.syntheticNucMapFromDist_good_result_03() ",
@@ -487,8 +487,8 @@ test.syntheticNucMapFromDist_good_result_03 <- function() {
     checkEqualsNumeric(obs$fuz.nreads, exp.fuz.nreads, msg = message)
     checkEqualsNumeric(obs$nuc.len, exp.nuc.len, msg = message)
     checkEqualsNumeric(length(obs$wp.reads), 33, msg = message)
-    checkEqualsNumeric(length(obs$fuz.reads), 94, msg = message)
-    checkEqualsNumeric(length(obs$syn.reads), 127, msg = message)
+    checkEqualsNumeric(length(obs$fuz.reads), 51, msg = message)
+    checkEqualsNumeric(length(obs$syn.reads), 84, msg = message)
     checkTrue(is.null(obs$syn.ratio), msg = message)
     checkTrue(is.null(obs$ctr.reads), msg = message)
 }
@@ -500,10 +500,10 @@ test.syntheticNucMapFromDist_good_result_04 <- function() {
                                    lin.len = 4, as.ratio = TRUE,
                                    rnd.seed = 26, distr = "Uniform")
 
-    exp.wp.starts  <- c(1, 152, 605)
-    exp.wp.nreads  <- c(3, 30, 32)
-    exp.fuz.starts <- c(614, 145)
-    exp.fuz.nreads <- c(48, 54)
+    exp.wp.starts  <- c(1, 152, 454)
+    exp.wp.nreads  <- c(3, 30, 80)
+    exp.fuz.starts <- c(96, 326)
+    exp.fuz.nreads <- c(91, 13)
     exp.nuc.len    <- 147
 
     message     <- paste0(" test.syntheticNucMapFromDist_good_result_04() ",
@@ -515,11 +515,11 @@ test.syntheticNucMapFromDist_good_result_04 <- function() {
     checkEqualsNumeric(obs$fuz.starts, exp.fuz.starts, msg = message)
     checkEqualsNumeric(obs$fuz.nreads, exp.fuz.nreads, msg = message)
     checkEqualsNumeric(obs$nuc.len, exp.nuc.len, msg = message)
-    checkEqualsNumeric(length(obs$wp.reads), 65, msg = message)
-    checkEqualsNumeric(length(obs$fuz.reads), 102, msg = message)
-    checkEqualsNumeric(length(obs$syn.reads), 167, msg = message)
-    checkEqualsNumeric(length(obs$syn.ratio), 858, msg = message)
-    checkEqualsNumeric(length(obs$ctr.reads), 167, msg = message)
+    checkEqualsNumeric(length(obs$wp.reads), 113, msg = message)
+    checkEqualsNumeric(length(obs$fuz.reads), 104, msg = message)
+    checkEqualsNumeric(length(obs$syn.reads), 217, msg = message)
+    checkEqualsNumeric(length(obs$syn.ratio), 664, msg = message)
+    checkEqualsNumeric(length(obs$ctr.reads), 217, msg = message)
 }
 
 ## Test the result when no nucleosome deleted
