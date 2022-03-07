@@ -264,8 +264,8 @@ createNucReadsFromNucMap <- function(map, read.len, offset, call) {
                                 as.integer(syn.reads$end)),
                             c(rep("+", nreads), rep("-", nreads)),
                             c(seq_len(nreads), seq_len(nreads)))
-                        colnames(dataIP) = c("chr", "start", "end",
-                                                "strand", "ID")
+
+    colnames(dataIP) <- c("chr", "start", "end", "strand", "ID")
 
     # Order reads by starting position
     dataIP <- dataIP[order(dataIP$start), ]

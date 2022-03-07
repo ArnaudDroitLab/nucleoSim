@@ -538,9 +538,9 @@ syntheticNucReadsFromMap <- function(syntheticNucMap, read.len = 40, offset) {
 plot.syntheticNucMap <- function(x, ...) {
 
     ## Extract as.ratio parameter if present
-    as.ratio = FALSE
+    as.ratio <- FALSE
     if (exists('syn.ratio', where=x)) {
-        as.ratio = TRUE
+        as.ratio <- TRUE
     }
 
     ## Set Y axis maximum range
