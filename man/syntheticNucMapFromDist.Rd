@@ -4,10 +4,20 @@
 \alias{syntheticNucMapFromDist}
 \title{Generate a synthetic nucleosome map containing complete sequences}
 \usage{
-syntheticNucMapFromDist(wp.num, wp.del, wp.var, fuz.num, fuz.var,
-  max.cover = 100, nuc.len = 147, len.var = 10, lin.len = 20,
-  rnd.seed = NULL, as.ratio = FALSE, distr = c("Uniform", "Normal",
-  "Student"))
+syntheticNucMapFromDist(
+  wp.num,
+  wp.del,
+  wp.var,
+  fuz.num,
+  fuz.var,
+  max.cover = 100,
+  nuc.len = 147,
+  len.var = 10,
+  lin.len = 20,
+  rnd.seed = NULL,
+  as.ratio = FALSE,
+  distr = c("Uniform", "Normal", "Student")
+)
 }
 \arguments{
 \item{wp.num}{a non-negative \code{integer}, the number of well-positioned

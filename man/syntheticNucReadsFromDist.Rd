@@ -5,10 +5,21 @@
 \title{Generate a synthetic nucleosome map containing forward and
 reverse reads (paired-end reads)}
 \usage{
-syntheticNucReadsFromDist(wp.num, wp.del, wp.var, fuz.num, fuz.var,
-  max.cover = 100, nuc.len = 147, len.var = 10, lin.len = 20,
-  read.len = 40, rnd.seed = NULL, distr = c("Uniform", "Normal",
-  "Student"), offset)
+syntheticNucReadsFromDist(
+  wp.num,
+  wp.del,
+  wp.var,
+  fuz.num,
+  fuz.var,
+  max.cover = 100,
+  nuc.len = 147,
+  len.var = 10,
+  lin.len = 20,
+  read.len = 40,
+  rnd.seed = NULL,
+  distr = c("Uniform", "Normal", "Student"),
+  offset
+)
 }
 \arguments{
 \item{wp.num}{a non-negative \code{integer}, the number of well-positioned

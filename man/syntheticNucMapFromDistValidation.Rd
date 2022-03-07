@@ -5,8 +5,19 @@
 \title{Parameter validation for the \code{\link{syntheticNucMapFromDist}}
 function}
 \usage{
-syntheticNucMapFromDistValidation(wp.num, wp.del, wp.var, fuz.num, fuz.var,
-  max.cover, nuc.len, len.var, lin.len, rnd.seed, as.ratio)
+syntheticNucMapFromDistValidation(
+  wp.num,
+  wp.del,
+  wp.var,
+  fuz.num,
+  fuz.var,
+  max.cover,
+  nuc.len,
+  len.var,
+  lin.len,
+  rnd.seed,
+  as.ratio
+)
 }
 \arguments{
 \item{wp.num}{a non-negative \code{integer}, the number of well-positioned
