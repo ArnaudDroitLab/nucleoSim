@@ -1,7 +1,7 @@
 nucleoSim: Generate synthetic nucleosome maps
 =====================
 
-[![Build Status](https://travis-ci.org/ArnaudDroitLab/nucleoSim.svg?branch=master)](https://travis-ci.org/ArnaudDroitLab/nucleoSim?branch=master)
+[![R-CMD-check-bio](https://github.com/adeschen/nucleoSim/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/adeschen/nucleoSim/actions)
 [![codecov](https://codecov.io/gh/ArnaudDroitLab/nucleoSim/branch/master/graph/badge.svg)](https://codecov.io/gh/ArnaudDroitLab/nucleoSim)
 [![License: Artistic-2.0](https://img.shields.io/badge/License-Artistic%202.0-0298c3.svg)](https://opensource.org/licenses/Artistic-2.0)
 
@@ -43,7 +43,7 @@ If you use this package for a publication, we would ask you to cite the followin
 and [Arnaud Droit](http://ca.linkedin.com/in/drarnaud 
 "Arnaud Droit").
 
-See [AD Lab](http://compbio.ulaval.ca/ 
+See [AD Lab](https://compbio.ca/  
 "AD Lab") website.
 
 
